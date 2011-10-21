@@ -1,4 +1,4 @@
-.. contents:: Inhalt
+.. contents:: Inhaltsverzeichnis
 
 ======================
  Feuerwehr Infoscreen
