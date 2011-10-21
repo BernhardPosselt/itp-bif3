@@ -65,6 +65,7 @@ Code Conventions
 
 * Einrücken mit 4 Spaces (kann man in den meisten Editoren konfigurieren)
 * Funktions/Methoden Kommentare in folgender Form (http://www.python.org/dev/peps/pep-0257/#multi-line-docstrings):
+  
   """Methodenbeschreibung   
    
   Keyword arguments:
