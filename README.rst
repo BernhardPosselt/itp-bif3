@@ -61,10 +61,12 @@ in das Static-Verzeichnis kopiert:
 
 
 Code Conventions
-----------------
+================
 
 * Einrücken mit 4 Spaces (kann man in den meisten Editoren konfigurieren)
 * Funktions/Methoden Kommentare in folgender Form (http://www.python.org/dev/peps/pep-0257/#multi-line-docstrings):
+
+..
   
   """Methodenbeschreibung   
    
@@ -73,3 +75,7 @@ Code Conventions
   argument2 -- Beschreibung für argument 2
                                             
   """
+
+README Markup Hilfe
+===================
+GOTO http://docutils.sourceforge.net/docs/user/rst/quickref.html
