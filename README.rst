@@ -31,12 +31,14 @@ Das ganze kann wie folgt auf einem aktuellen Ubuntu installiert werden:
 
 Debian oder älteres Ubuntu
 --------------------------
-Auf einer Debian Installation muss das aktuelle Django von der Django-Homepage
+Zuerst führt man folgendes aus:
+
+  sudo apt-get install python-mysqldb apache2 libapache2-mod-wsgi mysql-server python python-support
+  
+Danach muss das aktuelle Django von der Django-Homepage
 heruntergeladen und installiert werden: https://www.djangoproject.com/download/
 
-Danach führt man folgendes aus:
 
-  sudo apt-get install python-mysqldb apache2 libapache2-mod-wsgi mysql-server
 
 Developen
 ---------
