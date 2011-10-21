@@ -23,14 +23,20 @@ Abhängigkeiten
 
 * MySQL Server
 
-
+Ubuntu 11.10
+------------
 Das ganze kann wie folgt auf einem aktuellen Ubuntu installiert werden:
 
   sudo apt-get install python-django python-mysqldb apache2 libapache2-mod-wsgi mysql-server
 
+Debian oder älteres Ubuntu
+--------------------------
 Auf einer Debian Installation muss das aktuelle Django von der Django-Homepage
 heruntergeladen und installiert werden: https://www.djangoproject.com/download/
 
+Danach führt man folgendes aus:
+
+  sudo apt-get install python-mysqldb apache2 libapache2-mod-wsgi mysql-server
 
 Developen
 ---------
