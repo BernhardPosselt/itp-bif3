@@ -41,7 +41,7 @@ heruntergeladen und installiert werden: https://www.djangoproject.com/download/
 
 
 Developen
----------
+=========
 
 Dazu geht man mit der Konsole (Bash) in das Projektverzeichnis und führt
 folgendes aus:
@@ -60,23 +60,23 @@ in das Static-Verzeichnis kopiert:
   python manage.py collectstatic
 
 
+Deployen mit Apache & Debian
+============================
+TBD
+
 Code Conventions
 ================
 
 * Einrücken mit 4 Spaces (kann man in den meisten Editoren konfigurieren)
 * Funktions/Methoden Kommentare in folgender Form (http://www.python.org/dev/peps/pep-0257/#multi-line-docstrings):
 
-..
-  
-  """Methodenbeschreibung   
-   
-  Keyword arguments:
-  
-  argument1 -- Beschreibung für argument 1
-  
-  argument2 -- Beschreibung für argument 2
-                                            
-  """
+|  """Methodenbeschreibung   
+|   
+|  Keyword arguments:
+|  argument1 -- Beschreibung für argument 1
+|  argument2 -- Beschreibung für argument 2
+|                                            
+|  """
 
 README Markup Hilfe
 ===================
