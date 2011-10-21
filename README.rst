@@ -71,7 +71,9 @@ Code Conventions
   """Methodenbeschreibung   
    
   Keyword arguments:
+  
   argument1 -- Beschreibung für argument 1
+  
   argument2 -- Beschreibung für argument 2
                                             
   """
