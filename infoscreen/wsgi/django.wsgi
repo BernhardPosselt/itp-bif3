@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-import os
 import sys
-from os.path import dirname
+from os.path import dirname, abspath
+
 # append infoscreens's parent directory to the sys path
-relPath = dirname(dirname(dirname( os.path.abspath(__file__) )))
-sys.path.append(os.path.abspath(relPath))
+relPath = dirname(dirname(dirname( abspath(__file__) )))
+sys.path.append(abspath(relPath))
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'infoscreen.settings'
 
