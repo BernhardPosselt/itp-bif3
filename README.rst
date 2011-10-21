@@ -58,3 +58,17 @@ Statischer Content wird von infoscreen_screen/static mit folgendem Befehl
 in das Static-Verzeichnis kopiert:
 
   python manage.py collectstatic
+
+
+Code Conventions
+----------------
+
+* Einrücken mit 4 Spaces (kann man in den meisten Editoren konfigurieren)
+* Funktions/Methoden Kommentare in folgender Form (http://www.python.org/dev/peps/pep-0257/#multi-line-docstrings):
+  """Methodenbeschreibung   
+   
+  Keyword arguments:
+  argument1 -- Beschreibung für argument 1
+  argument2 -- Beschreibung für argument 2
+                                            
+  """
