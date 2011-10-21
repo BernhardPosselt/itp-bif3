@@ -89,5 +89,7 @@ Code Conventions
 README Markup Hilfe
 ===================
 GOTO 
+
 * http://docutils.sourceforge.net/docs/user/rst/quickref.html
+
 * http://docutils.sourceforge.net/docs/ref/rst/directives.html
