@@ -20,6 +20,10 @@ html, body {
     height: 100%;
 }
 
+p {
+    line-height: 1.5;
+}
+
 #site {
     min-height: 100%;
     height: 100%;
