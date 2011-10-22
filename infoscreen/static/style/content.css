@@ -1,7 +1,7 @@
 #content {
-    margin-top: 100px;
-    margin-bottom: 50px;
-    background-color: #F2F2F2;
+    margin-top: 151px;
+    margin-bottom: 76px;
+    background-color: #fcfcfc;
     height: auto;
     position: absolute;
     top: 0;
@@ -9,6 +9,4 @@
     left: 0;
     right: 0;
     padding: 20px;
-    border-top: 1px solid #D9D2AD;
-    border-bottom: 1px solid #D9D2AD;
 }

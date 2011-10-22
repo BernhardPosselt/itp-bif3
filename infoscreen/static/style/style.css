@@ -12,7 +12,7 @@
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    font-size: 10pt;
+    font-size: 14pt;
     color: #212426;
 }
 
@@ -23,6 +23,25 @@ html, body {
 #site {
     min-height: 100%;
     height: 100%;
+}
+
+/*
+ * General classes
+ */
+.alarm {
+    background-image: linear-gradient(bottom, rgb(191,15,30) 0%, rgb(213,15,28) 100%);
+    background-image: -o-linear-gradient(bottom, rgb(191,15,30) 0%, rgb(213,15,28) 100%);
+    background-image: -moz-linear-gradient(bottom, rgb(191,15,30) 0%, rgb(213,15,28) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgb(191,15,30) 0%, rgb(213,15,28) 100%);
+    background-image: -ms-linear-gradient(bottom, rgb(191,15,30) 0%, rgb(213,15,28) 100%);
+}
+
+.peace {
+    background-image: linear-gradient(bottom, rgb(52,124,38) 0%, rgb(60,155,38) 100%);
+    background-image: -o-linear-gradient(bottom, rgb(52,124,38) 0%, rgb(60,155,38) 100%);
+    background-image: -moz-linear-gradient(bottom, rgb(52,124,38) 0%, rgb(60,155,38) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgb(52,124,38) 0%, rgb(60,155,38) 100%);
+    background-image: -ms-linear-gradient(bottom, rgb(52,124,38) 0%, rgb(60,155,38) 100%);
 }
 
 /*
