@@ -70,6 +70,9 @@ Code Conventions
 ================
 
 * Einrücken mit 4 Spaces (kann man in den meisten Editoren konfigurieren)
+
+.. image::  http://dl.dropbox.com/u/15205713/spaces.png
+
 * Funktions/Methoden Kommentare in folgender Form (:PEP:`257`):
 
 .. line-block::
