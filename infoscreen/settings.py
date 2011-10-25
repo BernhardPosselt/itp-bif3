@@ -12,10 +12,13 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+# Shortcut for the installation directory
+INSTALL_DIR = os.path.dirname( os.path.abspath(__file__) )
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(INSTALL_DIR, 'infoscreen.db'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -46,8 +49,7 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
-# Shortcut for the installation directory
-INSTALL_DIR = os.path.dirname( os.path.abspath(__file__) )
+
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
