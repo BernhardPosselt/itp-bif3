@@ -10,6 +10,7 @@
 *~
 *.sass-cache
 *.pyc
+*.db
 geany_run_script.sh
 
 # OS or Editor folders
