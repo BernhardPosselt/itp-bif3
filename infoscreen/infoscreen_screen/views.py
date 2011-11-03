@@ -13,4 +13,5 @@ def index(request):
     """
     Main page
     """
-    return render(request, "infoscreen_screen/index.html")
+    einsatz = Einsatz.objects.all()
+    return render(request, "infoscreen_screen/index.html", {"test": einsatz })

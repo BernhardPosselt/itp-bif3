@@ -6,5 +6,8 @@
 {% block content %}
     <h1>Weisheit des Tages</h1>
     <p>Kaffee + Alarm: Do host die Sauerei</p>
+    {% for e in test %}
+        {{ e.hausnummer }}
+    {% endfor %}
 {% endblock %}
 
