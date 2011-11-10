@@ -20,7 +20,9 @@ ALARMSTUFEN = (
 )
 
 class Einsatz(models.Model):
-    einsatzID = models.CharField("Einsatz ID", unique=True, max_length=200)
+    einsatzID = models.CharField("Einsatz ID", unique=True, max_length=200,
+        help_text="Die Nummer die für den Einsatz von der Leistelle vergeben \
+            wird. Ist immer eindeutig.")
     adresse = models.CharField("Adresse", max_length=300, blank=True)
     hausnummer = models.CharField("Hausnummer", max_length=50, blank=True)
     stiege = models.CharField("Stiege", max_length=50, blank=True)
