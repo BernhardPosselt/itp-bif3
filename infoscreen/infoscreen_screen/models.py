@@ -20,6 +20,12 @@ ALARMSTUFEN = (
 )
 
 class Einsatz(models.Model):
+    """
+    Diese Eintraege werden automatisch vom Hauptserver abgerufen und in die
+    Datenbank geschrieben. Bitte nur aendern, wenn es wirklich notwendig ist!
+    Die Daten fuer den Einsatz. Ein Einsatz kann an mehrere 
+    :model:`infoscreen_screen.Dispo` vergeben werden. 
+    """
     einsatzID = models.CharField("Einsatz ID", unique=True, max_length=200,
         help_text="Die Nummer die für den Einsatz von der Leistelle vergeben \
             wird. Ist immer eindeutig.")
