@@ -15,5 +15,8 @@ def index(request):
     """
     einsatz = Einsatz.objects.all()
     # debug your code like this, prints the string in the console
-    print "hey hier is n fehler %s" % einsatz[0].einsatzID
+    try:
+        print "hey hier is n fehler %s" % einsatz[0].einsatzID
+    except IndexError:
+        pass
     return render(request, "infoscreen_screen/index.html", {"test": einsatz })
