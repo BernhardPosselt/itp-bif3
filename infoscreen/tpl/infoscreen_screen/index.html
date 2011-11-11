@@ -4,10 +4,8 @@
 
 
 {% block content %}
-    <h1>Weisheit des Tages</h1>
-    <p>Kaffee + Alarm: Do host die Sauerei</p>
-    {% for e in test %}
-        {{ e.hausnummer }}
-    {% endfor %}
+    <a href="{% url admin:index %}">Admin login</a>
+    <a href="{% url screen:bildschirm_links %}">Bildschirm links</a>
+    <a href="{% url screen:bildschirm_rechts %}">Bildschirm rechts</a>
 {% endblock %}
 

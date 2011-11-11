@@ -17,33 +17,18 @@ def index(request):
     return render(request, "infoscreen_screen/index.html", ctx)
     
 
-def news(request):
+def bildschirm_links(request):
     """
     Doku
     """
     ctx = {}
-    return render(request, "infoscreen_screen/news.html", ctx)
+    return render(request, "infoscreen_screen/bildschirm_links.html", ctx)
 
 
-def willkommen(request):
+def bildschirm_rechts(request):
     """
     Doku
     """
     ctx = {}
-    return render(request, "infoscreen_screen/willkommen.html", ctx)
+    return render(request, "infoscreen_screen/bildschirm_rechts.html", ctx)
     
-    
-def karte(request):
-    """
-    Doku
-    """
-    ctx = {}
-    return render(request, "infoscreen_screen/karte.html", ctx)
-
-
-def alarm(request):
-    """
-    Doku
-    """
-    ctx = {}
-    return render(request, "infoscreen_screen/alarm.html", ctx)

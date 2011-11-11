@@ -4,10 +4,8 @@ from django.conf.urls.defaults import patterns, include, url
 # normal views
 urlpatterns = patterns('infoscreen.infoscreen_screen.views.views',
     url(r'^$', 'index', name='index'),
-    url(r'^news/$', 'news', name='news'),
-    url(r'^willkommen/$', 'willkommen', name='willkommen'),
-    url(r'^alarm/$', 'alarm', name='alarm'),
-    url(r'^karte/$', 'karte', name='karte'),
+    url(r'^bildschirm/links/$', 'bildschirm_links', name='bildschirm_links'),
+    url(r'^bildschirm/rechts/$', 'bildschirm_rechts', name='bildschirm_rechts'),
 )
 
 # ajax views

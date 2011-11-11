@@ -40,6 +40,7 @@ class Einsatz(models.Model):
     ort = models.CharField("Ort", max_length=200, blank=True)
     alarmstufe = models.CharField("Alarmstufe", max_length=2, choices=ALARMSTUFEN)
     meldebild = models.CharField("Meldebild", max_length=300)
+    abgeschlossen = models.BooleanField("Abgeschlossen", blank=True)
     ausgedruckt = models.BooleanField("Ausgedruckt", blank=True)
     modifiziert = models.DateTimeField(auto_now=True)
     
