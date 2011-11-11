@@ -11,15 +11,23 @@ from infoscreen.inc.shortcuts import render
 
 def einsatzfax(request):
     """
-    Doku
+    Returns an xml with all einsaetze which were not printed yet
+    
+    Keyword arguments:
+    
+    id -- The id (databaseid, not einsatzID) of the einsatz 
     """
-    ctx = {}
-    return render(request, "infoscreen_screen/einsatzfax/einsatzfax.json", ctx)
+    pdfs = Einsatz.objects.filter(ausgedruckt=False)
+    ctx = {
+        "einsaetze": pdfs,
+    }
+    return render(request, "infoscreen_screen/einsatzfax/einsatzfax.xml", ctx)
+
     
 
-def einsatzfax_pdf(request):
+def einsatzfax_pdf(request, id):
     """
-    Doku
+    Creates a pdf of an einsatz ready for printing
     """
     # Create the HttpResponse object with the appropriate PDF headers.
     response = HttpResponse(mimetype='application/pdf')
@@ -40,7 +48,17 @@ def einsatzfax_pdf(request):
     
 def einsatzfax_pdf_printed(request, id):
     """
-    Doku
+    Sets an einsatz to printed
+    
+    Keyword arguments:
+    
+    id -- The id (databaseid, not einsatzID) of the einsatz 
     """
-    ctx = {}
-    return render(request, "infoscreen_screen/einsatzfax/einsatzfax_pdf_printed.html", ctx)
+    # TODO: error and ok in xml?
+    try:
+        einsatz = Einsatz.objects.get(id=id)
+        einsatz.ausgedruckt = True
+        einsatz.save()
+    except Einsatz.DoesNotExist:
+        pass
+    return HttpResponse("")

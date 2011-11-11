@@ -1,0 +1,11 @@
+{% extends 'infoscreen_screen/einsatzfax/root.xml' %}
+
+{% block content %}
+    {% for einsatz in einsaetze %}
+        <einsatz>
+            <id>{{ einsatz.id }}</id>
+            <modifiziert>{{ einsatz.modifiziert }}</modifiziert>
+        </einsatz>
+    {% endfor %}
+{% endblock %}
+
