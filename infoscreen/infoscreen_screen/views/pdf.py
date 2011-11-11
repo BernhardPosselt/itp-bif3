@@ -23,7 +23,6 @@ def einsatzfax(request):
     }
     return render(request, "infoscreen_screen/einsatzfax/einsatzfax.xml", ctx)
 
-    
 
 def einsatzfax_pdf(request, id):
     """
@@ -46,9 +45,9 @@ def einsatzfax_pdf(request, id):
     return response
     
     
-def einsatzfax_pdf_printed(request, id):
+def einsatzfax_pdf_ausgedruckt(request, id):
     """
-    Sets an einsatz to printed
+    Sets an einsatz to ausgedruckt
     
     Keyword arguments:
     
@@ -59,6 +58,10 @@ def einsatzfax_pdf_printed(request, id):
         einsatz = Einsatz.objects.get(id=id)
         einsatz.ausgedruckt = True
         einsatz.save()
+        ok = True
     except Einsatz.DoesNotExist:
-        pass
-    return HttpResponse("")
+        ok = False
+    ctx = {
+        "ok": ok,
+    }
+    return render(request, "infoscreen_screen/einsatzfax/einsatzfax_pdf_ausgedruckt.xml", ctx)

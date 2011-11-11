@@ -23,6 +23,6 @@ urlpatterns += patterns('infoscreen.infoscreen_screen.views.ajax',
 urlpatterns += patterns('infoscreen.infoscreen_screen.views.pdf',
     url(r'^einsatzfax/$', 'einsatzfax', name='einsatzfax'),
     url(r'^einsatzfax/pdf/(?P<id>\d+)/$', 'einsatzfax_pdf', name='einsatzfax_pdf'),
-    url(r'^einsatzfax/pdf/printed/(?P<id>\d+)/$', 'einsatzfax_pdf_printed', 
+    url(r'^einsatzfax/pdf/ausgedruckt/(?P<id>\d+)/$', 'einsatzfax_pdf_ausgedruckt', 
         name='einsatzfax_pdf_printed'),
 )

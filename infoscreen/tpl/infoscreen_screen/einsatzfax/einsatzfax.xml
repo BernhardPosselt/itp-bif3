@@ -4,6 +4,7 @@
     {% for einsatz in einsaetze %}
         <einsatz>
             <id>{{ einsatz.id }}</id>
+            <einsatzid>{{ einsatz.einsatzID }}</einsatzid>
             <modifiziert>{{ einsatz.modifiziert }}</modifiziert>
         </einsatz>
     {% endfor %}

@@ -1,0 +1,10 @@
+{% extends 'infoscreen_screen/einsatzfax/root.xml' %}
+
+{% block content %}
+    {% if ok %}
+        <ok>1</ok>
+    {% else %}
+        <ok>0</ok>
+    {% endif %}
+{% endblock %}
+
