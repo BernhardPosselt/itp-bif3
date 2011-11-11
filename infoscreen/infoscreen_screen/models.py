@@ -106,5 +106,7 @@ class Kuerzel(models.Model):
 
     def __unicode__(self):
         return self.kurzbezeichnung
-        
+
+class Ausrueckordnung(models.Model):
+    fahrzeuge = models.ManyToManyField("Fahrzeuge")
  

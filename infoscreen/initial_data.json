@@ -1,0 +1,28 @@
+[
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "test", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2011-11-11 11:42:44", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$702c3$f5fbdcf6d96506f0ce77f27a8545bd968a28bb55", 
+      "email": "test@test.de", 
+      "date_joined": "2011-11-11 11:42:18"
+    }
+  },
+  {
+    "pk": "faa280c80d1f76b77ba44008dce79fed", 
+    "model": "sessions.session", 
+    "fields": {
+      "expire_date": "2012-11-25 11:42:44", 
+      "session_data": "ZTYzM2M1NjBiYzUzNmJmYmU1Y2UxNzQzN2I0YmZkMmM5MGEwOGQ5NjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+    }
+  }
+]
