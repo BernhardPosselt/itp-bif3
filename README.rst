@@ -25,7 +25,9 @@ Abhängigkeiten
 
 * MySQL Server
 
-* Docutils
+* Python Docutils
+
+* Python ReportLab
 
 Ubuntu 11.10
 ------------
