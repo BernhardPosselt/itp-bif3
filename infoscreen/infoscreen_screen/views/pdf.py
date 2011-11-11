@@ -53,7 +53,6 @@ def einsatzfax_pdf_ausgedruckt(request, id):
     
     id -- The id (databaseid, not einsatzID) of the einsatz 
     """
-    # TODO: error and ok in xml?
     try:
         einsatz = Einsatz.objects.get(id=id)
         einsatz.ausgedruckt = True
