@@ -56,9 +56,9 @@ folgendes aus:
   
 Die Seite ist dann auf http://127.0.0.1:8000/ verfügbar
 
-MySQL Tabellen werden von den Models mit folgendem Befehl generiert
+MySQL Tabellen werden von den Models mit folgendem Befehl generiert bzw upgedated
 
-  python manage.py syncdb
+  ./syncdb.sh
   
 Statischer Content wird von infoscreen_screen/static mit folgendem Befehl
 in das Static-Verzeichnis kopiert:
