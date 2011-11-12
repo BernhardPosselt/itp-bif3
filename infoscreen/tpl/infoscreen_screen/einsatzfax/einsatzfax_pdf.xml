@@ -1,6 +1,6 @@
 {% extends 'infoscreen_screen/einsatzfax/root.xml' %}
 
 {% block content %}
-    <ok>0</ok>
+    <ok>False</ok>
 {% endblock %}
 
