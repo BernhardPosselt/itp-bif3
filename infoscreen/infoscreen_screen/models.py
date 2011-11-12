@@ -113,7 +113,7 @@ class Kuerzel(models.Model):
     kurzbezeichnung = models.CharField("Kürzel", max_length=100)
     beschreibung = models.CharField("Beschreibung", max_length=300)
     modifiziert = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
         verbose_name = "Kürzel"
         verbose_name_plural = "Kürzel"
@@ -124,7 +124,7 @@ class Kuerzel(models.Model):
 class Ausrueckordnung(models.Model):
     fahrzeuge = models.ManyToManyField("Fahrzeuge")
  
-     class Meta:
+    class Meta:
         verbose_name = "Ausrückordnung"
         verbose_name_plural = "Ausrückordnungen"
 
