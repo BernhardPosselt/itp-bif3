@@ -19,6 +19,18 @@ ALARMSTUFEN = (
     ("S3", "S3"),
 )
 
+class Willkommen(models.Model):
+    titel = models.CharField("Willkommenstitel", max_length=300)
+    nachricht = models.TextField("Willkommensnachricht", blank=True)
+    
+    class Meta:
+        verbose_name = "Willkommensnachricht"
+        verbose_name_plural = "Willkommensnachrichten"
+
+    def __unicode__(self):
+        return self.titel
+        
+
 class Einsatz(models.Model):
     """
     Diese Eintraege werden automatisch vom Hauptserver abgerufen und in die
