@@ -112,3 +112,9 @@ class Kuerzel(models.Model):
 class Ausrueckordnung(models.Model):
     fahrzeuge = models.ManyToManyField("Fahrzeuge")
  
+     class Meta:
+        verbose_name = "Ausrückordnung"
+        verbose_name_plural = "Ausrückordnungen"
+
+    def __unicode__(self):
+        return "" # FIXME: return proper Ausrückordnung
