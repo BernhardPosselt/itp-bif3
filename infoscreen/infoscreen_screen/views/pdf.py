@@ -28,21 +28,26 @@ def einsatzfax_pdf(request, id):
     """
     Creates a pdf of an einsatz ready for printing
     """
-    # Create the HttpResponse object with the appropriate PDF headers.
-    response = HttpResponse(mimetype='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=somefilename.pdf'
+    try:
+        # TODO: create pdf from Einsatz
+        einsatz = Einsatz.objects.get(id=id)
+        # Create the HttpResponse object with the appropriate PDF headers.
+        response = HttpResponse(mimetype='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename=somefilename.pdf'
 
-    # Create the PDF object, using the response object as its "file."
-    p = canvas.Canvas(response)
+        # Create the PDF object, using the response object as its "file."
+        p = canvas.Canvas(response)
 
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    # See the ReportLab documentation for the full list of functionality.
-    p.drawString(100, 100, "Hello world.")
+        # Draw things on the PDF. Here's where the PDF generation happens.
+        # See the ReportLab documentation for the full list of functionality.
+        p.drawString(100, 100, "Hello world.")
 
-    # Close the PDF object cleanly, and we're done.
-    p.showPage()
-    p.save()
-    return response
+        # Close the PDF object cleanly, and we're done.
+        p.showPage()
+        p.save()
+        return response
+    except Einsatz.DoesNotExist:
+        return render(request, "infoscreen_screen/einsatzfax/einsatzfax_pdf.xml", ctx)
     
     
 def einsatzfax_pdf_ausgedruckt(request, id):
