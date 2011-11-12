@@ -17,7 +17,7 @@ def einsatzfax(request):
     
     id -- The id (databaseid, not einsatzID) of the einsatz 
     """
-    pdfs = Einsatz.objects.filter(ausgedruckt=False)
+    pdfs = Einsatz.objects.filter(abgeschlossen=False)
     ctx = {
         "einsaetze": pdfs,
     }
