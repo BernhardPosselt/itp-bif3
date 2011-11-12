@@ -11,5 +11,5 @@ else
 fi
 
 # remove database and syncdb
-rm ./infoscreen.db
+rm -rf ./infoscreen.db
 $PYTHON_INT ./manage.py syncdb --noinput
