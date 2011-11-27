@@ -1,11 +1,16 @@
 {% extends 'infoscreen_screen/base.html' %}
 
 {% block title %}Feuerwehr Infoscreen{% endblock %}
-
+{% load webdesign %}
 
 {% block content %}
-    <a href="{% url admin:index %}">Admin login</a>
-    <a href="{% url screen:bildschirm_links %}">Bildschirm links</a>
-    <a href="{% url screen:bildschirm_rechts %}">Bildschirm rechts</a>
+    <div class="left_row">
+        {% lorem 100 p %}
+    </div>
+    
+    <div class="right_row">
+        {% lorem 100 p %}
+    </div>
+
 {% endblock %}
 

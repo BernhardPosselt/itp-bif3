@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.webdesign',
     'infoscreen',
     'infoscreen.infoscreen_screen',
     'django.contrib.admin',

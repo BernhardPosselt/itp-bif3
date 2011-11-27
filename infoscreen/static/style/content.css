@@ -1,5 +1,7 @@
+
+
 #content {
-    margin-top: 151px;
+    margin-top: 101px;
     margin-bottom: 76px;
     background-color: #fcfcfc;
     height: auto;
@@ -10,3 +12,13 @@
     right: 0;
     padding: 20px;
 }
+
+    #content .left_row {
+        float: left;
+        width: 50%;
+    }
+    
+    #content .right_row {
+        float: left;
+        width: 50%;
+    }

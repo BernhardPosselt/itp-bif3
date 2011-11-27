@@ -8,10 +8,18 @@
 /**
  * Basic configuration
  */
+@font-face {
+	font-family: dejavusans;
+	src: url('font/DejaVuSans.ttf');
+}
+
+
+ 
+ 
 * {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: dejavusans;
     font-size: 14pt;
     color: #212426;
 }
