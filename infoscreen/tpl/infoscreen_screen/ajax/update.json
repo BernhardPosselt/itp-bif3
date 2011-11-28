@@ -1,5 +1,8 @@
 {
-    "time": 44545444,
     "peace": True,
-    "update_interval": 5
+    "update_interval": 5,
+    "news": 313333131,
+    "welcome": 2131231233,
+    "map": 133232323,
+    "operation": 11123123123
 }
