@@ -111,11 +111,22 @@ ul {
     #header h1 {
         text-shadow: 0 0 2px #000;
         color: #fefefe;
-        font-size: 50pt;
+        font-size: 45pt;
         text-align: center;
         line-height: 120px;
     }
 
+    #header #alarmstufe {
+        height: 80px;
+        width: 80px;
+        padding: 20px 30px;
+        line-height: 80px;
+        font-size: 50pt;
+        float: left;
+        background-color: #B20F0F;
+        color: #fefefe;
+        text-shadow: 0 0 2px #000;
+    }
 
 
 /**
@@ -158,4 +169,10 @@ ul {
 
     #einsatz_links .beschreibung {
         font-size: 40pt;
+    }
+
+    #einsatz_links .ausrueckordnung {
+        float:left;
+        width: 400px;
+        background-color: yellow;
     }
