@@ -29,6 +29,8 @@ Abhängigkeiten
 
 * Python ReportLab
 
+* Python lxml
+
 Ubuntu 11.10
 ------------
 Das ganze kann wie folgt auf einem aktuellen Ubuntu installiert werden:
@@ -39,7 +41,7 @@ Debian oder älteres Ubuntu
 --------------------------
 Zuerst führt man folgendes aus:
 
-  sudo apt-get install python-mysqldb apache2 libapache2-mod-wsgi mysql-server python python-support python-docutils python-reportlab
+  sudo apt-get install python-mysqldb apache2 libapache2-mod-wsgi mysql-server python python-support python-docutils python-reportlab python-lxml
 
   
 Danach muss das aktuelle Django von der Django-Homepage
