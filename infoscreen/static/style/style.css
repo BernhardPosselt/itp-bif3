@@ -126,6 +126,7 @@ ul {
         background-color: #B20F0F;
         color: #fefefe;
         text-shadow: 0 0 2px #000;
+        border-right: 1px solid #444;
     }
 
 
