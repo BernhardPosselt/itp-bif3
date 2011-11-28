@@ -54,7 +54,7 @@ html, body {
 }
 
 h1 {
-    font-size: 22pt;
+    font-size: 24pt;
     font-family: dejavusans;
     font-weight: bold;
 }
@@ -62,7 +62,7 @@ h1 {
 p {
     line-height: 1.5;
     margin-bottom: 30px;
-    font-size: 18pt;
+    font-size: 20pt;
 }
 
 ul {
