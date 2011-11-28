@@ -46,7 +46,6 @@ kuler:
     margin: 0;
     padding: 0;
     font-family: dejavusans;
-    font-size: 18pt;
     color: #212426;
 }
 
@@ -63,6 +62,11 @@ h1 {
 p {
     line-height: 1.5;
     margin-bottom: 30px;
+    font-size: 18pt;
+}
+
+ul {
+    list-style-type: none;
 }
 
 
@@ -100,16 +104,16 @@ p {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100px;
+    height: 120px;
     border-bottom: 1px solid #D9D2AD;
 }
 
     #header h1 {
         text-shadow: 0 0 2px #000;
         color: #fefefe;
-        font-size: 28pt;
+        font-size: 50pt;
         text-align: center;
-        line-height: 100px;
+        line-height: 120px;
     }
 
 
@@ -118,7 +122,7 @@ p {
  * Content
  */
 #content {
-    margin-top: 101px;
+    margin-top: 121px;
     margin-bottom: 76px;
     background-color: #fcfcfc;
     height: auto;
@@ -140,3 +144,18 @@ p {
         width: 50%;
     }
 
+/**
+ * Einsatz links
+ */
+#einsatz_links {
+    font-size: 60pt;
+}
+
+    #einsatz_links .adresse {
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    #einsatz_links .beschreibung {
+        font-size: 40pt;
+    }
