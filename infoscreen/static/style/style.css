@@ -38,7 +38,7 @@ kuler:
 @font-face {
 	font-family: dejavusans;
     font-weight: bold;
-	src: url('font/DejaVuSans.ttf');
+	src: url('font/DejaVuSans-Bold.ttf');
 }
 
  
@@ -54,10 +54,17 @@ html, body {
     height: 100%;
 }
 
+h1 {
+    font-size: 20pt;
+    font-family: dejavusans;
+    font-weight: bold;
+}
+
 p {
     line-height: 1.5;
     margin-bottom: 30px;
 }
+
 
 #site {
     min-height: 100%;
