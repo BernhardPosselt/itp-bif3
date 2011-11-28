@@ -156,6 +156,7 @@ ul {
         width: 50%;
     }
 
+
 /**
  * Einsatz links
  */
@@ -177,3 +178,29 @@ ul {
         width: 400px;
         background-color: yellow;
     }
+
+
+/**
+ * Einsatz rechts
+ */
+#einsatz_rechts {
+    font-size: 60pt;
+}
+
+    #einsatz_rechts .karte {
+        text-align: center;
+        line-height: 1.5;
+        width: 960px;
+        height: 960px;
+        background-image: url('../img/testmap.png');
+        background-repeat: no-repeat;
+        float: left;
+    }
+
+    #einsatz_rechts .dispos {
+        font-size: 40pt;
+        float: right;
+        background-color: yellow;
+        width: 400px;
+    }
+
