@@ -6,7 +6,7 @@ from django.views.generic.simple import direct_to_template
 urlpatterns = patterns('infoscreen.infoscreen_screen.views.views',
     url(r'^$', 'index', name='index'),
     #url(r'^bildschirm/links/$', 'bildschirm_links', name='bildschirm_links'),
-    #url(r'^bildschirm/rechts/$', 'bildschirm_rechts', name='bildschirm_rechts'),
+    url(r'^bildschirm/rechts/$', 'bildschirm_rechts', name='bildschirm_rechts'),
     
     # only for test purposes
     url(r'^1/$', direct_to_template, {'template': 'test/einsatz_links.html'} ),

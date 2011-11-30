@@ -34,13 +34,13 @@ def bildschirm_rechts(request):
     """
     Doku
     """
-   gmap = maps.Map(opts = {
-        'center': maps.LatLng(38, -97),
-        'mapTypeId': maps.MapTypeId.ROADMAP,
-        'zoom': 3,
-        'mapTypeControlOptions': {
-             'style': maps.MapTypeControlStyle.DROPDOWN_MENU
-        },
+    gmap = maps.Map(opts = {
+         'center': maps.LatLng(38, -97),
+         'mapTypeId': maps.MapTypeId.ROADMAP,
+         'zoom': 3,
+         'mapTypeControlOptions': {
+              'style': maps.MapTypeControlStyle.DROPDOWN_MENU
+         },
     })
 
     ctx = {'form': MapForm(initial={'map': gmap})}
