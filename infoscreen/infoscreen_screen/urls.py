@@ -31,3 +31,11 @@ urlpatterns += patterns('infoscreen.infoscreen_screen.views.pdf',
     url(r'^einsatzfax/pdf/ausgedruckt/(?P<id>\d+)/$', 'einsatzfax_pdf_ausgedruckt', 
         name='einsatzfax_pdf_printed'),
 )
+
+from django.conf.urls.defaults import *
+
+
+urlpatterns = patterns('',
+    (r'', include('gmapi.urls.media')), # Use for debugging only.
+    (r'^$', 'myapp.views.index'),
+)
