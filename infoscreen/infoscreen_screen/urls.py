@@ -32,10 +32,4 @@ urlpatterns += patterns('infoscreen.infoscreen_screen.views.pdf',
         name='einsatzfax_pdf_printed'),
 )
 
-from django.conf.urls.defaults import *
 
-
-urlpatterns = patterns('',
-    (r'', include('gmapi.urls.media')), # Use for debugging only.
-    (r'^$', 'myapp.views.index'),
-)
