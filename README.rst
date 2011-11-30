@@ -25,19 +25,24 @@ Abhängigkeiten
 
 * MySQL Server
 
-* Docutils
+* Python Docutils
+
+* Python ReportLab
+
+* Python lxml
 
 Ubuntu 11.10
 ------------
 Das ganze kann wie folgt auf einem aktuellen Ubuntu installiert werden:
 
-  sudo apt-get install python-django python-mysqldb apache2 libapache2-mod-wsgi mysql-server python-docutils
+  sudo apt-get install python-django python-mysqldb apache2 libapache2-mod-wsgi mysql-server python-docutils python-reportlab
 
 Debian oder älteres Ubuntu
 --------------------------
 Zuerst führt man folgendes aus:
 
-  sudo apt-get install python-mysqldb apache2 libapache2-mod-wsgi mysql-server python python-support python-docutils
+  sudo apt-get install python-mysqldb apache2 libapache2-mod-wsgi mysql-server python python-support python-docutils python-reportlab python-lxml
+
   
 Danach muss das aktuelle Django von der Django-Homepage
 heruntergeladen und installiert werden: https://www.djangoproject.com/download/
@@ -54,9 +59,9 @@ folgendes aus:
   
 Die Seite ist dann auf http://127.0.0.1:8000/ verfügbar
 
-MySQL Tabellen werden von den Models mit folgendem Befehl generiert
+MySQL Tabellen werden von den Models mit folgendem Befehl generiert bzw upgedated
 
-  python manage.py syncdb
+  ./syncdb.sh
   
 Statischer Content wird von infoscreen_screen/static mit folgendem Befehl
 in das Static-Verzeichnis kopiert:

@@ -14,16 +14,10 @@
     <body>
     <div id="site">
         
-        <div id="header">
-            <h1>Feuerwehrleitsystem</h1>
-        </div>
+        {% block header %}{% endblock %}
         
         <div id="content">
             {% block content %}{% endblock %}
-        </div>
-        
-        <div id="footer">
-            {% block footer %}{% endblock %}
         </div>
         
     </div>

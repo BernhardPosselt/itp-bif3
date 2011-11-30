@@ -1,18 +1,51 @@
 /**
- * Include other stylesheets
- */
-@import url("header.css") all;
-@import url("content.css") all;
-@import url("footer.css") all;
+ * Stylesheet for infoscreen 
+ * 
 
+
+colorschemes:
+
+* 1B2B32
+* 37646F
+* A3ABAF
+* E1E7E8
+* B22E2F
+* 
+
+
+
+kuler:
+* clear
+* 
+
+ * BF0F1E
+ * 212426
+ * 4D8C8C
+ * D9D2AD
+ * F2F2F2
+ * 357C26
+
+ */
+ 
 /**
  * Basic configuration
  */
+@font-face {
+	font-family: dejavusans;
+	src: url('font/DejaVuSansCondensed.ttf');
+}
+
+@font-face {
+	font-family: dejavusans;
+    font-weight: bold;
+	src: url('font/DejaVuSans-Bold.ttf');
+}
+
+ 
 * {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
-    font-size: 14pt;
+    font-family: dejavusans;
     color: #212426;
 }
 
@@ -20,9 +53,22 @@ html, body {
     height: 100%;
 }
 
+h1 {
+    font-size: 24pt;
+    font-family: dejavusans;
+    font-weight: bold;
+}
+
 p {
     line-height: 1.5;
+    margin-bottom: 30px;
+    font-size: 20pt;
 }
+
+ul {
+    list-style-type: none;
+}
+
 
 #site {
     min-height: 100%;
@@ -48,29 +94,113 @@ p {
     background-image: -ms-linear-gradient(bottom, rgb(52,124,38) 0%, rgb(60,155,38) 100%);
 }
 
-/*
-
-colorschemes:
-
-* 1B2B32
-* 37646F
-* A3ABAF
-* E1E7E8
-* B22E2F
-* 
 
 
+/**
+ * Header
+ */
+#header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    border-bottom: 1px solid #D9D2AD;
+}
 
-kuler:
-* clear
-* 
+    #header h1 {
+        text-shadow: 0 0 2px #000;
+        color: #fefefe;
+        font-size: 45pt;
+        text-align: center;
+        line-height: 120px;
+    }
 
- * BF0F1E
- * 212426
- * 4D8C8C
- * D9D2AD
- * F2F2F2
- * 357C26
+    #header #alarmstufe {
+        height: 80px;
+        width: 80px;
+        padding: 20px 30px;
+        line-height: 80px;
+        font-size: 50pt;
+        float: left;
+        background-color: #B20F0F;
+        color: #fefefe;
+        text-shadow: 0 0 2px #000;
+        border-right: 1px solid #444;
+    }
 
 
-*/
+/**
+ * Content
+ */
+#content {
+    margin-top: 121px;
+    margin-bottom: 76px;
+    background-color: #fcfcfc;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+}
+
+    #content .left_row {
+        float: left;
+        width: 50%;
+    }
+    
+    #content .right_row {
+        float: left;
+        width: 50%;
+    }
+
+
+/**
+ * Einsatz links
+ */
+#einsatz_links {
+    font-size: 60pt;
+}
+
+    #einsatz_links .adresse {
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    #einsatz_links .beschreibung {
+        font-size: 40pt;
+    }
+
+    #einsatz_links .ausrueckordnung {
+        float:left;
+        width: 400px;
+        background-color: yellow;
+    }
+
+
+/**
+ * Einsatz rechts
+ */
+#einsatz_rechts {
+    font-size: 60pt;
+}
+
+    #einsatz_rechts .karte {
+        text-align: center;
+        line-height: 1.5;
+        width: 960px;
+        height: 960px;
+        background-image: url('../img/testmap.png');
+        background-repeat: no-repeat;
+        float: left;
+    }
+
+    #einsatz_rechts .dispos {
+        font-size: 40pt;
+        float: right;
+        background-color: yellow;
+        width: 400px;
+    }
+

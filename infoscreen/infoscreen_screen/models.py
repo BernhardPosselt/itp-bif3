@@ -19,6 +19,18 @@ ALARMSTUFEN = (
     ("S3", "S3"),
 )
 
+class Willkommen(models.Model):
+    titel = models.CharField("Willkommenstitel", max_length=300)
+    nachricht = models.TextField("Willkommensnachricht", blank=True)
+    
+    class Meta:
+        verbose_name = "Willkommensnachricht"
+        verbose_name_plural = "Willkommensnachrichten"
+
+    def __unicode__(self):
+        return self.titel
+        
+
 class Einsatz(models.Model):
     """
     Diese Eintraege werden automatisch vom Hauptserver abgerufen und in die
@@ -40,6 +52,8 @@ class Einsatz(models.Model):
     ort = models.CharField("Ort", max_length=200, blank=True)
     alarmstufe = models.CharField("Alarmstufe", max_length=2, choices=ALARMSTUFEN)
     meldebild = models.CharField("Meldebild", max_length=300)
+    abgeschlossen = models.BooleanField("Abgeschlossen", blank=True)
+    ausgedruckt = models.BooleanField("Ausgedruckt", blank=True)
     modifiziert = models.DateTimeField(auto_now=True)
     
     class Meta:
@@ -99,12 +113,20 @@ class Kuerzel(models.Model):
     kurzbezeichnung = models.CharField("Kürzel", max_length=100)
     beschreibung = models.CharField("Beschreibung", max_length=300)
     modifiziert = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
         verbose_name = "Kürzel"
         verbose_name_plural = "Kürzel"
 
     def __unicode__(self):
         return self.kurzbezeichnung
-        
+
+class Ausrueckordnung(models.Model):
+    fahrzeuge = models.ManyToManyField("Fahrzeuge")
  
+    class Meta:
+        verbose_name = "Ausrückordnung"
+        verbose_name_plural = "Ausrückordnungen"
+
+    def __unicode__(self):
+        return "" # FIXME: return proper Ausrückordnung
