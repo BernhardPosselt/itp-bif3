@@ -10,9 +10,7 @@ from infoscreen.inc.shortcuts import render
 from django import forms
 from django.shortcuts import render_to_response
 from infoscreen.infoscreen_screen.forms import MapForm
-
-
-
+from gmapi import maps
 
 def index(request):
     """
@@ -35,21 +33,12 @@ def bildschirm_rechts(request):
     Doku
     """
     gmap = maps.Map(opts = {
-<<<<<<< HEAD
          'center': maps.LatLng(38, -97),
          'mapTypeId': maps.MapTypeId.ROADMAP,
          'zoom': 3,
          'mapTypeControlOptions': {
               'style': maps.MapTypeControlStyle.DROPDOWN_MENU
          },
-=======
-        'center': maps.LatLng(38, -97),
-        'mapTypeId': maps.MapTypeId.ROADMAP,
-        'zoom': 3,
-        'mapTypeControlOptions': {
-             'style': maps.MapTypeControlStyle.DROPDOWN_MENU
-        },
->>>>>>> 050c4f9bee72794c457b55e020c652ff4b3cab38
     })
 
     ctx = {'form': MapForm(initial={'map': gmap})}

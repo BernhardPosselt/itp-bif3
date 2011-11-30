@@ -5,7 +5,7 @@ from django.views.generic.simple import direct_to_template
 # normal views
 urlpatterns = patterns('infoscreen.infoscreen_screen.views.views',
     url(r'^$', 'index', name='index'),
-    #url(r'^bildschirm/links/$', 'bildschirm_links', name='bildschirm_links'),
+    url(r'^bildschirm/links/$', 'bildschirm_links', name='bildschirm_links'),
     url(r'^bildschirm/rechts/$', 'bildschirm_rechts', name='bildschirm_rechts'),
     
     # only for test purposes
@@ -32,10 +32,3 @@ urlpatterns += patterns('infoscreen.infoscreen_screen.views.pdf',
         name='einsatzfax_pdf_printed'),
 )
 
-from django.conf.urls.defaults import *
-
-
-urlpatterns = patterns('',
-    (r'', include('gmapi.urls.media')), # Use for debugging only.
-    (r'^$', 'myapp.views.index'),
-)
