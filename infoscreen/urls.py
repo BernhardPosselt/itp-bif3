@@ -3,6 +3,8 @@ from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
+from django.conf.urls.defaults import *
+
 
 
 # enable admin interfaces
@@ -22,3 +24,5 @@ if settings.DEBUG:
 urlpatterns += patterns('',
 	url(r'^', include('infoscreen.infoscreen_screen.urls', namespace='screen', app_name='infoscreen_screen')),
 )
+
+
