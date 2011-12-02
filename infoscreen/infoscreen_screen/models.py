@@ -45,9 +45,21 @@ class News(models.Model):
     def __unicode__(self):
         return self.titel   
 
+#Alarmstufen        
+class Alarmstufen(models.Model):
+	stufe = models.CharField("Alarmstufe", max_length=2, primary_key=True)
+	
+	class Meta:
+		verbose_name = "Alarmstufe"
+		verbose_name_plural = "Alarmstufen"
+		
+	def __unicode__(self):
+		return self.stufe
+		
 #Meldebilder        
 class Meldebilder(models.Model):
 	beschreibung = models.CharField("Beschreibung", max_length=200)
+	stufe = models.ForeignKey("Alarmstufen")
 	
 	class Meta:
 		verbose_name = "Meldebilder"
@@ -55,6 +67,8 @@ class Meldebilder(models.Model):
 		
 	def __unicode__(self):
 		return self.beschreibung
+
+
         
 #Einsatz
 class Einsatz(models.Model):
@@ -78,7 +92,7 @@ class Einsatz(models.Model):
     einsatznummer = models.IntegerField("Einsatznummer", unique=True) # unique?
     erzeugt = models.DateTimeField("Einsatz erzeugt")    
     meldebild = models.ForeignKey("Meldebilder")
-    alarmstufe = models.CharField("Alarmstufe", max_length=2, choices=ALARMSTUFEN)
+    alarmstufe = models.ForeignKey("Alarmstufen")
     abgeschlossen = models.BooleanField("Abgeschlossen", blank=True)
     ausgedruckt = models.BooleanField("Ausgedruckt", blank=True)
     modifiziert = models.DateTimeField(auto_now=True)

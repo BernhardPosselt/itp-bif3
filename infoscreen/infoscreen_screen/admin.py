@@ -19,7 +19,9 @@ class AusrueckeordnungAdmin(admin.TabularInline):
 class FahrzeugAdmin(admin.ModelAdmin):
 	list_display = ('kuerzel', 'beschreibung')	
     
-class MeldebildAdmin(admin.ModelAdmin):
+class MeldebildAdmin(admin.ModelAdmin):	
+	ordering = ('stufe',)
+	search_fields = ['beschreibung']
 	inlines = (AusrueckeordnungAdmin, )
 	
 class NewsAdmin(admin.ModelAdmin):
