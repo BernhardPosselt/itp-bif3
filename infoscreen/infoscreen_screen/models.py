@@ -19,6 +19,7 @@ ALARMSTUFEN = (
     ("S3", "S3"),
 )
 
+#Willkommennachrichten
 class Willkommen(models.Model):
     titel = models.CharField("Willkommenstitel", max_length=300)
     nachricht = models.TextField("Willkommensnachricht", blank=True)
@@ -29,8 +30,33 @@ class Willkommen(models.Model):
 
     def __unicode__(self):
         return self.titel
-        
 
+#News  
+class News(models.Model):
+    datum = models.DateTimeField("Datum")
+    titel = models.CharField("Titel", max_length=400)
+    text = models.TextField("Beschreibung")
+    modifiziert = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "News"
+        verbose_name_plural = "News"
+
+    def __unicode__(self):
+        return self.titel   
+
+#Meldebilder        
+class Meldebilder(models.Model):
+	beschreibung = models.CharField("Beschreibung", max_length=200)
+	
+	class Meta:
+		verbose_name = "Meldebilder"
+		verbose_name_plural = "Meldebilder"
+		
+	def __unicode__(self):
+		return self.beschreibung
+        
+#Einsatz
 class Einsatz(models.Model):
     """
     Diese Eintraege werden automatisch vom Hauptserver abgerufen und in die
@@ -46,12 +72,13 @@ class Einsatz(models.Model):
     stiege = models.CharField("Stiege", max_length=50, blank=True)
     tuer = models.CharField("Tür", max_length=50, blank=True)
     postleitzahl = models.IntegerField("Postleitzahl", blank=True)
-    einsatznummer = models.IntegerField("Einsatznummer", unique=True) # unique?
+    ort = models.CharField("Ort", max_length=200, blank=True)    
     bemerkung = models.TextField("Bemerkungen", blank=True)
-    erzeugt = models.DateTimeField("Einsatz erzeugt")
-    ort = models.CharField("Ort", max_length=200, blank=True)
+    objekt = models.CharField("Objekt", blank=True, max_length=200)
+    einsatznummer = models.IntegerField("Einsatznummer", unique=True) # unique?
+    erzeugt = models.DateTimeField("Einsatz erzeugt")    
+    meldebild = models.ForeignKey("Meldebilder")
     alarmstufe = models.CharField("Alarmstufe", max_length=2, choices=ALARMSTUFEN)
-    meldebild = models.CharField("Meldebild", max_length=300)
     abgeschlossen = models.BooleanField("Abgeschlossen", blank=True)
     ausgedruckt = models.BooleanField("Ausgedruckt", blank=True)
     modifiziert = models.DateTimeField(auto_now=True)
@@ -63,13 +90,13 @@ class Einsatz(models.Model):
     def __unicode__(self):
         return "%s: %s" % (self.einsatzID, self.bemerkung)
     
-    
+#Dispo - Feuerwehren alarmiert  
 class Dispo(models.Model):
     einsatz = models.ForeignKey("Einsatz")
     dispoID = models.IntegerField("Dispo ID")
     name = models.CharField("Name", max_length=200)
     zeit = models.DateTimeField("Dispozeit")
-    alarm = models.DateTimeField("Alarmierungszeit")
+    alarm = models.DateTimeField("Alarmierungszeit", blank=True)
     aus = models.DateTimeField("Ausrückzeit", blank=True)
     ein = models.DateTimeField("Einrückzeit", blank=True)
     modifiziert = models.DateTimeField(auto_now=True)
@@ -81,24 +108,12 @@ class Dispo(models.Model):
     def __unicode__(self):
         return self.name
         
-class News(models.Model):
-    datum = models.DateTimeField("Datum")
-    titel = models.CharField("Titel", max_length=400)
-    text = models.TextField("Beschreibung")
-    modifiziert = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = "News"
-        verbose_name_plural = "News"
-
-    def __unicode__(self):
-        return self.titel   
-
-    
+#Fahrzeuge    
 class Fahrzeuge(models.Model):
-    kennzeichen = models.CharField("Kennzeichen", max_length=200)
-    funkrufname = models.CharField("Funkrufname", max_length=200)
-    kuerzel = models.ForeignKey("Kuerzel")
+    kennzeichen = models.CharField("Kennzeichen", max_length=200, blank=True)
+    funkrufname = models.CharField("Funkrufname", max_length=200, blank=True)
+    kuerzel = models.CharField("Kürzel", max_length=12)
+    beschreibung = models.CharField("Beschreibung", max_length=100)
     modifiziert = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -106,27 +121,18 @@ class Fahrzeuge(models.Model):
         verbose_name_plural = "Fahrzeuge"
 
     def __unicode__(self):
-        return self.funkrufname 
-
-
-class Kuerzel(models.Model):
-    kurzbezeichnung = models.CharField("Kürzel", max_length=100)
-    beschreibung = models.CharField("Beschreibung", max_length=300)
-    modifiziert = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = "Kürzel"
-        verbose_name_plural = "Kürzel"
-
-    def __unicode__(self):
-        return self.kurzbezeichnung
-
+        return self.kuerzel
+   
 class Ausrueckordnung(models.Model):
-    fahrzeuge = models.ManyToManyField("Fahrzeuge")
+    fahrzeug = models.ForeignKey("Fahrzeuge", unique=True)
+    meldebild = models.ForeignKey("Meldebilder")
+    order = models.IntegerField("Ordnung")
  
     class Meta:
         verbose_name = "Ausrückordnung"
         verbose_name_plural = "Ausrückordnungen"
 
     def __unicode__(self):
-        return "" # FIXME: return proper Ausrückordnung
+        return self.meldebild.beschreibung
+
+

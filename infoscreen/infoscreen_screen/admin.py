@@ -12,4 +12,24 @@ class EinsatzAdmin(admin.ModelAdmin):
     date_hierarchy = 'erzeugt'
     search_fields = ["adresse", 'hausnummer']
     
+class AusrueckeordnungAdmin(admin.TabularInline):
+	model = Ausrueckordnung
+	extra = 0
+    
+class FahrzeugAdmin(admin.ModelAdmin):
+	list_display = ('kuerzel', 'beschreibung')	
+    
+class MeldebildAdmin(admin.ModelAdmin):
+	inlines = (AusrueckeordnungAdmin, )
+	
+class NewsAdmin(admin.ModelAdmin):
+	list_display = ('titel', 'datum')
+	
+class WillkommenAdmin(admin.ModelAdmin):
+	pass
+
+admin.site.register(Willkommen, WillkommenAdmin)
+admin.site.register(News, NewsAdmin)	    
 admin.site.register(Einsatz, EinsatzAdmin)
+admin.site.register(Meldebilder, MeldebildAdmin)
+admin.site.register(Fahrzeuge, FahrzeugAdmin)
