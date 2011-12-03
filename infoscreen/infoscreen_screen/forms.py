@@ -9,7 +9,7 @@ from infoscreen.gmapi.forms.widgets import GoogleMap
 from infoscreen.infoscreen_screen.models import *
 
 class MapForm(forms.Form):
-    map = forms.Field(widget=GoogleMap(attrs={'width':900, 'height':900}))
+    map = forms.Field(widget=GoogleMap(attrs={'width':1100, 'height':750}))
 
 
 

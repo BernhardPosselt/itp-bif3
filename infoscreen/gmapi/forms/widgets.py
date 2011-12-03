@@ -35,8 +35,8 @@ class GoogleMap(Widget):
         if attrs:
             default_attrs.update(attrs)
         final_attrs = self.build_attrs(default_attrs)
-        width = final_attrs.pop('width', 500)
-        height = final_attrs.pop('height', 400)
+        width = final_attrs.pop('width', 1100)
+        height = final_attrs.pop('height', 750)
         style = (u'position:relative;width:%dpx;height:%dpx;' %
                  (width, height))
         final_attrs['style'] = style + final_attrs.get('style', '')
