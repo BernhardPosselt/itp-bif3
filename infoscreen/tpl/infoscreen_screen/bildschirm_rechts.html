@@ -16,18 +16,51 @@
 	     //<![CDATA[
          
        
-    
+        
         var gml, mmap;
+        var gxmlopts = {}
+        
         function initMap() {
 
-        mmap=new GMap2(document.getElementById("map"));
-        mmap.setCenter(new GLatLng(0,0),2);
+        mmap=new GMap2(document.getElementById("map")); 
+        geocoder = new GClientGeocoder();
+        var adresse = "3161, St. Veit/Gölsen";
+        showAddress(adresse);
+        
+        /*mmap.setCenter(new GLatLng(0,0),2);
         point = new GLatLng(48.042556,15.673016);
         marker = new GMarker(point);
-        mmap.addOverlay(marker);
-
-        gml = new GeoXml("gml", mmap, "{{ STATIC_URL }}script/Hydranten.kml");
+        mmap.addOverlay(marker);*/
+        
+        gxmlopts["nozoom"]=true;
+        gml = new GeoXml("gml", mmap, "{{ STATIC_URL }}script/Hydranten.kml",gxmlopts);
         gml.parse();
+        }
+        
+        
+        function showAddress(address) 
+        {
+            if (geocoder) 
+            {
+                geocoder.getLatLng
+                (
+                    address,
+                    function(point) 
+                    {
+                        if (!point) 
+                        {
+                            alert(address + " not found");
+                        } 
+                        else 
+                        {
+                            mmap.setCenter(point, 16);
+                            var marker = new GMarker(point);
+                            mmap.addOverlay(marker);
+
+                        }
+                    }
+                );
+            }
         }
         //]]>
         </script>
