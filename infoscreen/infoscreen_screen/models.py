@@ -1,23 +1,9 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-
 # Django imports
 from django.db import models
 
-# declare alarm ids
-ALARMSTUFEN = (
-    ("B1", "B1"),
-    ("B2", "B2"),
-    ("B3", "B3"),
-    ("B4", "B4"),
-    ("T1", "T1"),
-    ("T2", "T2"),
-    ("T3", "T3"),
-    ("S1", "S1"),
-    ("S2", "S2"),
-    ("S3", "S3"),
-)
 
 #Willkommennachrichten
 class Willkommen(models.Model):
@@ -91,8 +77,7 @@ class Einsatz(models.Model):
     objekt = models.CharField("Objekt", blank=True, max_length=200)
     einsatznummer = models.IntegerField("Einsatznummer", unique=True) # unique?
     erzeugt = models.DateTimeField("Einsatz erzeugt")    
-    meldebild = models.ForeignKey("Meldebilder")
-    alarmstufe = models.ForeignKey("Alarmstufen")
+    meldebild = models.ForeignKey("Meldebilder")    
     abgeschlossen = models.BooleanField("Abgeschlossen", blank=True)
     ausgedruckt = models.BooleanField("Ausgedruckt", blank=True)
     modifiziert = models.DateTimeField(auto_now=True)
@@ -138,15 +123,14 @@ class Fahrzeuge(models.Model):
         return self.kuerzel
    
 class Ausrueckordnung(models.Model):
-    fahrzeug = models.ForeignKey("Fahrzeuge", unique=True)
+    fahrzeug = models.ForeignKey("Fahrzeuge")
     meldebild = models.ForeignKey("Meldebilder")
-    order = models.IntegerField("Ordnung")
+    position = models.PositiveSmallIntegerField("Position")
  
-    class Meta:
+    class Meta:		
         verbose_name = "Ausrückordnung"
         verbose_name_plural = "Ausrückordnungen"
+        ordering = ["position"]
 
     def __unicode__(self):
         return self.meldebild.beschreibung
-
-
