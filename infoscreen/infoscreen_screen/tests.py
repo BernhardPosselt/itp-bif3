@@ -5,12 +5,30 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
-from django.test import TestCase
+import unittest
+from lxml import etree
+from infoscreen.infoscreen_screen.parser import *
 
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+    
+
+class Testparser(unittest.TestCase):
+    def test_tags(self):
         """
-        Tests that 1 + 1 always equals 2.
+        Einlesen mit Parser
         """
-        self.assertEqual(1 + 1, 2)
+       
+        x = 2+2
+        self.assertEqual(x,4)
+        
+        """ 
+      
+        for element in xml_element:
+            print element.tag
+       
+        self.assertEqual(x,"B3")
+        """
+        """
+        root = etree.parse("tests/xml/dummy.xml")
+        context = etree.iterwalk(root)
+        for elem in context:"""

@@ -27,10 +27,6 @@
         var adresse = "3161, St. Veit/Gölsen";
         showAddress(adresse);
         
-        /*mmap.setCenter(new GLatLng(0,0),2);
-        point = new GLatLng(48.042556,15.673016);
-        marker = new GMarker(point);
-        mmap.addOverlay(marker);*/
         
         gxmlopts["nozoom"]=true;
         gml = new GeoXml("gml", mmap, "{{ STATIC_URL }}script/Hydranten.kml",gxmlopts);

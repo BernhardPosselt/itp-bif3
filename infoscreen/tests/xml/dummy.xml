@@ -1,0 +1,35 @@
+<root>
+	<einsatz id="MI 947">
+		<alarmstufe>B3</alarmstufe>
+		<meldebild>Wohnhausbrand</meldebild>
+		<nummer1>3</nummer1>
+		<nummer2></nummer2>
+		<nummer3></nummer3>
+		<plz>3500</plz>
+		<strasse>Hoher Markt</strasse>
+		<ort>Krems</ort>
+		<abschnitt></abschnitt>
+		<objekt></objekt>
+		<bemerkung>Hier steht eine beliebige Bemerkung!</bemerkung>
+		<einsatzerzeugt>25.04.2008 18:56:58</einsatzerzeugt>
+		<melder></melder>
+		<meldertel></meldertel>
+		<einsatznr>1986638816</einsatznr>
+		<dispo id="1">
+			<disponame>Gaweinstal</disponame>
+			<zeitdispo>25.04.2008 18:57:41</zeitdispo>
+			<zeitalarm>02.01.1970</zeitalarm>
+			<zeitaus>25.04.2008 19:01:44</zeitaus>
+			<zeitein>01.01.1900</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="2">
+			<disponame>Pellendorf</disponame>
+			<zeitdispo>25.04.2008 18:57:33</zeitdispo>
+			<zeitalarm>02.01.1970</zeitalarm>
+			<zeitaus>25.04.2008 19:01:48</zeitaus>
+			<zeitein>01.01.1900</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+	</einsatz>
+</root>

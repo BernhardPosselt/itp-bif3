@@ -9,9 +9,9 @@ from infoscreen.infoscreen_screen.models import *
 from infoscreen.inc.shortcuts import render
 from django import forms
 from django.shortcuts import render_to_response
-from infoscreen.infoscreen_screen.forms import MapForm
 from gmapi import maps
 from gmapi.maps import Geocoder
+from lxml import etree
 
 def index(request):
     """
