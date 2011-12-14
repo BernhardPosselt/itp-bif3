@@ -13,6 +13,10 @@ urlpatterns = patterns('infoscreen.infoscreen_screen.views.views',
     url(r'^2/$', direct_to_template, {'template': 'test/einsatz_rechts.html'} ),
     url(r'^3/$', direct_to_template, {'template': 'test/frieden_links.html'} ),
     url(r'^4/$', direct_to_template, {'template': 'test/frieden_rechts.html'} ),
+    
+    # javascript
+    url(r'javascript/(?P<src>\w+)/$', 'javascript', name='javascript'),
+    url(r'settings/(?P<src>\w+)/$', 'settings', name='settings'),
 )
 
 # ajax views
