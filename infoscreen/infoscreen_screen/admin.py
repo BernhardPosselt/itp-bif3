@@ -5,11 +5,11 @@ from django.contrib import admin
 from infoscreen.infoscreen_screen.models import *
 
 class EinsatzAdmin(admin.ModelAdmin):
-    list_display = ('adresse', 'hausnummer', 'stiege', 'meldebild', 'erzeugt')
-    list_filter = ("meldebild", 'postleitzahl')
+    list_display = ('nummer1', 'nummer2', 'nummer3', 'meldebild', 'einsatzerzeugt')
+    list_filter = ("meldebild", 'plz')
     ordering = ("modifiziert",)
-    date_hierarchy = 'erzeugt'
-    search_fields = ["adresse", 'hausnummer']
+    date_hierarchy = 'einsatzerzeugt'
+    search_fields = ["nummer1", 'nummer2']
     
     
 class AusrueckeordnungAdmin(admin.TabularInline):

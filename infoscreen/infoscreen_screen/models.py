@@ -64,20 +64,21 @@ class Einsatz(models.Model):
     Die Daten fuer den Einsatz. Ein Einsatz kann an mehrere 
     :model:`infoscreen_screen.Dispo` vergeben werden. 
     """
-    einsatzID = models.CharField("Einsatz ID", unique=True, max_length=200,
+    einsatz = models.CharField("Einsatz ID", unique=True, max_length=200,
         help_text="Die Nummer die für den Einsatz von der Leistelle vergeben \
             wird. Ist immer eindeutig.")
-    adresse = models.CharField("Adresse", max_length=300, blank=True)
-    hausnummer = models.CharField("Hausnummer", max_length=50, blank=True)
-    stiege = models.CharField("Stiege", max_length=50, blank=True)
-    tuer = models.CharField("Tür", max_length=50, blank=True)
-    postleitzahl = models.IntegerField("Postleitzahl", blank=True)
+    strasse = models.CharField("Adresse", max_length=300, blank=True)
+    nummer1 = models.CharField("Hausnummer", max_length=50, blank=True)
+    nummer2 = models.CharField("Stiege", max_length=50, blank=True)
+    nummer3 = models.CharField("Tür", max_length=50, blank=True)
+    plz = models.IntegerField("Postleitzahl", blank=True)
     ort = models.CharField("Ort", max_length=200, blank=True)    
     bemerkung = models.TextField("Bemerkungen", blank=True)
     objekt = models.CharField("Objekt", blank=True, max_length=200)
-    einsatznummer = models.IntegerField("Einsatznummer", unique=True) # unique?
-    erzeugt = models.DateTimeField("Einsatz erzeugt")    
+    einsatznr = models.IntegerField("Einsatznummer", unique=True) # unique?
+    einsatzerzeugt = models.DateTimeField("Einsatz erzeugt")    
     meldebild = models.ForeignKey("Meldebilder")    
+    melder = models.TextField("Melder", blank = True, max_length=200)
     abgeschlossen = models.BooleanField("Abgeschlossen", blank=True)
     ausgedruckt = models.BooleanField("Ausgedruckt", blank=True)
     modifiziert = models.DateTimeField(auto_now=True)
@@ -87,7 +88,7 @@ class Einsatz(models.Model):
         verbose_name_plural = "Einsätze"
 
     def __unicode__(self):
-        return "%s: %s" % (self.einsatzID, self.bemerkung)
+        return "%s: %s" % (self.einsatz, self.bemerkung)
     
 #Dispo - Feuerwehren alarmiert  
 class Dispo(models.Model):

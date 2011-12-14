@@ -12,6 +12,7 @@ from django.shortcuts import render_to_response
 from gmapi import maps
 from gmapi.maps import Geocoder
 from lxml import etree
+from infoscreen.infoscreen_screen.parser import *
 
 def index(request):
     """
@@ -25,6 +26,8 @@ def bildschirm_links(request):
     """
     Doku
     """
+    testxml = XML("tests/xml/dummy.xml")
+    testxml.save()
     ctx = {}
     return render(request, "infoscreen_screen/bildschirm_links.html", ctx)
 

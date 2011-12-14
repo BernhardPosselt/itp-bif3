@@ -1,6 +1,10 @@
 from lxml import etree
 from infoscreen.infoscreen_screen.models import Einsatz as EinsatzModel
-import time
+from datetime import *
+import re
+from infoscreen.infoscreen_screen.models import Meldebilder as MeldebildModel
+from infoscreen.infoscreen_screen.models import Dispo as DispoModel
+
 
 
 class XML(object):
@@ -9,12 +13,6 @@ class XML(object):
     """
     
     # static vars for debug purposes
-   
-    
-
-    einsatztags = { "einsatz", "alarmstufe", "meldebild", "nummer1", "nummer2",
-    "nummer3", "plz", "strasse", "ort", "objekt", "bemerkung", "einsatzerzeugt", 
-    "melder", "einsatznr"}
 
     dispotags = {"dispo", "disponame"}
 
@@ -22,42 +20,45 @@ class XML(object):
         """
         DOKU
         """
-        self.einsatzid = 0
+        einsatztags = { "einsatz", "alarmstufe", "meldebild", "nummer1", "nummer2",
+            "nummer3", "plz", "strasse", "ort", "objekt", "bemerkung", "einsatzerzeugt", 
+            "melder", "einsatznr"}
+        self.einsatz = 0
         self.alarmstufe = "DEF"
         self.meldebild= "DEFAULT"
-        self.hausnummer = -1
-        self.stiege = -1
-        self.tuer = -1
-        self.postleitzahl= -1
+        self.nummer1 = -1
+        self.nummer2 = -1
+        self.nummer3 = -1
+        self.plz= -1
         self.adresse = "DEFAULT"
         self.ort = "DEFAULT"
         self.bemerkung = "DEFAULT"
         self.objekt = "DEFAULT"
-        self.einsatznummer = -1
-        self.erzeugt = 01,01,2001
-        self.abgeschlossen = 01,01,2001
+        self.einsatznr = -1
+        self.melder = "DEFAULT"
+        self.einsatzerzeugt = date(2001,01,01)
+        self.abgeschlossen = date(2001,01,01)
         self.ausgedruckt = False 
         self.modified = False
-        self.lastModified = time.time()
+        self.lastModified = datetime.now()
+        
+        melder = 'Default'
+        meldertel = 'Default'
          
         xml_tree = etree.parse(xml)
         xml_root = xml_tree.getroot()
-        for tags in einsatztags:
-            context = etree.iterwalk(
-                        xml_root, tag=tags)
+        for mytag in einsatztags:
+            context = etree.iterwalk(xml_root, tag=mytag)
             for action, elem in context:
                 if elem.tag == "einsatz":
-                    einsatz = elem.tag,elem.get("id");
-                elif elem.tag == "dispo":
-                    einsatz = elem.tag,elem.get("id");
-                else:
-                     einsatz = elem.tag,elem.text;
-                     
+                    setattr( self,mytag, elem.get("id"))
+                elif elem.text:
+                    setattr( self, mytag, elem.text)
+              
 
     def __setattr__(self, name, value):
         """Setter"""
         
-                
         object.__setattr__(self, name, value)
     
      
@@ -66,7 +67,7 @@ class XML(object):
         Returns true if the timestamp from the file is newer than the
         Database entry
         """
-        return einsatz.lastModified == self.lastModified
+        return einsatz.modifiziert == self.lastModified
     
     
     def getModel(self):
@@ -74,7 +75,7 @@ class XML(object):
         DOKU
         """
         try:
-            einsatz = Einsatzmodel.objects.get(einsatzID=self.einsatzID)
+            einsatz = EinsatzModel.objects.get(einsatz=self.einsatz)
             return einsatz
         except EinsatzModel.DoesNotExist:
             return False
@@ -94,11 +95,28 @@ class XML(object):
            
 
         # only save to database if einsatz is modified
-        if self.isModified(einsatz):           
-            
-            for attr in einsatztags:
+        """if self.isModified(einsatz):     """      
+        einsatztags = { "einsatz", "alarmstufe", "meldebild", "nummer1", "nummer2",
+            "nummer3", "plz", "strasse", "ort", "objekt", "bemerkung", "einsatzerzeugt", 
+            "melder", "einsatznr"}  
+        for attr in einsatztags:
+            if attr == "meldebild":
+                meldebild_beschreibung = MeldebildModel.objects.get(beschreibung = self.meldebild)
+                einsatz.meldebild = meldebild_beschreibung
+            elif attr == "einsatzerzeugt":
+                hilf = re.split('\.+|\:+|\ +',self.einsatzerzeugt,5)
+                datal = date(int(hilf[2]),int(hilf[1]),int(hilf[0]))
+                try:
+                    if hilf[3]:
+                        zeital = time(int(hilf[3]),int(hilf[4]),int(hilf[5]))
+                
+                except:
+                    zeital = time(0,0,0)
+                tstamp = datetime.combine(datal,zeital)
+                einsatz.einsatzerzeugt  = tstamp
+            else:
                 setattr( einsatz, attr, getattr(self, attr) )
-            
-            einsatz.save();
+        
+        einsatz.save()
 
 
