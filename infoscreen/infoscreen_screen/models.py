@@ -82,7 +82,7 @@ class Einsaetze(models.Model):
     
 #Dispo - Feuerwehren alarmiert  
 class Dispos(models.Model):
-    einsatz = models.ForeignKey("Einsatz")
+    einsatz = models.ForeignKey("Einsaetze")
     dispo = models.IntegerField("Dispo ID")
     disponame = models.CharField("Name", max_length=200)
     zeitdispo = models.DateTimeField("Dispozeit")
