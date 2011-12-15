@@ -17,7 +17,7 @@ def einsatzfax(request):
     
     id -- The id (databaseid, not einsatzID) of the einsatz 
     """
-    pdfs = Einsatz.objects.filter(abgeschlossen=False)
+    pdfs = Einsaetze.objects.filter(abgeschlossen=False)
     ctx = {
         "einsaetze": pdfs,
     }
@@ -30,7 +30,7 @@ def einsatzfax_pdf(request, id):
     """
     try:
         # TODO: create pdf from Einsatz
-        einsatz = Einsatz.objects.get(id=id)
+        einsatz = Einsaetze.objects.get(id=id)
         # Create the HttpResponse object with the appropriate PDF headers.
         response = HttpResponse(mimetype='application/pdf')
         response['Content-Disposition'] = 'attachment; filename=somefilename.pdf'
@@ -46,7 +46,7 @@ def einsatzfax_pdf(request, id):
         p.showPage()
         p.save()
         return response
-    except Einsatz.DoesNotExist:
+    except Einsaetze.DoesNotExist:
         return render(request, "infoscreen_screen/einsatzfax/einsatzfax_pdf.xml", ctx)
     
     
@@ -59,11 +59,11 @@ def einsatzfax_pdf_ausgedruckt(request, id):
     id -- The id (databaseid, not einsatzID) of the einsatz 
     """
     try:
-        einsatz = Einsatz.objects.get(id=id)
+        einsatz = Einsaetze.objects.get(id=id)
         einsatz.ausgedruckt = True
         einsatz.save()
         ok = True
-    except Einsatz.DoesNotExist:
+    except Einsaetze.DoesNotExist:
         ok = False
     ctx = {
         "ok": ok,

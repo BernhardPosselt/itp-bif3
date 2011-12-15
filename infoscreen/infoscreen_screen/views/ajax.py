@@ -25,14 +25,14 @@ def update(request):
     frieden_rechts_last = [
             int(mktime(news[:1].modifiziert.timetuple()),
             int(mktime(geraet[:1].modifiziert.timetuple()),
-            int(mktime(fahrzeug[:1].modifiziert.timetuple()),
+            int(mktime(fahrzeug[:1].modifiziert.timetuple())
         ].sort()[-1] 
     einsatz_links_anzahl = [len(einsatz), len(ausrueckordnung), len(fahrzeug)]
     einsatz_links_last = 
         [
             int(mktime(einsatz[:1].modifiziert.timetuple()),
             int(mktime(ausrueckordnung[:1].modifiziert.timetuple()),
-            int(mktime(fahrzeug[:1].modifiziert.timetuple()),
+            int(mktime(fahrzeug[:1].modifiziert.timetuple())
         ].sort()[-1] 
     einsatz_rechts_anzahl = [len(dispo), len(einsatz)]
     einsatz_rechts_last = [
