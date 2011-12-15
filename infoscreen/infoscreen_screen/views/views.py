@@ -20,7 +20,14 @@ def index(request):
     """
     ctx = {}
     return render(request, "infoscreen_screen/index.html", ctx)
-    
+
+
+def settings(request):
+    """
+    Doku
+    """
+    ctx = {}
+    return render(request, "infoscreen_screen/index.html", ctx)
 
 def bildschirm_links(request):
     """
@@ -39,4 +46,15 @@ def bildschirm_rechts(request):
     return render(request, "infoscreen_screen/bildschirm_rechts.html", ctx)
    
    
-    
+def javascript(request, src):
+    """Generates the javascript from templates
+
+    Keyword arguments:
+    src -- The javascript part which should be generated 
+    """
+    if src == 'main':
+        tpl = 'javascript/main.js'
+    elif src == 'loader':
+        tpl = 'javascript/loader.js'
+        
+    return render(request, tpl)

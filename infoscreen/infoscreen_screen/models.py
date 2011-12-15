@@ -134,6 +134,7 @@ class Ausrueckordnung(models.Model):
         verbose_name = "Ausrückordnung"
         verbose_name_plural = "Ausrückordnungen"
         ordering = ["position"]
+        unique_together = ("fahrzeug", "meldebild")
 
     def __unicode__(self):
         return self.meldebild.beschreibung
