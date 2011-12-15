@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
 # System includes
 
 
@@ -7,10 +10,6 @@
 # Project includes
 from infoscreen.infoscreen_screen.models import *
 from infoscreen.inc.shortcuts import render
-from django import forms
-from django.shortcuts import render_to_response
-from gmapi import maps
-from gmapi.maps import Geocoder
 from lxml import etree
 from infoscreen.infoscreen_screen.parser import *
 
