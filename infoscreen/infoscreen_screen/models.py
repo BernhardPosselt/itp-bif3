@@ -93,17 +93,19 @@ class Einsatz(models.Model):
 #Dispo - Feuerwehren alarmiert  
 class Dispo(models.Model):
     einsatz = models.ForeignKey("Einsatz")
-    dispoID = models.IntegerField("Dispo ID")
-    name = models.CharField("Name", max_length=200)
-    zeit = models.DateTimeField("Dispozeit")
-    alarm = models.DateTimeField("Alarmierungszeit", blank=True)
-    aus = models.DateTimeField("Ausrückzeit", blank=True)
-    ein = models.DateTimeField("Einrückzeit", blank=True)
+    dispo = models.IntegerField("Dispo ID")
+    disponame = models.CharField("Name", max_length=200)
+    zeitdispo = models.DateTimeField("Dispozeit")
+    zeitalarm = models.DateTimeField("Alarmierungszeit", blank=True)
+    zeitaus = models.DateTimeField("Ausrückzeit", blank=True)
+    zeitein = models.DateTimeField("Einrückzeit", blank=True)
+    hintergrund = models.CharField("Hintergrund", max_length =200,blank=True)
     modifiziert = models.DateTimeField(auto_now=True)
     
     class Meta:
         verbose_name = "Dispo"
         verbose_name_plural = "Dispos"
+        unique_together = ("einsatz", "dispo")
 
     def __unicode__(self):
         return self.name
