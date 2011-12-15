@@ -23,16 +23,26 @@ class Testparser(unittest.TestCase):
         Einlesen mit Parser
         """
         alarm = AlarmModel()
-        alarm.stufe = "B1"
+        alarm.stufe = "B3"
+        alarm.save()
+        
+        alarm = AlarmModel()
+        alarm.stufe = "T1"
         alarm.save()
         
         mbild = MeldebildModel()
-        mbild.beschreibung = "Kaminbrand"
-        alarm_stufe = AlarmModel.objects.get(stufe = "B1")
+        mbild.beschreibung = "Wohnhausbrand"
+        alarm_stufe = AlarmModel.objects.get(stufe = "B3")
         mbild.stufe = alarm_stufe
         mbild.save()
-        testxml = XML("tests/xml/dummy.xml")
-        testxml.save()
+        
+        mbild = MeldebildModel()
+        mbild.beschreibung = "Auspumparbeiten"
+        alarm_stufe = AlarmModel.objects.get(stufe = "T1")
+        mbild.stufe = alarm_stufe
+        mbild.save()
+        
+        testxml = XML("tests/xml/dummy1.xml")
         testeintrag = EinsatzModel.objects.all()
         print testeintrag[0].einsatznr
         
@@ -56,7 +66,7 @@ class Testdb(unittest.TestCase):
         einsatz.bemerkung = "test"
         einsatz.einsatznummer = 129
         einsatz.ort = "Bernhardsthal"
-        einsatz.postleitzahl = 2275
+        einsatz.plz = 2275
         einsatz.erzeugt = datetime.now()
         meldebild_beschreibung = MeldebildModel.objects.get(beschreibung = "Kaminbrand")
         einsatz.meldebild = meldebild_beschreibung
