@@ -39,7 +39,9 @@ function Loader() {
  * 
  */
 Loader.prototype.update = function () {
-
+    $.getJSON('{% url screen:update %}', function(data){
+        alert();
+    });
 }
 
 

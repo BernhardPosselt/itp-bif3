@@ -8,7 +8,7 @@ Replace this with more appropriate tests for your application.
 import unittest
 from lxml import etree
 from infoscreen.infoscreen_screen.parser import *
-from infoscreen.infoscreen_screen.models import Einsatz as EinsatzModel
+from infoscreen.infoscreen_screen.models import Einsaetze as EinsatzModel
 from infoscreen.infoscreen_screen.models import Meldebilder as MeldebildModel
 from infoscreen.infoscreen_screen.models import Alarmstufen as AlarmModel
 from datetime import *

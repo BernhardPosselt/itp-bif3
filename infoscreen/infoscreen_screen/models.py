@@ -5,18 +5,6 @@
 from django.db import models
 
 
-#Willkommennachrichten
-class Willkommen(models.Model):
-    titel = models.CharField("Willkommenstitel", max_length=300)
-    nachricht = models.TextField("Willkommensnachricht", blank=True)
-    
-    class Meta:
-        verbose_name = "Willkommensnachricht"
-        verbose_name_plural = "Willkommensnachrichten"
-
-    def __unicode__(self):
-        return self.titel
-
 #News  
 class News(models.Model):
     datum = models.DateTimeField("Datum")
@@ -34,6 +22,7 @@ class News(models.Model):
 #Alarmstufen        
 class Alarmstufen(models.Model):
 	stufe = models.CharField("Alarmstufe", max_length=2, primary_key=True)
+	modifiziert = models.DateTimeField(auto_now=True)
 	
 	class Meta:
 		verbose_name = "Alarmstufe"
@@ -46,6 +35,7 @@ class Alarmstufen(models.Model):
 class Meldebilder(models.Model):
 	beschreibung = models.CharField("Beschreibung", max_length=200)
 	stufe = models.ForeignKey("Alarmstufen")
+	modifiziert = models.DateTimeField(auto_now=True)
 	
 	class Meta:
 		verbose_name = "Meldebilder"
@@ -57,7 +47,7 @@ class Meldebilder(models.Model):
 
         
 #Einsatz
-class Einsatz(models.Model):
+class Einsaetze(models.Model):
     """
     Diese Eintraege werden automatisch vom Hauptserver abgerufen und in die
     Datenbank geschrieben. Bitte nur aendern, wenn es wirklich notwendig ist!
@@ -91,8 +81,8 @@ class Einsatz(models.Model):
         return "%s: %s" % (self.einsatz, self.bemerkung)
     
 #Dispo - Feuerwehren alarmiert  
-class Dispo(models.Model):
-    einsatz = models.ForeignKey("Einsatz")
+class Dispos(models.Model):
+    einsatz = models.ForeignKey("Einsaetze")
     dispo = models.IntegerField("Dispo ID")
     disponame = models.CharField("Name", max_length=200)
     zeitdispo = models.DateTimeField("Dispozeit")
@@ -117,6 +107,7 @@ class Fahrzeuge(models.Model):
     kuerzel = models.CharField("Kürzel", max_length=12)
     beschreibung = models.CharField("Beschreibung", max_length=100)
     modifiziert = models.DateTimeField(auto_now=True)
+    reperatur = models.BooleanField("In Reperatur", blank=True)
 
     class Meta:
         verbose_name = "Fahrzeug"
@@ -124,11 +115,27 @@ class Fahrzeuge(models.Model):
 
     def __unicode__(self):
         return self.kuerzel
+        
+        
+# Geraete    
+class Geraete(models.Model):
+    beschreibung = models.CharField("Beschreibung", max_length=100)
+    modifiziert = models.DateTimeField(auto_now=True)
+    reperatur = models.BooleanField("In Reperatur", blank=True)
+
+    class Meta:
+        verbose_name = "Gerät"
+        verbose_name_plural = "Geräte"
+
+    def __unicode__(self):
+        return self.beschreibung
+        
    
-class Ausrueckordnung(models.Model):
+class Ausrueckordnungen(models.Model):
     fahrzeug = models.ForeignKey("Fahrzeuge")
     meldebild = models.ForeignKey("Meldebilder")
     position = models.PositiveSmallIntegerField("Position")
+    modifiziert = models.DateTimeField(auto_now=True)
  
     class Meta:		
         verbose_name = "Ausrückordnung"

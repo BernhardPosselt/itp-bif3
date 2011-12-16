@@ -129,7 +129,6 @@ INSTALLED_APPS = (
     'infoscreen.infoscreen_screen',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'infoscreen.gmapi',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -13,7 +13,7 @@ class EinsatzAdmin(admin.ModelAdmin):
     
     
 class AusrueckeordnungAdmin(admin.TabularInline):
-	model = Ausrueckordnung
+	model = Ausrueckordnungen
 	sortable_field_name = "position"
 	extra = 0
     
@@ -28,12 +28,9 @@ class MeldebildAdmin(admin.ModelAdmin):
 	
 class NewsAdmin(admin.ModelAdmin):
 	list_display = ('titel', 'datum')
-	
-class WillkommenAdmin(admin.ModelAdmin):
-	pass
 
-admin.site.register(Willkommen, WillkommenAdmin)
+
 admin.site.register(News, NewsAdmin)	    
-admin.site.register(Einsatz, EinsatzAdmin)
+admin.site.register(Einsaetze, EinsatzAdmin)
 admin.site.register(Meldebilder, MeldebildAdmin)
 admin.site.register(Fahrzeuge, FahrzeugAdmin)
