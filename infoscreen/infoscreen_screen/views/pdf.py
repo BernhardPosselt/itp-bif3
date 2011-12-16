@@ -33,14 +33,23 @@ def einsatzfax_pdf(request, id):
         einsatz = Einsatz.objects.get(id=id)
         # Create the HttpResponse object with the appropriate PDF headers.
         response = HttpResponse(mimetype='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename=somefilename.pdf'
+        response['Content-Disposition'] = 'attachment; filename=einsatzfax.pdf'
 
         # Create the PDF object, using the response object as its "file."
         p = canvas.Canvas(response)
 
         # Draw things on the PDF. Here's where the PDF generation happens.
         # See the ReportLab documentation for the full list of functionality.
-        p.drawString(100, 100, "Hello world.")
+        
+        meldeb = Meldebilder.objects.get(id = einsatz.meldebild_id)
+        alarm = Alarmstufen.objects.get(stufe = meldeb.stufe_id)
+        rand_links = 50
+        p.setFont("Helvetica", 50)
+        p.drawString(rand_links, 790, alarm.stufe + " " + meldeb.beschreibung)
+        p.setFont("Helvetica", 25)
+        p.drawString(rand_links, 750, einsatz.strasse + " " + einsatz.nummer1)
+        p.drawString(rand_links, 720, str(einsatz.plz) + " " + einsatz.ort)
+        p.drawString(rand_links, 690, einsatz.bemerkung)
 
         # Close the PDF object cleanly, and we're done.
         p.showPage()
