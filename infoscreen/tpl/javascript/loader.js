@@ -2,7 +2,7 @@
  * This is the loader class which handles when something should be loaded
  * 
  * @param screen: 0 for left screen, 1 for right screen
- * @param screen: 0 for peace, 1 for mission
+ * @param peace: 0 for peace, 1 for mission
  * @param last_change: an array with the last changed timestamp of all reloadable elements
  * @param nr_elements: an array with the count of all reloadable elements
  */
@@ -14,6 +14,12 @@ function Loader(screen, peace, last_change, nr_elements) {
     // url which should be called for checking changes
     this.url_left = '{% url screen:update "0" %}';
     this.url_right = '{% url screen:update "1" %}';
+    
+    // urls to redirect
+    this.url_peace_left = '{% url screen:bildschirm_frieden_links %}';
+    this.url_peace_right = '{% url screen:bildschirm_frieden_rechts %}';
+    this.url_mission_left = '{% url screen:bildschirm_einsatz_links %}';
+    this.url_mission_right = '{% url screen:bildschirm_einsatz_rechts %}';
     
     if(screen === 0){
         this.url = this.url_left;
@@ -52,7 +58,7 @@ Loader.prototype.update = function () {
 
         // check if we have to change the context
         if(self.peace !== data.frieden){
-            self.change_context(data.frieden);
+            self.change_context(self.screen, data.frieden);
         }
         
         // check if we have to change the update interval
@@ -78,6 +84,29 @@ Loader.prototype.change_update_interval (seconds) {
  * @param nr_elements: an array with the count of all reloadable elements
  */
 Loader.prototype.change_update_interval (last_change, nr_elements) {
+    // TODO: write reloads
     this.last_change = last_change;
     this.nr_elements = nr_elements;
+}
+
+/**
+ * Redirects to the new context
+ *
+ * @param screen: 0 for left screen, 1 for right screen
+ * @param peace: 0 for peace, 1 for mission
+ */
+Loader.prototype.change_context (screen, peace) {
+    if(this.screen === 0){
+        if(peace === 0){
+            window.location = this.url_peace_left;
+        } else {
+            window.location = this.url_peace_right;
+        }
+    } else {
+        if(peace === 0){
+            window.location ) = this.url_mission_left;
+        } else {
+            window.location = this.url_mission_right;
+        }
+    }
 }
