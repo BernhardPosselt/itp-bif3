@@ -4,7 +4,7 @@
     {% for einsatz in einsaetze %}
         <einsatz>
             <id>{{ einsatz.id }}</id>
-            <einsatzid>{{ einsatz.einsatzID }}</einsatzid>
+            <einsatzid>{{ einsatz.einsatz }}</einsatzid>
             <ausgedruckt>{{ einsatz.ausgedruckt }}</ausgedruckt>
             <modifiziert>{{ einsatz.modifiziert|date:"U" }}</modifiziert>
         </einsatz>

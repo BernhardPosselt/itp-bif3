@@ -1,9 +1,9 @@
 from lxml import etree
-from infoscreen.infoscreen_screen.models import Einsatz as EinsatzModel
+from infoscreen.infoscreen_screen.models import Einsaetze as EinsatzModel
 from datetime import *
 import re
 from infoscreen.infoscreen_screen.models import Meldebilder as MeldebildModel
-from infoscreen.infoscreen_screen.models import Dispo as DispoModel
+from infoscreen.infoscreen_screen.models import Dispos as DispoModel
 
 class EinsatzKlasse(object):
     """
