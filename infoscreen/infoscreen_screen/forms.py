@@ -8,6 +8,7 @@ from django.conf import settings
 
 # Project imports
 from infoscreen.infoscreen_screen.models import *
+from infoscreen.inc.config import WebsiteConfig
 
 
 class SettingsForm(forms.ModelForm):
@@ -23,7 +24,7 @@ class SettingsForm(forms.ModelForm):
     def save(self):
         """Saves the values into the config file
         """
-        config = LaudioConfig(settings.WEBSITE_CFG)
+        config = WebsiteConfig(settings.WEBSITE_CFG)
         config.collectionPath = self.cleaned_data['collection_path']
         config.xmlAuth = self.cleaned_data['xml_auth']
         config.tokenLifespan = self.cleaned_data['token_lifespan']
