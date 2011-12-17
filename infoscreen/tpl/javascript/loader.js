@@ -74,6 +74,7 @@ Loader.prototype.update = function () {
  * @param seconds: The update interval in seconds
  */
 Loader.prototype.change_update_interval (seconds) {
+    clearTimeout(this.timer);
     this.timer = setTimeout('this.update', this.update_interval*1000);
 }
 
