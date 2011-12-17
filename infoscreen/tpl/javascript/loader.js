@@ -47,7 +47,7 @@ function Loader(screen, peace, last_change, nr_elements) {
  */
 Loader.prototype.update = function () {
     var self = this;
-    $.getJSON(self, function(data){
+    $.getJSON(self.url, function(data){
         // when the timestamp != the timestamp from the server or the number
         // of elements is not the same as on the server, reload the area which needs
         // reloading
