@@ -55,7 +55,9 @@ def update(request, screen):
             news_len = len(news)
             geraet_len = len(geraet)
             fahrzeug_len = len(fahrzeug)
-            anzahl = [einsatz_len, ausrueckordnung_len, fahrzeug_len]
+            anzahl.append(einsatz_len)
+            anzahl.append(ausrueckordnung_len)
+            anzahl.append(fahrzeug_len)
             # check if we have to push a lastchange
             if news_len != 0:
                 letze_aenderung.append(int(mktime(news[0].modifiziert.timetuple())))
@@ -71,7 +73,9 @@ def update(request, screen):
             fahrzeug = Fahrzeuge.objects.all().order_by('-modifiziert')
             # get nr of elements
             ausrueckordnung_len = len(ausrueckordnung)
-            anzahl = [news_len, geraet_len, fahrzeug_len]
+            anzahl.append(news_len)
+            anzahl.append(geraet_len)
+            anzahl.append(fahrzeug_len)
             # check if we have to push a lastchange
             if ausrueckordnung_len != 0:
                 letze_aenderung.append(int(mktime(ausrueckordnung[0].modifiziert.timetuple())))
@@ -80,7 +84,8 @@ def update(request, screen):
             dispo = Dispos.objects.all().order_by('-modifiziert')
             # get nr of elements      
             dispo_len = len(dispo) 
-            anzahl = [dispo_len, einsatz_len]
+            anzahl.append(dispo_len)
+            anzahl.append(einsatz_len)
             # check if we have to push a lastchange
             if dispo_len != 0:
                 letze_aenderung.append(int(mktime(fahrzeug[0].modifiziert.timetuple())))
