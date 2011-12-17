@@ -29,7 +29,7 @@ def update(request, screen):
     fahrzeug_len = 0
     ausrueckordnung_len = 0
     dispo_len = 0
-    letze_aenderung = [0,]
+    letze_aenderung = []
     anzahl = []
     
     # check if we got frieden or einsatz
@@ -90,10 +90,8 @@ def update(request, screen):
             if dispo_len != 0:
                 letze_aenderung.append(int(mktime(fahrzeug[0].modifiziert.timetuple())))
     
-    # sort last change and take the last element (the biggest one)
-    letze_aenderung.sort()
     ctx = {
-        'letze_aenderung': letze_aenderung[-1],
+        'letze_aenderung': letze_aenderung,
         'anzahl': anzahl,
         'update_interval': update_interval,
         'frieden': frieden

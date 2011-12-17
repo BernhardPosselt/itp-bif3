@@ -1,10 +1,25 @@
 /**
  * This is the loader class which handles when something should be loaded
+ * 
+ * @param screen: 0 for left screen, 1 for right screen
+ * @param screen: 0 for peace, 1 for mission
+ * @param last_change: an array with the last changed timestamp of all reloadable elements
+ * @param nr_elements: an array with the count of all reloadable elements
  */
-function Loader() {
+function Loader(screen, peace, last_change, nr_elements) {
+    
+    this.screen = screen;
+    this.peace = peace;
     
     // url which should be called for checking changes
-    this.url = '{% url screen:update %}';
+    this.url_left = '{% url screen:update "0" %}';
+    this.url_right = '{% url screen:update "1" %}';
+    
+    if(screen === 0){
+        this.url = this.url_left;
+    } else {
+        this.url = this.url_right;
+    }
     
     // update interval in seconds
     this.update_interval = 5;
@@ -12,36 +27,57 @@ function Loader() {
     // context, 0 is for peace, 1 for mission
     this.context = 0;
     
-    // when the timestamp != the timestamp from the server or the number
-    // of elements is not the same as on the server, reload the area which needs
-    // reloading
-    
     // welcome screen timestamp and number of entries
-    this.welcome_screen_lm = 0;
-    this.welcome_screen_elem = 0;
+    this.last_change = last_change;
+    this.nr_elements = nr_elements;
     
-    // news screen timestamp and number of entries
-    this.news_screen_lm = 0;
-    this.news_screen_elem = 0; 
-    
-    // mission screen data timestamp and number of entries
-    this.mission_screen_data_lm = 0;
-    this.mission_screen_data_elem = 0;
-    
-    // mission screen map timestamp and number of entries
-    this.mission_screen_map_lm = 0;
-    this.mission_screen_map_elem = 0;
-    
+    // set timer to 
+    this.timer = setTimeout('this.update', this.update_interval*1000);
 }
 
 
 /**
- * 
+ * Periodically checks the server for updates
  */
 Loader.prototype.update = function () {
-    $.getJSON('{% url screen:update %}', function(data){
-        alert();
+    var self = this;
+    $.getJSON(self, function(data){
+        // when the timestamp != the timestamp from the server or the number
+        // of elements is not the same as on the server, reload the area which needs
+        // reloading
+        if(!self.last_change.compare(data.letze_aenderung) || 
+           !self.nr_elements.compare(data.anzahl)){
+            self.screen_update(data.letzte_aenderung, data.anzahl);
+        }
+
+        // check if we have to change the context
+        if(self.peace !== data.frieden){
+            self.change_context(data.frieden);
+        }
+        
+        // check if we have to change the update interval
+        if(self.update_interval !== data.update_interval){
+            self.change_update_interval(data.update_interval);
+        }
     });
 }
 
+/**
+ * Sets a new update interval
+ *
+ * @param seconds: The update interval in seconds
+ */
+Loader.prototype.change_update_interval (seconds) {
+    this.timer = setTimeout('this.update', this.update_interval*1000);
+}
 
+/**
+ * Handles the reloadable elements on the page
+ *
+ * @param last_change: an array with the last changed timestamp of all reloadable elements
+ * @param nr_elements: an array with the count of all reloadable elements
+ */
+Loader.prototype.change_update_interval (last_change, nr_elements) {
+    this.last_change = last_change;
+    this.nr_elements = nr_elements;
+}
