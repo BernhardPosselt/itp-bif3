@@ -32,7 +32,7 @@ def bildschirm_links(request):
     """
     Doku
     """
-    testxml = XML("tests/xml/eldisdata.xml")
+    testxml = XML("tests/xml/dummy.xml")
     ctx = {}
     return render(request, "infoscreen_screen/bildschirm_links.html", ctx)
 
