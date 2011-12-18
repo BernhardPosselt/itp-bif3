@@ -111,5 +111,6 @@ def javascript(request, src):
         tpl = 'javascript/main.js'
     elif src == 'loader':
         tpl = 'javascript/loader.js'
-        
+    elif src == 'gmaps':
+        tpl = 'javascript/gmaps.js'
     return render(request, tpl)
