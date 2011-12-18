@@ -42,7 +42,7 @@ def bildschirm_einsatz_rechts(request):
     Doku
     """
     ctx = {}
-    return render(request, "infoscreen_screen/bildschirm_einsatz_links.html", ctx)
+    return render(request, "infoscreen_screen/bildschirm_einsatz_rechts.html", ctx)
 
 def bildschirm_frieden_links(request):
     """
@@ -57,7 +57,7 @@ def bildschirm_frieden_rechts(request):
     Doku
     """
     ctx = {}
-    return render(request, "infoscreen_screen/bildschirm_frieden_links.html", ctx)
+    return render(request, "infoscreen_screen/bildschirm_frieden_rechts.html", ctx)
 
   
 def woooot(request):
@@ -111,5 +111,6 @@ def javascript(request, src):
         tpl = 'javascript/main.js'
     elif src == 'loader':
         tpl = 'javascript/loader.js'
-        
+    elif src == 'gmaps':
+        tpl = 'javascript/gmaps.js'
     return render(request, tpl)
