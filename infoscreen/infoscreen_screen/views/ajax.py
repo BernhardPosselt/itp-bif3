@@ -2,51 +2,99 @@
 from time import mktime
 
 # Django includes
-
+from django.conf import settings
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
 from infoscreen.inc.shortcuts import render
+from infoscreen.inc.config import WebsiteConfig
 
 
-def update(request):
+def update(request, screen):
     """
-    Doku
-    """
-    news = News.objects.all().order_by('-modifiziert')
-    einsatz = Einsaetze.objects.filter(abgeschlossen=False).order_by('-modifiziert')
-    dispo = Dispos.objects.all().order_by('-modifiziert')
-    fahrzeug = Fahrzeuge.objects.all().order_by('-modifiziert')
-    geraet = Geraete.objects.filter(reperatur=True).order_by('-modifiziert')
-    ausrueckordnung = Ausrueckordnungen.objects.all().order_by('-modifiziert')
+    This function queries, of elements in the datagbase have been updated or
+    deleted/added. If so the request will see it and can update the according 
+    element of the page
     
-    # get the nr of elements on each page and the last modified element
-    frieden_rechts_anzahl = [len(news), len(geraet), len(fahrzeug)]
-    frieden_rechts_last = [
-            int(mktime(news[:1].modifiziert.timetuple()),
-            int(mktime(geraet[:1].modifiziert.timetuple()),
-            int(mktime(fahrzeug[:1].modifiziert.timetuple())
-        ].sort()[-1] 
-    einsatz_links_anzahl = [len(einsatz), len(ausrueckordnung), len(fahrzeug)]
-    einsatz_links_last = 
-        [
-            int(mktime(einsatz[:1].modifiziert.timetuple()),
-            int(mktime(ausrueckordnung[:1].modifiziert.timetuple()),
-            int(mktime(fahrzeug[:1].modifiziert.timetuple())
-        ].sort()[-1] 
-    einsatz_rechts_anzahl = [len(dispo), len(einsatz)]
-    einsatz_rechts_last = [
-            int(mktime(dispo[:1].modifiziert.timetuple()),
-            int(mktime(einsatz[:1].modifiziert.timetuple())
-        ].sort()[-1] 
+    Keyword arguments
+    request -- The request object
+    screen -- which page we're on, 0 for left screen, 1 for right screen
+    """
+    config = WebsiteConfig(settings.WEBSITE_CFG)
+    update_interval = config.update_interval
+    
+    # set default values
+    news_len = 0
+    geraet_len = 0
+    fahrzeug_len = 0
+    ausrueckordnung_len = 0
+    dispo_len = 0
+    letze_aenderung = []
+    anzahl = []
+    
+    # check if we got frieden or einsatz
+    einsatz = Einsaetze.objects.filter(abgeschlossen=False).order_by('-modifiziert')
+    einsatz_len = len(einsatz)
+    if einsatz_len == 0:
+        frieden = True
+    else:
+        frieden = False
+        letze_aenderung.append(int(mktime(einsatz[0].modifiziert.timetuple())))
+
+    # depending on frieden or einsatz we query the database    
+    if frieden:
+    
+        if screen == 0:
+            pass
+                            
+        elif screen == 1:
+            news = News.objects.all().order_by('-modifiziert')  
+            fahrzeug = Fahrzeuge.objects.all().order_by('-modifiziert')
+            geraet = Geraete.objects.filter(reperatur=True).order_by('-modifiziert')
+            # get nr of elements
+            news_len = len(news)
+            geraet_len = len(geraet)
+            fahrzeug_len = len(fahrzeug)
+            anzahl.append(einsatz_len)
+            anzahl.append(ausrueckordnung_len)
+            anzahl.append(fahrzeug_len)
+            # check if we have to push a lastchange
+            if news_len != 0:
+                letze_aenderung.append(int(mktime(news[0].modifiziert.timetuple())))
+            if geraet_len != 0:
+                letze_aenderung.append(int(mktime(geraet[0].modifiziert.timetuple())))
+            if fahrzeug_len != 0:
+                letze_aenderung.append(int(mktime(fahrzeug[0].modifiziert.timetuple())))
+            
+    else:
+
+        if screen == 0:
+            ausrueckordnung = Ausrueckordnungen.objects.all().order_by('-modifiziert')
+            fahrzeug = Fahrzeuge.objects.all().order_by('-modifiziert')
+            # get nr of elements
+            ausrueckordnung_len = len(ausrueckordnung)
+            anzahl.append(news_len)
+            anzahl.append(geraet_len)
+            anzahl.append(fahrzeug_len)
+            # check if we have to push a lastchange
+            if ausrueckordnung_len != 0:
+                letze_aenderung.append(int(mktime(ausrueckordnung[0].modifiziert.timetuple())))
+            
+        elif screen == 1:
+            dispo = Dispos.objects.all().order_by('-modifiziert')
+            # get nr of elements      
+            dispo_len = len(dispo) 
+            anzahl.append(dispo_len)
+            anzahl.append(einsatz_len)
+            # check if we have to push a lastchange
+            if dispo_len != 0:
+                letze_aenderung.append(int(mktime(fahrzeug[0].modifiziert.timetuple())))
+    
     ctx = {
-        'frieden_rechts_last': frieden_rechts_last,
-        'einsatz_links_last': einsatz_links_last,
-        'einsatz_rechts_last': einsatz_rechts_last,
-        # nr of elems
-        'frieden_rechts_anzahl': frieden_rechts_anzahl,
-        'einsatz_links_anzahl': einsatz_links_anzahl,
-        'einsatz_rechts_anzahl': einsatz_rechts_anzahl
+        'letze_aenderung': letze_aenderung,
+        'anzahl': anzahl,
+        'update_interval': update_interval,
+        'frieden': frieden
     }
     return render(request, "infoscreen_screen/ajax/update.json", ctx)
 

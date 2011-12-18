@@ -1,8 +1,14 @@
 {
-    "frieden": True,
-    "update_interval": 5,
-    "news": 313333131,
-    "willkommen": 2131231233,
-    "karte": 133232323,
-    "einsatz": 11123123123
+    "frieden": {{ frieden|lower }},
+    "update_interval": {{ update_interval }},
+    "letze_aenderung": [
+        {% for e in letze_aenderung %}
+            {{ e }},
+        {% endfor %}
+    ]
+    "anzahl": [
+        {% for e in anzahl %}
+            {{ e }},
+        {% endfor %}
+    ]
 }

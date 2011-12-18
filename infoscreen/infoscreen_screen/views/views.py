@@ -28,21 +28,39 @@ def settings(request):
     ctx = {}
     return render(request, "infoscreen_screen/index.html", ctx)
 
-def bildschirm_links(request):
+def bildschirm_einsatz_links(request):
     """
     Doku
     """
     testxml = XML("tests/xml/dummy.xml")
     ctx = {}
-    return render(request, "infoscreen_screen/bildschirm_links.html", ctx)
+    return render(request, "infoscreen_screen/bildschirm_einsatz_links.html", ctx)
 
 
-def bildschirm_rechts(request):
+def bildschirm_einsatz_rechts(request):
     """
     Doku
     """
-    
+    ctx = {}
+    return render(request, "infoscreen_screen/bildschirm_einsatz_links.html", ctx)
+
+def bildschirm_frieden_links(request):
+    """
+    Doku
+    """
+    ctx = {}
+    return render(request, "infoscreen_screen/bildschirm_frieden_links.html", ctx)
+
+
+def bildschirm_frieden_rechts(request):
+    """
+    Doku
+    """
+    ctx = {}
+    return render(request, "infoscreen_screen/bildschirm_frieden_links.html", ctx)
+
   
+def woooot(request):
     # Calculate the size of the whole screen
     screenw = gtk.gdk.screen_width()
     screenh = gtk.gdk.screen_height()

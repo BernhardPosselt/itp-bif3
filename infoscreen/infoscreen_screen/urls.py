@@ -5,14 +5,10 @@ from django.views.generic.simple import direct_to_template
 # normal views
 urlpatterns = patterns('infoscreen.infoscreen_screen.views.views',
     url(r'^$', 'index', name='index'),
-    url(r'^bildschirm/links/$', 'bildschirm_links', name='bildschirm_links'),
-    url(r'^bildschirm/rechts/$', 'bildschirm_rechts', name='bildschirm_rechts'),
-    
-    # only for test purposes
-    url(r'^1/$', direct_to_template, {'template': 'test/einsatz_links.html'} ),
-    url(r'^2/$', direct_to_template, {'template': 'test/einsatz_rechts.html'} ),
-    url(r'^3/$', direct_to_template, {'template': 'test/frieden_links.html'} ),
-    url(r'^4/$', direct_to_template, {'template': 'test/frieden_rechts.html'} ),
+    url(r'^bildschirm/frieden/links/$', 'bildschirm_frieden_links', name='bildschirm_frieden_links'),
+    url(r'^bildschirm/frieden/rechts/$', 'bildschirm_frieden_rechts', name='bildschirm_frieden_rechts'),
+    url(r'^bildschirm/einsatz/links/$', 'bildschirm_einsatz_links', name='bildschirm_einsatz_links'),
+    url(r'^bildschirm/einsatz/rechts/$', 'bildschirm_einsatz_rechts', name='bildschirm_einsatz_rechts'),
     
     # javascript
     url(r'javascript/(?P<src>\w+)/$', 'javascript', name='javascript'),
@@ -21,11 +17,7 @@ urlpatterns = patterns('infoscreen.infoscreen_screen.views.views',
 
 # ajax views
 urlpatterns += patterns('infoscreen.infoscreen_screen.views.ajax',
-    url(r'^update/$', 'update', name='update'),
-    url(r'^update/einsatz/$', 'update_einsatz', name='update_einsatz'),
-    url(r'^update/karte/$', 'update_karte', name='update_karte'),
-    url(r'^update/news/$', 'update_news', name='update_news'),
-    url(r'^update/willkommen/$', 'update_willkommen', name='update_willkommen'),
+    url(r'^update/(?P<screen>\d{1})/$', 'update', name='update'),
 )
 
 # pdf views

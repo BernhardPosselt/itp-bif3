@@ -1,6 +1,18 @@
 # Django settings for infoscreen project.
 
+# System imports
 import os
+
+# Screen imports
+from inc.config import WebsiteConfig
+
+# infoscreen config vars
+WEBSITE_CFG = {
+    'MAIN_CFG': '/etc/infoscreen/website.cfg',
+    'APACHE_CFG': '/etc/infoscreen/apache/infoscreen.conf',
+}
+CONF = WebsiteConfig(WEBSITE_CFG)
+WEB_URL = CONF.url
 
 
 DEBUG = True
