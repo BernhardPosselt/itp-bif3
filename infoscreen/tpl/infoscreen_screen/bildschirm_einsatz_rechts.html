@@ -1,83 +1,18 @@
-<!DOCTYPE html>
+{% extends 'infoscreen_screen/base.html' %}
 
+{% block title %}Feuerwehr Infoscreen - Bildschirm rechts{% endblock %}
 
-    <head>
-        <title>{% block title %}{% endblock %}</title>
-        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-        <link rel="stylesheet" href="{{ STATIC_URL }}style/style.css" type="text/css" media="all" charset="utf-8" />
-        <script src="{{ STATIC_URL }}script/lib/jquery-1.6.4.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="{{ STATIC_URL }}script/script.js" type="text/javascript" charset="utf-8"></script>
-        <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA6qiASEwfhYtcYhMd2vJTQRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTbnGPuWPrgJfngU16ijUyydxuB8Q" type="text/javascript"></script>
-        <link rel="icon" type="image/png" href="{{ STATIC_URL }}style/img/favicon.png?" />
-        <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}style/gmap.css" />
+{% block head %}
+    <script src="{{ STATIC_URL }}script/lib/geoxml.js" type="text/javascript"></script>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA6qiASEwfhYtcYhMd2vJTQRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTbnGPuWPrgJfngU16ijUyydxuB8Q" type="text/javascript"></script>
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}style/gmap.css" />
+{% endblock %}
 
-        <script src="{{ STATIC_URL }}script/geoxml.js" type="text/javascript"></script>
-        <script   type="text/javascript">
-	     //<![CDATA[
-         
-       
-        
-        var gml, mmap;
-        var gxmlopts = {}
-        
-        function initMap() {
+{% block content %}
 
-        mmap=new GMap2(document.getElementById("map")); 
-        geocoder = new GClientGeocoder();
-        var adresse = "3161, St. Veit/Gölsen";
-        showAddress(adresse);
-        
-        
-        gxmlopts["nozoom"]=true;
-        gml = new GeoXml("gml", mmap, "{{ STATIC_URL }}script/Hydranten.kml",gxmlopts);
-        gml.parse();
-        }
-        
-        
-        function showAddress(address) 
-        {
-            if (geocoder) 
-            {
-                geocoder.getLatLng
-                (
-                    address,
-                    function(point) 
-                    {
-                        if (!point) 
-                        {
-                            alert(address + " not found");
-                        } 
-                        else 
-                        {
-                            mmap.setCenter(point, 16);
-                            var marker = new GMarker(point);
-                            mmap.addOverlay(marker);
+    <div id="map" style="width: 1100px; height: 750px; "></div>
+    <!--{{ form.map }}-->
 
-                        }
-                    }
-                );
-            }
-        }
-        //]]>
-        </script>
-    </head>
+{% endblock %}
 
-
-  
-    <body onload="initMap()" onunload="GUnload()">
-
-        
-      
-        <div id="map" style="width: 1100px; height: 750px; "></div>
-        
-  
-        <!--{{ form.map }}-->
- 
-
-	
-           
-
-        
-    </body>
-</html>
 
