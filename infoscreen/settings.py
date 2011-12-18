@@ -3,6 +3,7 @@
 # System imports
 import os
 
+
 # Screen imports
 from inc.config import WebsiteConfig
 
