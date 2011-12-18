@@ -1,14 +1,7 @@
-$(document).ready(function() {
-    initMap();
-});
-
-$(window).unload(function() {
-    GUnload();
-});
-
-function initMap() {
-    var gml, mmap;
-    var gxmlopts = {}
+var gml, mmap;
+var gxmlopts = {}
+    
+window.onload = function() {
     mmap=new GMap2(document.getElementById("map")); 
     geocoder = new GClientGeocoder();
     var adresse = "3161, St. Veit/Gölsen";
@@ -16,7 +9,12 @@ function initMap() {
     gxmlopts["nozoom"]=true;
     gml = new GeoXml("gml", mmap, "{{ STATIC_URL }}kml/Hydranten.kml",gxmlopts);
     gml.parse();
+};
+
+window.unload = function(){
+    GUnload();
 }
+
 
 
 function showAddress(address) {
