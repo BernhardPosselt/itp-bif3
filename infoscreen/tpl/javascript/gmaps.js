@@ -2,7 +2,7 @@ $(document).ready(function() {
     initMap();
 });
 
-$(window).onload(function() {
+$(window).unload(function() {
     GUnload();
 });
 
