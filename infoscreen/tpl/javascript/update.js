@@ -2,15 +2,14 @@
  * This is the updater class which handles when something should be updated
  * 
  * @param screen: 0 for left screen, 1 for right screen
- * @param peace: 0 for peace, 1 for mission
+ * @param mission: 0 for peace, 1 for mission
  * @param last_change: an array with the last changed timestamp of all reloadable elements
  * @param nr_elements: an array with the count of all reloadable elements
  */
-function Update(screen, peace, last_change, nr_elements) {
-    // TODO: extend loader
+function Update(screen, mission, last_change, nr_elements) {
     
     this.screen = screen;
-    this.peace = peace;
+    this.mission = mission;
     
     // url which should be called for checking changes
     this.url_left = '{% url screen:update "0" %}';
@@ -58,7 +57,7 @@ Update.prototype.update = function () {
         }
 
         // check if we have to change the context
-        if(self.peace !== data.frieden){
+        if(self.mission !== data.frieden){
             self.change_context(self.screen, data.frieden);
         }
         
@@ -74,7 +73,7 @@ Update.prototype.update = function () {
  *
  * @param seconds: The update interval in seconds
  */
-Update.prototype.change_update_interval (seconds) {
+Update.prototype.change_update_interval = function (seconds) {
     clearTimeout(this.timer);
     this.timer = setTimeout('this.update', this.update_interval*1000);
 }
@@ -85,7 +84,7 @@ Update.prototype.change_update_interval (seconds) {
  * @param last_change: an array with the last changed timestamp of all reloadable elements
  * @param nr_elements: an array with the count of all reloadable elements
  */
-Update.prototype.change_update_interval (last_change, nr_elements) {
+Update.prototype.change_update_interval = function (last_change, nr_elements) {
     // TODO: write reloads
     this.last_change = last_change;
     this.nr_elements = nr_elements;
@@ -95,18 +94,18 @@ Update.prototype.change_update_interval (last_change, nr_elements) {
  * Redirects to the new context
  *
  * @param screen: 0 for left screen, 1 for right screen
- * @param peace: 0 for peace, 1 for mission
+ * @param mission: 0 for peace, 1 for mission
  */
-Update.prototype.change_context (screen, peace) {
+Update.prototype.change_context = function (screen, mission) {
     if(this.screen === 0){
-        if(peace === 0){
+        if(mission === 0){
             window.location = this.url_peace_left;
         } else {
-            window.location = this.url_peace_right;
+            window.location = this.url_mission_left;
         }
     } else {
-        if(peace === 0){
-            window.location ) = this.url_mission_left;
+        if(mission === 0){
+            window.location = this.url_peace_right;
         } else {
             window.location = this.url_mission_right;
         }

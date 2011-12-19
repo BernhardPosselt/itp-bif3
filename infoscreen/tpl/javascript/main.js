@@ -5,9 +5,9 @@ $(document).ready(function(){
         peace, 
         last_change, 
         nr_elements;
-    screen = {{ screen }}
-    peace = {{ peace }}
-    loader = new Loader(screen, peace, last_change, nr_elements);
+    screen = {{ screen }};
+    mission = {{ mission }};
+    update = new Update(screen, mission, last_change, nr_elements);
 });
 
 
