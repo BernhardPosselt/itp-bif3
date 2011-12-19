@@ -43,10 +43,8 @@ class WebsiteConfig(object):
         # set default values
         self.parserError = False
         self.url = '/'
-        self.collectionPath = ''
-        # in seconds
-        self.update_interval = 5
-        self.xmlAuth = False
+        self.xml_url = '/'
+        self.update_interval = 5 # in seconds
         
         # read in main config
         try:
@@ -54,7 +52,7 @@ class WebsiteConfig(object):
             config.read(self.mainConfig)
                 
             try:
-                self.collectionPath = config.get('settings', 'collection_path')
+                self.xml_url = config.get('settings', 'xml_url')
             except ConfigParser.NoOptionError:
                 self.parserError = True
                 
@@ -62,11 +60,6 @@ class WebsiteConfig(object):
                 self.tokenLifespan = config.getint('settings', 'update_interval')
             except ConfigParser.NoOptionError:
                 self.parserError = True        
-
-            try:
-                self.xmlAuth = config.getboolean('settings', 'xml_auth')
-            except ConfigParser.NoOptionError:
-                self.parserError = True   
 
         # if there was something wrong with the config or parsing, write default
         # values
@@ -95,9 +88,8 @@ class WebsiteConfig(object):
         config = ConfigParser.SafeConfigParser()
         config.add_section('settings')
         # music settings
-        config.set('settings', 'collection_path', str(self.collectionPath))
+        config.set('settings', 'xml_path', str(self.xml_url))
         config.set('settings', 'update_interval', str(self.update_interval))
-        config.set('settings', 'xml_auth', str(self.xmlAuth))
         try:
             with open(self.mainConfig, 'wb') as confFile:
                 config.write(confFile)

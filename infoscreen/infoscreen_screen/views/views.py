@@ -109,6 +109,8 @@ def javascript(request, src):
     """
     if src == 'main':
         tpl = 'javascript/main.js'
+    elif src == 'update':
+        tpl = 'javascript/update.js'
     elif src == 'loader':
         tpl = 'javascript/loader.js'
     elif src == 'gmaps':

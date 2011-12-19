@@ -14,8 +14,8 @@ from infoscreen.inc.config import WebsiteConfig
 class SettingsForm(forms.ModelForm):
     """This form is used to set values
     """
-    collection_path = forms.CharField(label='', help_text='')
-    xml_auth = forms.BooleanField(required=False, label='')
+    xml_url = forms.CharField(label='XML URL', 
+        help_text='Die URL die für neue Einsätze abgefragt wird.')
     update_interval = forms.IntegerField(label='Update Intervall in Sekunden', 
         help_text='Die Geschwindigkeit in der die Website auf neue Elemente prüfen \
             kann. Sollte nicht zu hoch sein, da das prüfen auf updates aufwändig ist')
@@ -25,7 +25,6 @@ class SettingsForm(forms.ModelForm):
         """Saves the values into the config file
         """
         config = WebsiteConfig(settings.WEBSITE_CFG)
-        config.collectionPath = self.cleaned_data['collection_path']
-        config.xmlAuth = self.cleaned_data['xml_auth']
-        config.tokenLifespan = self.cleaned_data['token_lifespan']
+        config.update_interval = self.cleaned_data['update_interval']
+        config.xml_url = self.cleaned_data['xml_url']
         config.save()
