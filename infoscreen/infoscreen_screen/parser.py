@@ -55,9 +55,9 @@ class EinsatzKlasse(object):
 
         # only save to database if einsatz is modified
         """if self.isModified(einsatz):     """      
-        einsatztags = { "einsatz", "alarmstufe", "meldebild", "nummer1", "nummer2",
+        einsatztags = [ "einsatz", "alarmstufe", "meldebild", "nummer1", "nummer2",
             "nummer3", "plz", "strasse", "objekt","ort", "bemerkung", "einsatzerzeugt", 
-            "melder", "einsatznr","ausgedruckt"}  
+            "melder", "einsatznr","ausgedruckt"]
         for attr in einsatztags:
             if attr == "meldebild":
                 meldebild_beschreibung = MeldebildModel.objects.get(beschreibung = self.meldebild)
@@ -122,8 +122,8 @@ class DispoKlasse(object):
             dispomod = DispoModel()
            
 
-        dispotags = { "einsatz", "dispo", "disponame" ,"zeitdispo", "zeitalarm", "zeitaus", "zeitein",
-            "hintergrund"}  
+        dispotags = [ "einsatz", "dispo", "disponame" ,"zeitdispo", "zeitalarm", "zeitaus", "zeitein",
+            "hintergrund" ]
         for attr in dispotags:
             if attr == "einsatz":
                 einsatz_id = EinsatzModel.objects.get(einsatz = self.einsatz)

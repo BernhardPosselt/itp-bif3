@@ -5,7 +5,7 @@ from django.contrib import admin
 from infoscreen.infoscreen_screen.models import *
 
 class EinsatzAdmin(admin.ModelAdmin):
-    list_display = ('nummer1', 'nummer2', 'nummer3', 'meldebild', 'einsatzerzeugt')
+    list_display = ('objekt', 'bemerkung','nummer1', 'strasse', 'plz', 'ort','meldebild', 'einsatzerzeugt')
     list_filter = ("meldebild", 'plz')
     ordering = ("modifiziert",)
     date_hierarchy = 'einsatzerzeugt'
