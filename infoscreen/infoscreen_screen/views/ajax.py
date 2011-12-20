@@ -4,7 +4,7 @@ import datetime
 
 # Django includes
 from django.conf import settings
-from django.db.models import Max, Count
+from django.db.models import Count
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
@@ -25,7 +25,7 @@ def update(request):
     # check if we got frieden or einsatz
     missions = Einsaetze.objects.filter(abgeschlossen=False).aggregate( Count('id') )
     running_missions = Einsaetze.objects.filter(abgeschlossen=False)
-    missions_len = mission['id__count']
+    missions_len = missions['id__count']
     if missions_len == 0:
         mission = False
     else:

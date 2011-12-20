@@ -5,7 +5,7 @@
 from lxml import etree
 
 # Django includes
-
+from django.db.models import Count
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
@@ -123,7 +123,7 @@ def javascript_main(request, screen):
     """
     # check if we got frieden or einsatz
     missions = Einsaetze.objects.filter(abgeschlossen=False).aggregate( Count('id') )
-    missions_len = mission['id__count']
+    missions_len = missions['id__count']
     if missions_len == 0:
         mission = False
     else:

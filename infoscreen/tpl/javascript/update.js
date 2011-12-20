@@ -184,7 +184,7 @@ Update.prototype.change_context = function (screen, mission) {
 Update.prototype.screen_peace_left_update = function(){
     $.getJSON(self.url_peace_left, function(data){
         $('#' + this.welcome_id).html(data.welcome_msg);
-    }
+    });
 }
 
 /**
@@ -213,7 +213,7 @@ Update.prototype.screen_mission_left_update = function(){
         $('#' + this.classification_id).html(data.classification);
         $('#' + this.alarmnr).html(data.alarmnr);
         $('#' + this.notifier).html(data.notifier);
-    }   
+    });
     $('#' + this.vehicle_order_id).load(this.url_update_vehicle_order, data);
 }
 
