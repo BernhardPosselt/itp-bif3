@@ -1,0 +1,7 @@
+{% for order in vehicle_order %}
+    {% if not order.vehicle.reperatur%}
+        <div class="vehicle_order_entry">
+            {{ order.vehicle.kuerzel }}
+        </div>    
+    {% endif %}
+{% endfor %}
