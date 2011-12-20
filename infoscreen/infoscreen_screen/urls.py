@@ -32,6 +32,7 @@ urlpatterns += patterns('infoscreen.infoscreen_screen.views.pdf',
 
 #gmap view
 urlpatterns += patterns('infoscreen.infoscreen_screen.views.gmap',
-    url(r'^gmap/$', 'gmap', name='gmap'),
+    url(r'^gmap/(?P<id>\d+)/$', 'gmap', name='gmap'),
+    url(r'^gmap_adresse/(?P<id>\d+)/$', 'gmap_adresse', name='gmap_adresse'),
 )
 
