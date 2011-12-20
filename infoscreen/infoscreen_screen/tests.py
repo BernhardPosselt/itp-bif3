@@ -102,19 +102,21 @@ class Testdb(unittest.TestCase):
         mbild.save()
         
         einsatz = EinsatzModel()
-        einsatz.einsatzid = 1
+        einsatz.einsatz = 1
         einsatz.bemerkung = "test"
-        einsatz.einsatznummer = 129
+        einsatz.einsatznr = 129
         einsatz.ort = "Bernhardsthal"
         einsatz.plz = 2275
-        einsatz.erzeugt = datetime.now()
+        einsatz.einsatzerzeugt = datetime.now()
         meldebild_beschreibung = MeldebildModel.objects.get(beschreibung = "Kaminbrand")
         einsatz.meldebild = meldebild_beschreibung
+        einsatz.abgeschlossen = False
         
         einsatz.save()
         
-        testeintrag = EinsatzModel.objects.all()
-        print testeintrag[0].meldebild
+        unabgeschl = EinsatzModel.objects.filter(abgeschlossen = False)
+        for unab in test:
+            print unab.einsatz
         
 class Testdates(unittest.TestCase):
     def test_dates(self):

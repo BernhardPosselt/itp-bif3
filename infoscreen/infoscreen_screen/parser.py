@@ -146,6 +146,29 @@ class DispoKlasse(object):
                 setattr(dispomod, attr, getattr(self, attr) )
         
         dispomod.save()
+        
+    def closeeinsatz(self):
+        """
+        DOKU
+        """
+        xml_tree = etree.parse(xml)
+        xml_root = xml_tree.getroot()
+        context = etree.iterwalk(xml_root, events=("start",))
+        unabgeschl = EinsatzModel.objects.filter(abgeschlossen = False)
+        for unab in test:
+            for action,elem in context:
+                if elem.tag == "einsatz":
+                    if elem.get("id") != unab.einsatz
+                        closeeinsatz(unab.einsatz)
+        try:  
+            einsatz = EinsatzModel.objects.get(einsatz = closeeinsatz_id)
+        except EinsatzModel.DoesNotExist:
+            return False
+        if einsatz:
+            einsatz.abgeschlossen = true
+            einsatz.save()
+
+ 
 
 class XML(object):
     """
