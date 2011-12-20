@@ -221,7 +221,7 @@ ul {
 		padding-bottom:5%;
     }
     
-    #dispos ul
+    #dispos .dispo_entry
     {
 		font-size:20pt;	
     }
