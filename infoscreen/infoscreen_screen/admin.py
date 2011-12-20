@@ -4,12 +4,17 @@
 from django.contrib import admin
 from infoscreen.infoscreen_screen.models import *
 
+class DispoAdmin(admin.TabularInline):
+	model = Dispos
+	extra = 0
+
 class EinsatzAdmin(admin.ModelAdmin):
     list_display = ('objekt', 'bemerkung','nummer1', 'strasse', 'plz', 'ort','meldebild', 'einsatzerzeugt')
     list_filter = ("meldebild", 'plz')
     ordering = ("modifiziert",)
     date_hierarchy = 'einsatzerzeugt'
     search_fields = ["nummer1", 'nummer2']
+    inlines = (DispoAdmin, )
     
     
 class AusrueckeordnungAdmin(admin.TabularInline):

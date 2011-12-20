@@ -98,7 +98,7 @@ class Dispos(models.Model):
         unique_together = ("einsatz", "dispo")
 
     def __unicode__(self):
-        return self.name
+        return self.disponame
         
 #Fahrzeuge    
 class Fahrzeuge(models.Model):
