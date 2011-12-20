@@ -3,10 +3,10 @@ from reportlab.pdfgen import canvas
 
 # Django includes
 from django.http import HttpResponse
+from django.shortcuts import render
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
-from infoscreen.inc.shortcuts import render
 
 
 def einsatzfax(request):

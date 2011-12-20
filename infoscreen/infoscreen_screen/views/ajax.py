@@ -85,8 +85,8 @@ def update_utils(request):
 def update_vehicle_order(request):
     """Returns html for the mission with the vehicle order
     """
-    missionid = request.GET.get('missionid', '')
-    mission = get_object_or_404(Einsaetze, id=missionid)
+    mission_id = int(request.POST.get('mission_id', 0))
+    mission = get_object_or_404(Einsaetze, id=mission_id)
     vehicle_order = mission.meldebild.ausrueckordnungen_set.all()
     ctx = {
         'vehicle_order': vehicle_order
@@ -97,8 +97,10 @@ def update_vehicle_order(request):
 def update_mission(request):
     """Returns json for the mission
     """
-    missionid = request.GET.get('missionid', '')
-    mission = get_object_or_404(Einsaetze, id=missionid)
+    mission_id = int(request.POST.get('mission_id', 0))
+    if mission_id == 0:
+        mission_id = int(request.GET.get('mission_id', 0))
+    mission = get_object_or_404(Einsaetze, id=mission_id)
     ctx = {
         'mission': mission
     }
@@ -108,11 +110,13 @@ def update_mission(request):
 def update_dispos(request):
     """Returns html for the dispos
     """
-    missionid = request.GET.get('missionid', '')
-    mission = get_object_or_404(Einsaetze, id=missionid)
+    mission_id = int(request.POST.get('mission_id', 0))
+    if mission_id == 0:
+        mission_id = int(request.GET.get('mission_id', 0))
+    mission = get_object_or_404(Einsaetze, id=mission_id)
     dispos = mission.dispos_set.all()
     ctx = {
         'dispos': dispos
     }
-    return render(request, "infoscreen_screen/ajax/update_dispos.json", ctx)
+    return render(request, "infoscreen_screen/ajax/update_dispos.html", ctx)
 

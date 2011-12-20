@@ -1,9 +1,9 @@
 # System includes
 
 # Django includes
+from django.shortcuts import render
 
 # Project includes
-from infoscreen.inc.shortcuts import render
 from infoscreen.infoscreen_screen.models import *
 
 def gmap(request, id):

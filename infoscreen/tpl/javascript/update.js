@@ -89,7 +89,7 @@ Update.prototype.update = function () {
         
         // currently running missions, if < 0 then we have the first load of 
         // the page, so set the current mission to the first one
-        if(self.running_missions < 0 && this.mission){
+        if(self.current_mission < 0 && self.mission){
             self.screen_view = 0;
             self.current_mission = data.running_missions[0];
         }
@@ -118,7 +118,7 @@ Update.prototype.set_screen_view_change_interval = function (seconds) {
     }
     var self = this;
     this.screen_timer = setInterval(function(){
-        this.screen_view_change();
+        self.screen_view_change();
     }, this.screen_view_change_interval*1000);
 }
 
@@ -207,18 +207,19 @@ Update.prototype.screen_peace_right_update = function(){
  * Reloads and sets all elements on the mission left screen
  */
 Update.prototype.screen_mission_left_update = function(){
-    var data = { missionid: this.current_mission };
-    $.getJSON(self.url_update_mission, data, function(data){
-        $('#' + this.street_id).html(data.street);
-        $('#' + this.housenr_id).html(data.housenr);
-        $('#' + this.stairnr_id).html(data.stairnr);
-        $('#' + this.doornr_id).html(data.doornr);
-        $('#' + this.zip_id).html(data.zip);
-        $('#' + this.place_id).html(data.place);
-        $('#' + this.notes_id).html(data.notes);
-        $('#' + this.object_id).html(data.object);
-        $('#' + this.classification_id).html(data.classification);
-        $('#' + this.alarmnr).html(data.alarmnr);
+    var data = { mission_id: this.current_mission };
+    var self = this;
+    $.getJSON(this.url_update_mission, data, function(data){
+        $('#' + self.street_id).html(data.street);
+        $('#' + self.housenr_id).html(data.housenr);
+        $('#' + self.stairnr_id).html(data.stairnr);
+        $('#' + self.doornr_id).html(data.doornr);
+        $('#' + self.zip_id).html(data.zip);
+        $('#' + self.place_id).html(data.place);
+        $('#' + self.notes_id).html(data.notes);
+        $('#' + self.object_id).html(data.object);
+        $('#' + self.classification_id).html(data.classification);
+        $('#' + self.alarmnr).html(data.alarmnr);
         //$('#' + this.notifier).html(data.notifier);
     });
     $('#' + this.vehicle_order_id).load(this.url_update_vehicle_order, data);
@@ -229,11 +230,12 @@ Update.prototype.screen_mission_left_update = function(){
  */
 Update.prototype.screen_mission_right_update = function(){
     // FIXME: map reloading?
-    var data = { missionid: this.current_mission };
+    var data = { mission_id: this.current_mission };
+    var self = this;
     $('#' + this.dispos_id).load(this.url_update_dispos, data);
-    $.getJSON(self.url_update_mission, data, function(data){
-        $('#' + this.classification_id).html(data.classification);
-        $('#' + this.alarmnr).html(data.alarmnr);
+    $.getJSON(this.url_update_mission, data, function(data){
+        $('#' + self.classification_id).html(data.classification);
+        $('#' + self.alarmnr).html(data.alarmnr);
     });
 }
 

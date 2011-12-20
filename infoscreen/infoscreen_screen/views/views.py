@@ -6,10 +6,10 @@ from lxml import etree
 
 # Django includes
 from django.db.models import Count
+from django.shortcuts import render
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
-from infoscreen.inc.shortcuts import render
 from infoscreen.infoscreen_screen.parser import *
 import gtk.gdk
 
