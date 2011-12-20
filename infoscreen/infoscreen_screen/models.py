@@ -38,8 +38,8 @@ class Meldebilder(models.Model):
 	modifiziert = models.DateTimeField(auto_now=True)
 	
 	class Meta:
-		verbose_name = "Meldebilder"
-		verbose_name_plural = "Meldebilder"
+		verbose_name = "Meldebild & Ausrückordnung"
+		verbose_name_plural = "Meldebilder & Ausrückordnungen"
 		
 	def __unicode__(self):
 		return self.beschreibung
