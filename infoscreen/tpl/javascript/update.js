@@ -63,7 +63,7 @@ function Update(screen, mission) {
     
     // set update interval in seconds
     var self = this;
-    this.update_interval = 7;
+    this.update_interval = 17;
     this.update_timer = setInterval(function(){
         self.update();
     }, this.update_interval*1000);
@@ -126,17 +126,17 @@ Update.prototype.set_screen_view_change_interval = function (seconds) {
  * Redirects to the new context
  *
  * @param screen: 0 for left screen, 1 for right screen
- * @param mission: 0 for peace, 1 for mission
+ * @param mission: false for peace, true for mission
  */
 Update.prototype.change_context = function (screen, mission) {
     if(this.screen === 0){
-        if(mission === 0){
+        if(mission === false){
             window.location = this.url_peace_left;
         } else {
             window.location = this.url_mission_left;
         }
     } else {
-        if(mission === 0){
+        if(mission === false){
             window.location = this.url_peace_right;
         } else {
             window.location = this.url_mission_right;
@@ -149,13 +149,14 @@ Update.prototype.change_context = function (screen, mission) {
  */
 Update.prototype.screen_update = function () {
     if(this.screen === 0){
-        if(this.mission === 0){
+        if(this.mission === false){
             this.screen_peace_left_update();
         } else {
+            
             this.screen_mission_left_update();            
         }
     } else {
-        if(this.mission === 0){
+        if(this.mission === false){
             this.screen_peace_right_update();
         } else {
             this.screen_mission_right_update();
@@ -167,17 +168,17 @@ Update.prototype.screen_update = function () {
  * Redirects to the new context
  *
  * @param screen: 0 for left screen, 1 for right screen
- * @param mission: 0 for peace, 1 for mission
+ * @param mission: false for peace, true for mission
  */
 Update.prototype.change_context = function (screen, mission) {
     if(this.screen === 0){
-        if(mission === 0){
+        if(mission === false){
             window.location = this.url_peace_left;
         } else {
             window.location = this.url_mission_left;
         }
     } else {
-        if(mission === 0){
+        if(mission === false){
             window.location = this.url_peace_right;
         } else {
             window.location = this.url_mission_right;
@@ -189,8 +190,9 @@ Update.prototype.change_context = function (screen, mission) {
  * Reloads and sets all elements on the peace left screen
  */
 Update.prototype.screen_peace_left_update = function(){
-    $.getJSON(self.url_peace_left, function(data){
-        $('#' + this.welcome_id).html(data.welcome_msg);
+    var self = this;
+    $.getJSON(this.url_update_welcome, function(data){
+        $('#' + self.welcome_id).html(data.welcome_msg);
     });
 }
 
