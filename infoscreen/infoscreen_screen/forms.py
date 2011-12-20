@@ -16,6 +16,8 @@ class SettingsForm(forms.ModelForm):
     """
     xml_url = forms.CharField(label='XML URL', 
         help_text='Die URL die für neue Einsätze abgefragt wird.')
+    welcome_msg = forms.CharField(label='Willkommensnachricht', 
+        help_text='Die Nachricht, die in Friedenszeiten links angezeigt wird.')
     update_interval = forms.IntegerField(label='Update Intervall in Sekunden', 
         help_text='Die Geschwindigkeit in der die Website auf neue Elemente prüfen \
             kann. Sollte nicht zu hoch sein, da das prüfen auf updates aufwändig ist')
@@ -27,4 +29,5 @@ class SettingsForm(forms.ModelForm):
         config = WebsiteConfig(settings.WEBSITE_CFG)
         config.update_interval = self.cleaned_data['update_interval']
         config.xml_url = self.cleaned_data['xml_url']
+        config.welcome_msg = self.cleaned_data['welcome_msg']
         config.save()

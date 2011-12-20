@@ -2,6 +2,10 @@
 
 {% block title %}Feuerwehr Infoscreen - Bildschirm links{% endblock %}
 
+{% block head %}
+    <script src="{% url screen:javascript_main '0' %}" type="text/javascript"></script>
+{% endblock %}
+
 
 {% block header %}
 <div id="header" class="alarm">

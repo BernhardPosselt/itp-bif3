@@ -44,6 +44,7 @@ class WebsiteConfig(object):
         self.parserError = False
         self.url = '/'
         self.xml_url = '/'
+        self.welcome_msg = 'Hallo'
         self.update_interval = 5 # in seconds
         
         # read in main config
@@ -55,7 +56,12 @@ class WebsiteConfig(object):
                 self.xml_url = config.get('settings', 'xml_url')
             except ConfigParser.NoOptionError:
                 self.parserError = True
-                
+
+            try:
+                self.welcome_msg = config.get('settings', 'welcome_msg')
+            except ConfigParser.NoOptionError:
+                self.parserError = True
+            
             try:
                 self.tokenLifespan = config.getint('settings', 'update_interval')
             except ConfigParser.NoOptionError:
@@ -90,6 +96,7 @@ class WebsiteConfig(object):
         # music settings
         config.set('settings', 'xml_path', str(self.xml_url))
         config.set('settings', 'update_interval', str(self.update_interval))
+        config.set('settings', 'welcome_msg', str(self.welcome_msg))
         try:
             with open(self.mainConfig, 'wb') as confFile:
                 config.write(confFile)

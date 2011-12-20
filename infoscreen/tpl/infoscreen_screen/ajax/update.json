@@ -1,5 +1,5 @@
 {
-    "frieden": {{ frieden|lower }},
+    "einsatz": {{ einsatz|lower }},
     "update_interval": {{ update_interval }},
     "letze_aenderung": [
         {% for e in letze_aenderung %}
