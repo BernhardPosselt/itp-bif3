@@ -1,15 +1,18 @@
 var gml, mmap;
-var gxmlopts = {}
+//var gxmlopts = {}
     
 window.onload = function() {
-    mmap=new GMap2(document.getElementById("map")); 
-    geocoder = new GClientGeocoder();
-    var adresse = "3161, St. Veit/Gölsen";
-    showAddress(adresse);
-    gxmlopts["nozoom"]=true;
-    gml = new GeoXml("gml", mmap, "{{ STATIC_URL }}kml/Hydranten.kml",gxmlopts);
-    gml.parse();
-};
+    if (GBrowserIsCompatible()) 
+    {
+        mmap=new GMap2(document.getElementById("map")); 
+        geocoder = new GClientGeocoder();
+        var adresse = "3161, St. Veit/Gölsen";
+        showAddress(adresse);
+       // gxmlopts["nozoom"]=true;
+        gml = new GeoXml("gml", mmap, "{{ STATIC_URL }}kml/Hydranten.kml");
+        gml.parse();
+    }
+}
 
 window.unload = function(){
     GUnload();

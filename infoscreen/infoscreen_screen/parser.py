@@ -17,7 +17,7 @@ class EinsatzKlasse(object):
         self.nummer2 = -1
         self.nummer3 = -1
         self.plz= -1
-        self.adresse = "DEFAULT"
+        self.strasse = "DEFAULT"
         self.ort = "DEFAULT"
         self.bemerkung = "DEFAULT"
         self.objekt = "DEFAULT"
@@ -63,8 +63,8 @@ class EinsatzKlasse(object):
                 meldebild_beschreibung = MeldebildModel.objects.get(beschreibung = self.meldebild)
                 einsatzmod.meldebild = meldebild_beschreibung
             elif attr == "einsatzerzeugt":
-                hilf = re.split('\.+|\:+|\ +',self.einsatzerzeugt,5)
                 try:
+                    hilf = re.split('\.+|\:+|\ +',self.einsatzerzeugt,5)
                     datal = date(int(hilf[2]),int(hilf[1]),int(hilf[0]))
                 except:
                     datal = date(2001,01,01)
@@ -129,8 +129,8 @@ class DispoKlasse(object):
                 einsatz_id = EinsatzModel.objects.get(einsatz = self.einsatz)
                 dispomod.einsatz = einsatz_id
             elif attr == "zeitdispo" or attr == "zeitalarm" or attr == "zeitaus" or attr =="zeitein":
-                hilf = re.split('\.+|\:+|\ +',getattr(self,attr),5)
-                try:
+                try: 
+                    hilf = re.split('\.+|\:+|\ +',getattr(self,attr),5)
                     datal = date(int(hilf[2]),int(hilf[1]),int(hilf[0]))
                 except:
                     datal = date(2001,01,01)

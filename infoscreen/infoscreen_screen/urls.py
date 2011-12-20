@@ -28,3 +28,8 @@ urlpatterns += patterns('infoscreen.infoscreen_screen.views.pdf',
         name='einsatzfax_pdf_printed'),
 )
 
+#gmap view
+urlpatterns += patterns('infoscreen.infoscreen_screen.views.gmap',
+    url(r'^gmap/$', 'gmap', name='gmap'),
+)
+
