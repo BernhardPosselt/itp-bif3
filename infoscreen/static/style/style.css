@@ -221,7 +221,7 @@ ul {
 		padding-bottom:5%;
     }
     
-    #dispos ul
+    #dispos .dispo_entry
     {
 		font-size:20pt;	
     }
@@ -249,23 +249,68 @@ ul {
 {
 	width:100%;
 }
-	#frieden_rechts div
-	{
-		float:left;		
-	}
-
 	#frieden_rechts #news
 	{
 		width:33%;
+		float:left;
 	}
+	
+		#frieden_rechts #news .news_entry		
+		{
+			background-color:#fcffb2;
+			padding:2%;
+			margin:2% 1%;
+			width:90%;
+		}
+		
+		#frieden_rechts #news .news_entry h1		
+		{
+			font-size:18pt;
+			margin-bottom:5px;
+		}
+		
+		#frieden_rechts #news .news_entry .text		
+		{
+			font-size:12pt;
+			margin-bottom:5px;
+		}
+		
+		#frieden_rechts #news .news_entry .date		
+		{
+			font-size:12pt;
+			text-align:right;
+		}
 	
 	#frieden_rechts #fahrzeuge
 	{
-		width:33%;		
+		width:33%;
+		float:left;		
 	}
+	
+		#frieden_rechts #fahrzeuge .vehicle_entry
+		{
+			background-color:#fcffb2;
+			padding:2%;
+			margin:2% 1%;
+			width:90%;
+			font-size:20pt;
+			font-weight:bold;
+		}
+	
 	
 	#frieden_rechts #geraete
 	{
 		width:33%;
+		float:left;
 	}
+		
+		#frieden_rechts #geraete .util_entry
+		{
+			background-color:#fcffb2;
+			padding:2%;
+			margin:2% 1%;
+			width:90%;
+			font-size:20pt;
+			font-weight:bold;
+		}
 
