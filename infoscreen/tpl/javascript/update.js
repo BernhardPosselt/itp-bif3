@@ -61,8 +61,11 @@ function Update(screen, mission) {
     this.update();
     
     // set update interval in seconds
+    var self = this;
     this.update_interval = 7;
-    this.update_timer = setTimeout('this.update', this.update_interval*1000);
+    this.update_timer = setInterval(function(){
+        self.update();
+    }, this.update_interval*1000);
 }
 
 /**
@@ -71,7 +74,7 @@ function Update(screen, mission) {
 Update.prototype.update = function () {
     var self = this;
     $.getJSON(self.url_update, function(data){
-    
+
         // check if we have to change the context
         if(self.mission !== data.mission){
             self.change_context(self.screen, data.mission);
@@ -110,9 +113,12 @@ Update.prototype.set_screen_view_change_interval = function (seconds) {
     }
     this.screen_view_change_interval = seconds;
     if(this.screen_timer){
-        clearTimeout(this.screen_timer);
+        clearInterval(this.screen_timer);
     }
-    this.screen_timer = setTimeout('this.screen_view_change', this.screen_view_change_interval*1000);
+    var self = this;
+    this.screen_timer = setInterval(function(){
+        this.screen_view_change();
+    }, this.screen_view_change_interval*1000);
 }
 
 /**
@@ -142,13 +148,13 @@ Update.prototype.change_context = function (screen, mission) {
  */
 Update.prototype.screen_update = function () {
     if(this.screen === 0){
-        if(mission === 0){
+        if(this.mission === 0){
             this.screen_peace_left_update();
         } else {
             this.screen_mission_left_update();            
         }
     } else {
-        if(mission === 0){
+        if(this.mission === 0){
             this.screen_peace_right_update();
         } else {
             this.screen_mission_right_update();
