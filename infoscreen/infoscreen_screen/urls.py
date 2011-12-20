@@ -25,6 +25,7 @@ urlpatterns += patterns('infoscreen.infoscreen_screen.views.ajax',
     url(r'^ajax/update/utils/$', 'update_utils', name='update_utils'),
     url(r'^ajax/update/vehicle/order/(?P<missionid>\d+)/$', 'update_vehicle_order', name='update_vehicle_order'),
     url(r'^ajax/update/mission/(?P<missionid>\d+)/$', 'update_mission', name='update_mission'),
+    url(r'^ajax/running/missions/$', 'running_missions', name='running_missions'),
 )
 
 # pdf views

@@ -4,6 +4,7 @@ import datetime
 
 # Django includes
 from django.conf import settings
+from django.db.models import Max, Count
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
@@ -25,18 +26,19 @@ def update(request, screen):
     
     config = WebsiteConfig(settings.WEBSITE_CFG)
     update_interval = config.update_interval
-    willkommen =  config.welcome_msg
     
     # set default values
-    news_len = 0
-    geraet_len = 0
-    fahrzeug_len = 0
-    ausrueckordnung_len = 0
-    dispo_len = 0
-    letze_aenderung = []
-    anzahl = []
+    mission = False
+    last_change = []
+    count = []
     
     # check if we got frieden or einsatz
+    missions = Einsaetze.objects.filter(abgeschlossen=False).aggregate( Count('id'), Max('modifiziert') )
+    missions_len = mission['id__count']
+    missions_change = mission['modifiziert__max']
+    if missions_len == 0:
+        mission = True
+    
     einsatz = Einsaetze.objects.filter(abgeschlossen=False).order_by('-modifiziert')
     einsatz_len = len(einsatz)
     if einsatz_len == 0:
@@ -109,8 +111,7 @@ def update(request, screen):
         'letze_aenderung': letze_aenderung,
         'anzahl': anzahl,
         'update_interval': update_interval,
-        'einsatz': not frieden,
-        'willkommen': willkommen
+        'einsatz': not frieden
     }
     return render(request, "infoscreen_screen/ajax/update.json", ctx)
 
@@ -183,3 +184,16 @@ def update_mission(request, missionid):
         'mission': mission
     }
     return render(request, "infoscreen_screen/ajax/update_mission.json", ctx)
+
+   
+def running_missions(request):
+    """Returns json with ids of all running missions
+    
+    Keyword arguments:
+    missionid -- The id of the mission
+    """
+    missions = Einsaetze.objects.filter(abgeschlossen=False)
+    ctx = {
+        'missions': missions
+    }
+    return render(request, "infoscreen_screen/ajax/running_mission.json", ctx)

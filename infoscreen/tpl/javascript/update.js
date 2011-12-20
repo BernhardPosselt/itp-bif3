@@ -24,7 +24,7 @@ function Update(screen, mission, last_change, nr_elements) {
     this.url_mission_right = '{% url screen:bildschirm_einsatz_rechts %}';
     
     // url for reloads
-    this.reload_url = '{% url screen:reload_data %}';
+    this.reload_url = '';
     
     if(screen === 0){
         this.update_url = this.update_url_left;

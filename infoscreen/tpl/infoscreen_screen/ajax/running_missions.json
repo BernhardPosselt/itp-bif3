@@ -1,0 +1,3 @@
+{
+    "missions": [{% for mission in missions %}{{ mission.id }}, {% endfor %} ]
+}

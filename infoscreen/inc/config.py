@@ -50,7 +50,7 @@ class WebsiteConfig(object):
         
         # read in main config
         try:
-            config = ConfigParser.SafeConfigParser(allow_no_value=True)
+            config = ConfigParser.SafeConfigParser()
             config.read(self.mainConfig)
                 
             try:
@@ -69,8 +69,8 @@ class WebsiteConfig(object):
                 self.parserError = True
             
             try:
-                self.tokenLifespan = config.getint('settings', 'update_interval')
-            except ConfigParser.NoOptionError:
+                self.update_interval = config.getint('settings', 'update_interval')
+            except (ConfigParser.NoOptionError, ValueError):
                 self.parserError = True        
 
         # if there was something wrong with the config or parsing, write default
