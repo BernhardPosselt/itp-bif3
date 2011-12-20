@@ -33,7 +33,6 @@ function Update(screen, mission) {
     this.url_update_vehicle_order = '{% url screen:update_vehicle_order %}';
     this.url_update_mission = '{% url screen:update_mission %}';
     this.url_update_dispos = '{% url screen:update_dispos %}';
-    this.url_running_mission = '{% url screen:running_missions %}';
     
     // ids of each div field we need to load data into
     this.welcome_id = 'willkommen';
