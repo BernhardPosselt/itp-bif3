@@ -10,7 +10,7 @@ class DispoAdmin(admin.TabularInline):
 
 class EinsatzAdmin(admin.ModelAdmin):
     list_display = ('objekt', 'bemerkung','nummer1', 'strasse', 'plz', 'ort','meldebild', 'einsatzerzeugt')
-    list_filter = ("meldebild", 'plz')
+    list_filter = ("meldebild__stufe", "meldebild", 'modifiziert')
     ordering = ("modifiziert",)
     date_hierarchy = 'einsatzerzeugt'
     search_fields = ["nummer1", 'nummer2']

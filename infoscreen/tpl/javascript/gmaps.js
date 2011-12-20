@@ -7,10 +7,11 @@ window.onload = function() {
         mmap=new GMap2(document.getElementById("map")); 
         geocoder = new GClientGeocoder();
         ort = '{{ ort }}';
-        plz = {{ plz }};
+        plz = '{{ plz }}';
         strasse = '{{ strasse }}';
-        hausnummer = {{ hausnummer }};
-        var adresse = hausnummer.toString() + "," + strasse.toString() + ", " + plz.toString() + "," + ort.toString();
+        hausnummer = '{{ hausnummer }}';
+        var adresse = hausnummer + "," + strasse + ", " + plz + "," + ort;
+        alert(adresse);
         showAddress(adresse);
        // gxmlopts["nozoom"]=true;
         gml = new GeoXml("gml", mmap, "{{ STATIC_URL }}kml/Hydranten.kml");

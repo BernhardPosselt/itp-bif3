@@ -1,7 +1,9 @@
 {% for order in vehicle_order %}
-    {% if not order.vehicle.reperatur%}
+    {% if not order.vehicle.reperatur %}
         <div class="vehicle_order_entry">
-            {{ order.vehicle.kuerzel }}
+            {{ order.fahrzeug.kuerzel }}
         </div>    
     {% endif %}
 {% endfor %}
+
+{{ classification }}

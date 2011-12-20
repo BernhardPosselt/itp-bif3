@@ -86,6 +86,8 @@ def update_vehicle_order(request):
     """Returns html for the mission with the vehicle order
     """
     mission_id = int(request.POST.get('mission_id', 0))
+    if mission_id == 0:
+        mission_id = int(request.GET.get('mission_id', 0))
     mission = get_object_or_404(Einsaetze, id=mission_id)
     vehicle_order = mission.meldebild.ausrueckordnungen_set.all()
     ctx = {
