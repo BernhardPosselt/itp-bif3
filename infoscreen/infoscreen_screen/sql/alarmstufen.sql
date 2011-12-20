@@ -1,0 +1,10 @@
+INSERT INTO infoscreen_screen_alarmstufen VALUES ('B1', datetime('now'));
+INSERT INTO infoscreen_screen_alarmstufen VALUES ('B2',datetime('now'));
+INSERT INTO infoscreen_screen_alarmstufen VALUES ('B3',datetime('now'));
+INSERT INTO infoscreen_screen_alarmstufen VALUES ('B4',datetime('now'));
+INSERT INTO infoscreen_screen_alarmstufen VALUES ('S1',datetime('now'));
+INSERT INTO infoscreen_screen_alarmstufen VALUES ('S2',datetime('now'));
+INSERT INTO infoscreen_screen_alarmstufen VALUES ('S3',datetime('now'));
+INSERT INTO infoscreen_screen_alarmstufen VALUES ('T1',datetime('now'));
+INSERT INTO infoscreen_screen_alarmstufen VALUES ('T2',datetime('now'));
+INSERT INTO infoscreen_screen_alarmstufen VALUES ('T3',datetime('now'));

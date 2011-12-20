@@ -1,0 +1,100 @@
+<root>
+	<einsatz id="MI 947">
+		<alarmstufe>B3</alarmstufe>
+		<meldebild>Wohnhausbrand</meldebild>
+		<nummer1>3</nummer1>
+		<nummer2></nummer2>
+		<nummer3></nummer3>
+		<plz>3500</plz>
+		<strasse>Hoher Markt</strasse>
+		<ort>Krems</ort>
+		<abschnitt></abschnitt>
+		<objekt></objekt>
+		<bemerkung>Hier steht eine beliebige Bemerkung!</bemerkung>
+		<einsatzerzeugt>25.04.2008 18:56:58</einsatzerzeugt>
+		<melder></melder>
+		<meldertel></meldertel>
+		<einsatznr>1986638816</einsatznr>
+		<dispo id="1">
+			<disponame>Gaweinstal</disponame>
+			<zeitdispo>25.04.2008 18:57:41</zeitdispo>
+			<zeitalarm>02.01.1970</zeitalarm>
+			<zeitaus>25.04.2008 19:01:44</zeitaus>
+			<zeitein>01.01.1900</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="2">
+			<disponame>Pellendorf</disponame>
+			<zeitdispo>25.04.2008 18:57:33</zeitdispo>
+			<zeitalarm>02.01.1970</zeitalarm>
+			<zeitaus>25.04.2008 19:01:48</zeitaus>
+			<zeitein>01.01.1900</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+	</einsatz>
+	<einsatz id="MI 948">
+		<alarmstufe>T1</alarmstufe>
+		<meldebild>Auspumparbeiten</meldebild>
+		<nummer1>100</nummer1>
+		<nummer2></nummer2>
+		<nummer3></nummer3>
+		<plz>3161</plz>
+		<strasse>Haupstrasse</strasse>
+		<ort>St. Veit/Gölsen</ort>
+		<abschnitt></abschnitt>
+		<objekt></objekt>
+		<bemerkung>Keller überschwemmt!</bemerkung>
+		<einsatzerzeugt>01.12.2011 12:56:58</einsatzerzeugt>
+		<melder></melder>
+		<meldertel></meldertel>
+		<einsatznr>19863488343</einsatznr>
+		<dispo id="1">
+			<disponame>Tulln</disponame>
+			<zeitdispo>01.12.2011 12:57:41</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>01.12.2011 23:01:44</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="2">
+			<disponame>Zwentendorf</disponame>
+			<zeitdispo>01.12.2011 12:57:33</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>01.12.2011 22:15:48</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="3">
+			<disponame>Krems</disponame>
+			<zeitdispo>01.12.2011 18:57:33</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>01.12.2011 24:15:48</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="4">
+			<disponame>Gaweinstal</disponame>
+			<zeitdispo>01.12.2011 18:57:33</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>02.12.2011 21:15:48</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="5">
+			<disponame>St. Pölten</disponame>
+			<zeitdispo>01.12.2011 18:57:33</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>04.12.2011 23:15:48</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="6">
+			<disponame>Mistelbach</disponame>
+			<zeitdispo>01.12.2011 18:54:33</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>01.12.2011 23:14:48</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+	</einsatz>
+</root>

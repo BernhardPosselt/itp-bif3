@@ -1,0 +1,116 @@
+<root>
+	<einsatz id="PL 910">
+		<alarmstufe>T1</alarmstufe>
+		<meldebild>Auspumparbeiten</meldebild>
+		<nummer1>100</nummer1>
+		<nummer2></nummer2>
+		<nummer3></nummer3>
+		<plz>3161</plz>
+		<strasse>Haupstrasse</strasse>
+		<ort>St. Veit/Gölsen</ort>
+		<abschnitt></abschnitt>
+		<objekt></objekt>
+		<bemerkung>Keller überschwemmt!</bemerkung>
+		<einsatzerzeugt>01.12.2011 12:56:58</einsatzerzeugt>
+		<melder></melder>
+		<meldertel></meldertel>
+		<einsatznr>1988343</einsatznr>
+		<dispo id="1">
+			<disponame>Tulln</disponame>
+			<zeitdispo>01.12.2011 12:57:41</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>01.12.2011 23:01:44</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="2">
+			<disponame>Zwentendorf</disponame>
+			<zeitdispo>01.12.2011 12:57:33</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>01.12.2011 22:15:48</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="3">
+			<disponame>Krems</disponame>
+			<zeitdispo>01.12.2011 18:57:33</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>01.12.2011 24:15:48</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="4">
+			<disponame>Gaweinstal</disponame>
+			<zeitdispo>01.12.2011 18:57:33</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>02.12.2011 21:15:48</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="5">
+			<disponame>St. Pölten</disponame>
+			<zeitdispo>01.12.2011 18:57:33</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>04.12.2011 23:15:48</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="6">
+			<disponame>Mistelbach</disponame>
+			<zeitdispo>01.1f.2011 18:54:33</zeitdispo>
+			<zeitalarm>01.12.2011</zeitalarm>
+			<zeitaus>01.12.2011 23:14:48</zeitaus>
+			<zeitein>01.12.2011</zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+	</einsatz>
+    <einsatz id="PL 2552">
+        <alarmstufe>B2</alarmstufe>
+        <meldebild>Waldbrand</meldebild>
+        <nummer1>17.000</nummer1>
+        <nummer2></nummer2>
+        <nummer3></nummer3>
+        <plz></plz>
+        <strasse></strasse>
+        <ort>Pfenningbach</ort>
+        <abschnitt></abschnitt>
+        <objekt></objekt>
+        <bemerkung></bemerkung>
+        <einsatzerzeugt>01.12.2011 14:31:55</einsatzerzeugt>
+        <melder>Polizei Lilienfeld Fr. Lackner</melder>
+        <meldertel>0591333120100</meldertel>
+        <einsatznr>24587823</einsatznr>
+        <dispo id="1">
+          <disponame>Rainfeld</disponame>
+          <zeitdispo>01.12.2011 14:32:42</zeitdispo>
+          <zeitalarm>01.12.2011 14:33:15</zeitalarm>
+          <zeitaus>01.12.2011 14:40:00</zeitaus>
+          <zeitein></zeitein>
+          <hintergrund>0</hintergrund>
+        </dispo>
+        <dispo id="2">
+          <disponame>Rohrbach</disponame>
+          <zeitdispo>01.12.2011 14:37:27</zeitdispo>
+          <zeitalarm>01.12.2011 14:38:12</zeitalarm>
+          <zeitaus>01.12.2011 14:42:12</zeitaus>
+          <zeitein></zeitein>
+          <hintergrund>0</hintergrund>
+        </dispo>
+        <dispo id="3">
+          <disponame>Wiesenfeld</disponame>
+          <zeitdispo>01.12.2011 14:37:27</zeitdispo>
+          <zeitalarm>01.12.2011 14:39:19</zeitalarm>
+          <zeitaus>01.12.2011 14:44:14</zeitaus>
+          <zeitein></zeitein>
+          <hintergrund>0</hintergrund>
+        </dispo>
+        <dispo id="4">
+          <disponame>St.Veit/Gölsen</disponame>
+          <zeitdispo>01.12.2011 14:37:27</zeitdispo>
+          <zeitalarm>01.12.2011 14:38:46</zeitalarm>
+          <zeitaus>01.12.2011 14:45:10</zeitaus>
+          <zeitein></zeitein>
+          <hintergrund>0</hintergrund>
+        </dispo>
+  </einsatz>
+</root>

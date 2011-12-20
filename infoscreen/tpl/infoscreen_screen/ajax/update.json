@@ -1,0 +1,14 @@
+{
+    "einsatz": {{ einsatz|lower }},
+    "update_interval": {{ update_interval }},
+    "letze_aenderung": [
+        {% for e in letze_aenderung %}
+            {{ e }},
+        {% endfor %}
+    ]
+    "anzahl": [
+        {% for e in anzahl %}
+            {{ e }},
+        {% endfor %}
+    ]
+}

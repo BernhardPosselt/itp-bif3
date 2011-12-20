@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+hi {% for var in tplvar1 %}
+{{ var.name }}
+{% endfor %} <a href="{% url index %}">klick mich</a> 
+<a href="{% url testindex 12 %}">klick mich2</a>
+
+{% endblock %}
