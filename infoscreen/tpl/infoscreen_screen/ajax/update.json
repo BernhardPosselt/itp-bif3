@@ -1,4 +1,5 @@
 {
     "mission": {{ mission|lower }},
     "update_interval": {{ update_interval }},
+    "running_missions": [{% for mission in running_missions %}{{ mission.id }}, {% endfor%}]
 }

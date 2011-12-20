@@ -7,11 +7,14 @@
  * @param nr_elements: an array with the count of all reloadable elements
  */
 function Update(screen, mission) {
-    
-    // TODO: implement more than 1 concurrent mission
-    
     this.screen = screen;
     this.mission = mission;
+    
+    // default values, do not change these
+    this.screen_view_change_interval = -1;
+    this.screen_view = -1;
+    this.current_mission = -1;
+    this.running_missions = [];
     
     // url which should be called for checking changes
     this.url_update = '{% url screen:update %}';
@@ -29,31 +32,38 @@ function Update(screen, mission) {
     this.url_update_utils = '{% url screen:update_utils %}';
     this.url_update_vehicle_order = '{% url screen:update_vehicle_order %}';
     this.url_update_mission = '{% url screen:update_mission %}';
+    this.url_update_dispos = '{% url screen:update_dispos %}';
     this.url_running_mission = '{% url screen:running_missions %}';
     
     // ids of each div field we need to load data into
-    // peace left
     this.welcome_id = 'willkommen';
-    // peace right
     this.news_id = 'news';
     this.utils_id = 'geraete';
     this.vehicles_id = 'fahrzeuge';
-    // mission left
     this.vehicle_order_id = 'fahrzeugordnung';
     this.mission_data_id = 'einsatzdaten';
-    // mission right
-    this.dispo_id = 'dispos';
-    // loading element
-    this.loading_class = 'loading';
-    
+    this.dispos_id = 'dispos';
+    this.stats_id = 'stats';
+
+    // ids of the mission div
+    this.street_id = 'street';
+    this.housenr_id = 'housenr';
+    this.stairnr_id = 'stairnr';
+    this.doornr_id = 'doornr';
+    this.zip_id = 'zip';
+    this.place_id = 'place';
+    this.notes_id = 'notes';
+    this.object_id = 'object';
+    this.classification_id = 'classification';
+    this.alarmnr = 'alarmnr';
+    this.notifier = 'notifier';
+        
     // run initial reloads
     this.update();
     
     // set update interval in seconds
-    this.screen_view_change_interval = -1;
     this.update_interval = 7;
     this.update_timer = setTimeout('this.update', this.update_interval*1000);
-
 }
 
 /**
@@ -73,9 +83,17 @@ Update.prototype.update = function () {
            self.screen_view_change_interval < 0){
             self.set_screen_view_change_interval(data.update_interval);
         }
-    
+        
+        // currently running missions, if < 0 then we have the first load of 
+        // the page, so set the current mission to the first one
+        if(self.running_missions < 0 && this.mission){
+            self.screen_view = 0;
+            self.current_mission = data.running_missions[0];
+        }
+        self.running_missions = data.running_missions;
+        
         // run website reloads
-        this.screen_update(); 
+        self.screen_update(); 
            
     });
 }
@@ -174,47 +192,69 @@ Update.prototype.screen_peace_left_update = function(){
  * Reloads and sets all elements on the peace right screen
  */
 Update.prototype.screen_peace_right_update = function(){
-    $.getJSON(self.url_peace_right, function(data){
-        $('#' + this.welcome_id).html(data.welcome_msg);
-    }
+    $('#' + this.news_id).load(this.url_update_news);
+    $('#' + this.vehicles_id).load(this.url_update_vehicles);
+    $('#' + this.utils_id).load(this.url_update_utils);
 }
 
 /**
  * Reloads and sets all elements on the mission left screen
  */
 Update.prototype.screen_mission_left_update = function(){
-    $.getJSON(self.url_mission_left, function(data){
-        $('#' + this.welcome_id).html(data.welcome_msg);
-    }
+    var data = { missionid: this.current_mission };
+    $.getJSON(self.url_update_mission, data, function(data){
+        $('#' + this.street_id).html(data.street);
+        $('#' + this.housenr_id).html(data.housenr);
+        $('#' + this.stairnr_id).html(data.stairnr);
+        $('#' + this.doornr_id).html(data.doornr);
+        $('#' + this.zip_id).html(data.zip);
+        $('#' + this.place_id).html(data.place);
+        $('#' + this.notes_id).html(data.notes);
+        $('#' + this.object_id).html(data.object);
+        $('#' + this.classification_id).html(data.classification);
+        $('#' + this.alarmnr).html(data.alarmnr);
+        $('#' + this.notifier).html(data.notifier);
+    }   
+    $('#' + this.vehicle_order_id).load(this.url_update_vehicle_order, data);
 }
 
-
 /**
- * Reloads and sets all elements on the peace left screen
+ * Reloads and sets all elements on the mission right screen
  */
 Update.prototype.screen_mission_right_update = function(){
-    $.getJSON(self.url_mission_right, function(data){
-        $('#' + this.welcome_id).html(data.welcome_msg);
+    // FIXME: map reloading?
+    var data = { missionid: this.current_mission };
+    $('#' + this.dispos_id).load(this.url_update_dispos, data);
+}
+
+
+/**
+ * Changes between different views on the page, either multiple missions or
+ * the news screen
+ */
+Update.prototype.screen_view_change = function(){
+    if(this.mission === 0){
+        switch(this.screen_view){
+            case 0:
+                $('#' + this.news_id).fadeToggle(function(){
+                    $('#' + this.stats_id).fadeToggle();
+                });
+                this.screen_view = 1;
+                break;
+            case 1:
+                $('#' + this.stats_id).fadeToggle(function(){
+                    $('#' + this.news_id).fadeToggle();
+                });
+                this.screen_view = 0;
+                break;
+            default:
+                this.screen_view = 0;
+                break;
+        }
+    } else {
+        this.screen_view += 1;
+        this.screen_view %= this.running_missions.length;
+        this.current_mission = this.running_missions[this.screen_view];
     }
 }
 
-/**
- * Loads new data into the given field
- *
- * @param div_id: The id of the div element where we want to reload our data
- */
-Update.prototype.reload_data = function (div_id) {
-    var data = { id: div_id };
-    // fade out div element and fade in loading div 
-    $('#' + div_id).fadeOut(function(){
-        $('#' + this.div_id + ' .' + this.loading_class).fadeIn(function(){
-            $('#' + div_id).load(this.reload_url, data, function(){
-                $('#' + this.div_id + ' .' + this.loading_class).fadeOut(function(){
-                    $('#' + div_id).fadeIn();
-                });
-            });
-        });
-    });
-    
-    
-}

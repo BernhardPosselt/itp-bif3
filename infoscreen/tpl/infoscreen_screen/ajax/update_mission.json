@@ -3,7 +3,7 @@
     "housenr": "{{ mission.nummer1 }}",
     "stairnr": "{{ mission.nummer2 }}",
     "doornr": "{{ mission.nummer3 }}",
-    "zip": {{ mission.plz }},
+    "zip": "{{ mission.plz }}",
     "place": "{{ mission.ort }}",
     "notes": "{{ mission.bemerkung }}",
     "object": "{{ mission.objekt }}",

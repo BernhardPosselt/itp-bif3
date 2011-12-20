@@ -24,6 +24,7 @@ def update(request):
     
     # check if we got frieden or einsatz
     missions = Einsaetze.objects.filter(abgeschlossen=False).aggregate( Count('id') )
+    running_missions = Einsaetze.objects.filter(abgeschlossen=False)
     missions_len = mission['id__count']
     if missions_len == 0:
         mission = False
@@ -32,7 +33,8 @@ def update(request):
     
     ctx = {
         'update_interval': update_interval,
-        'mission': mission
+        'mission': mission,
+        'running_missions': running_missions,
     }
     return render(request, "infoscreen_screen/ajax/update.json", ctx)
 
@@ -82,9 +84,6 @@ def update_utils(request):
 
 def update_vehicle_order(request):
     """Returns html for the mission with the vehicle order
-    
-    Keyword arguments:
-    missionid -- The id of the mission
     """
     missionid = request.GET.get('missionid', '')
     mission = get_object_or_404(Einsaetze, id=missionid)
@@ -97,9 +96,6 @@ def update_vehicle_order(request):
 
 def update_mission(request):
     """Returns json for the mission
-    
-    Keyword arguments:
-    missionid -- The id of the mission
     """
     missionid = request.GET.get('missionid', '')
     mission = get_object_or_404(Einsaetze, id=missionid)
@@ -108,15 +104,15 @@ def update_mission(request):
     }
     return render(request, "infoscreen_screen/ajax/update_mission.json", ctx)
 
-   
-def running_missions(request):
-    """Returns json with ids of all running missions
-    
-    Keyword arguments:
-    missionid -- The id of the mission
+
+def update_dispos(request):
+    """Returns html for the dispos
     """
-    missions = Einsaetze.objects.filter(abgeschlossen=False)
+    missionid = request.GET.get('missionid', '')
+    mission = get_object_or_404(Einsaetze, id=missionid)
+    dispos = mission.dispos_set.all()
     ctx = {
-        'missions': missions
+        'dispos': dispos
     }
-    return render(request, "infoscreen_screen/ajax/running_mission.json", ctx)
+    return render(request, "infoscreen_screen/ajax/update_dispos.json", ctx)
+
