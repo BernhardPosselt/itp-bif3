@@ -9,6 +9,7 @@ urlpatterns = patterns('infoscreen.infoscreen_screen.views.views',
     url(r'^bildschirm/frieden/rechts/$', 'bildschirm_frieden_rechts', name='bildschirm_frieden_rechts'),
     url(r'^bildschirm/einsatz/links/$', 'bildschirm_einsatz_links', name='bildschirm_einsatz_links'),
     url(r'^bildschirm/einsatz/rechts/$', 'bildschirm_einsatz_rechts', name='bildschirm_einsatz_rechts'),
+    url(r'^settings$', 'settings', name='settings'),
     
     # javascript
     url(r'javascript/(?P<src>\w+)/$', 'javascript', name='javascript'),

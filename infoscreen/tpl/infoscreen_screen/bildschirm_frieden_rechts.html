@@ -6,7 +6,23 @@
     <script src="{% url screen:javascript_main '1' %}" type="text/javascript"></script>
 {% endblock %}
 
-{% block content %}
+{% block header %}
+<div id="header" class="frieden">
+    <h1>Freiwillige Feuerwehr St.Veit/Gölsen</h1>
+</div>    
+{% endblock %}
 
+{% block content %}
+<div id="frieden_rechts">
+	<div id="news">
+		<h2>Aktuelle News</h2>		
+	</div>
+	<div id="fahrzeuge">
+		<h2>Fahrzeuge nicht einsatzbereit</h2>
+	</div>
+	<div id="geraete">
+		<h2>Ger&auml;te nicht einsatzbereit</h2>
+	</div>
+</div>
 {% endblock %}
 

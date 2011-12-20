@@ -78,20 +78,20 @@ ul {
 /*
  * General classes
  */
-.alarm {
-    background-image: linear-gradient(bottom, rgb(191,15,30) 0%, rgb(213,15,28) 100%);
-    background-image: -o-linear-gradient(bottom, rgb(191,15,30) 0%, rgb(213,15,28) 100%);
-    background-image: -moz-linear-gradient(bottom, rgb(191,15,30) 0%, rgb(213,15,28) 100%);
-    background-image: -webkit-linear-gradient(bottom, rgb(191,15,30) 0%, rgb(213,15,28) 100%);
-    background-image: -ms-linear-gradient(bottom, rgb(191,15,30) 0%, rgb(213,15,28) 100%);
+.brand {
+    background-color:#cc3232;
 }
 
-.peace {
-    background-image: linear-gradient(bottom, rgb(52,124,38) 0%, rgb(60,155,38) 100%);
-    background-image: -o-linear-gradient(bottom, rgb(52,124,38) 0%, rgb(60,155,38) 100%);
-    background-image: -moz-linear-gradient(bottom, rgb(52,124,38) 0%, rgb(60,155,38) 100%);
-    background-image: -webkit-linear-gradient(bottom, rgb(52,124,38) 0%, rgb(60,155,38) 100%);
-    background-image: -ms-linear-gradient(bottom, rgb(52,124,38) 0%, rgb(60,155,38) 100%);
+.technisch {
+    background-color:#006ef6;
+}
+
+.schadstoff {
+    background-color:#188f1e;
+}
+
+.frieden {
+    background-color:#cc3232;
 }
 
 
@@ -104,29 +104,25 @@ ul {
     top: 0;
     left: 0;
     width: 100%;
-    height: 120px;
-    border-bottom: 1px solid #D9D2AD;
+    height: 120px;    
 }
 
     #header h1 {
         text-shadow: 0 0 2px #000;
         color: #fefefe;
-        font-size: 45pt;
+        font-size: 40pt;
         text-align: center;
         line-height: 120px;
     }
 
-    #header #alarmstufe {
-        height: 80px;
-        width: 80px;
-        padding: 20px 30px;
-        line-height: 80px;
-        font-size: 50pt;
-        float: left;
-        background-color: #B20F0F;
-        color: #fefefe;
-        text-shadow: 0 0 2px #000;
-        border-right: 1px solid #444;
+    #header #alarmstufe {    
+		text-shadow: 0 0 2px #000;
+		text-align: center;
+        width:120px;
+        padding:5px 20px 0px 20px;
+        font-size:70pt;
+        color:#ffffff;        
+        float: left;        
     }
 
 
@@ -163,22 +159,40 @@ ul {
 #einsatz_links {
     font-size: 60pt;
 }
-
-    #einsatz_links .adresse {
-        text-align: center;
-        line-height: 1.5;
-    }
-
-    #einsatz_links .beschreibung {
-        font-size: 40pt;
-    }
-
-    #einsatz_links .ausrueckordnung {
-        float:left;
-        width: 400px;
-        background-color: yellow;
-    }
-
+	#details
+	{
+		padding-left:2%;
+		width:76%;
+		float:left;
+	}
+	
+	#details ul
+	{
+		font-weight:bold;
+		font-size:50pt;
+		padding-bottom:50px;
+		
+	}
+	
+	#details #objekt
+	{
+		font-size:50pt;
+	}
+	
+	#details #bemerkung
+	{
+		font-size:40pt;
+	}
+	
+	#ausrueckeordnung
+	{
+		font-size:45pt;
+		width:20%;
+		padding:1%;
+		float:left;
+		background-color:#fcffb2;
+		min-height:100%;
+	} 
 
 /**
  * Einsatz rechts
@@ -187,20 +201,71 @@ ul {
     font-size: 60pt;
 }
 
-    #einsatz_rechts .karte {
-        text-align: center;
-        line-height: 1.5;
-        width: 960px;
-        height: 960px;
-        background-image: url('../img/testmap.png');
-        background-repeat: no-repeat;
-        float: left;
+    #karte {
+        padding-left:2%;
+		width:76%;
+		float:left;
     }
 
-    #einsatz_rechts .dispos {
-        font-size: 40pt;
-        float: right;
-        background-color: yellow;
-        width: 400px;
+    #dispos {
+        width:20%;
+		padding:1%;
+		float:left;
+		background-color:#fcffb2;
+		min-height:100%;
     }
+    
+    #dispos h2
+    {
+		font-size:20pt;
+		padding-bottom:5%;
+    }
+    
+    #dispos ul
+    {
+		font-size:20pt;	
+    }
+ /*
+  * Frieden links
+*/
+#frieden_links
+{
+	width:100%;
+}
+
+	#frieden_links #willkommen
+	{
+		width:80%;
+		padding:5% 10%;
+		font-size:60pt;
+		text-align:center;
+		line-height:1.4;
+	}
+	
+/*
+  * Frieden rechts
+*/
+#frieden_rechts
+{
+	width:100%;
+}
+	#frieden_rechts div
+	{
+		float:left;		
+	}
+
+	#frieden_rechts #news
+	{
+		width:33%;
+	}
+	
+	#frieden_rechts #fahrzeuge
+	{
+		width:33%;		
+	}
+	
+	#frieden_rechts #geraete
+	{
+		width:33%;
+	}
 

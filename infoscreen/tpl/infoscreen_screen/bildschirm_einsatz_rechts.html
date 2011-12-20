@@ -12,23 +12,26 @@
 
 
 {% block header %}
-<div id="header" class="alarm">
-    <h1>Einsatzort</h1>
-</div>    
+<div id="header" class="brand">
+    <div id="alarmstufe">B2</div>
+    <h1>Wohnungsbrand</h1>
+</div>  
 {% endblock %}
 
 {% block content %}
 <div id="einsatz_rechts">
     
-    <div id="map" style="width: 1100px; height: 750px; "></div>
-    
-    <ul class="dispos">
-        <li>RLF 1</li>
-        <li>TLF 1</li>
-        <li>RLF2000</li>
-        <li>K01</li>
-    </ul>
-
+    <div id="karte">
+    Karte
+    </div>
+    <div id="dispos">
+		<h2>Feuerwehren im Einsatz</h2>
+		<ul>
+			<li>Zentralfeuerwache</li>
+			<li>Gruppenwache Brigittenau</li>
+			<li>Feuerwache Kaisermühlen</li>
+		</ul>
+    </div>
 </div>
 
 {% endblock %}

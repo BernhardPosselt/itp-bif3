@@ -3,10 +3,20 @@
 {% block title %}Feuerwehr Infoscreen - Bildschirm links{% endblock %}
 
 {% block head %}
-    <script src="{% url screen:javascript_main '0' %}" type="text/javascript"></script>
+    <script src="{% url screen:javascript_main '0' %}" type="text/javascript"></script>    
+{% endblock %}
+
+{% block header %}
+<div id="header" class="frieden">
+    <h1>Freiwillige Feuerwehr St.Veit/Gölsen</h1>
+</div>    
 {% endblock %}
 
 {% block content %}
-
+<div id="frieden_links">
+	<div id="willkommen">
+		Herzlich Willkommen bei der Freiwilligen Feuerwehr St.Veit/Gölsen
+	</div>
+</div>
 {% endblock %}
 
