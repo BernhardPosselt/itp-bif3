@@ -10,5 +10,6 @@
         {% for e in anzahl %}
             {{ e }},
         {% endfor %}
-    ]
+    ],
+    "willkommen": {{ willkommen }}
 }
