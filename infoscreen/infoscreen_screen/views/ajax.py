@@ -55,7 +55,7 @@ def update_welcome(request):
 def update_news(request):
     """Returns html with all news
     """
-    news = News.objects.filter(datum__gte=datetime.datetime.now())
+    news = News.objects.all()[:5]
     ctx = {
         'news': news
     }
@@ -69,7 +69,7 @@ def update_vehicles(request):
     ctx = {
         'vehicles': vehicles
     }
-    return render(request, "infoscreen_screen/ajax/update_vehicles.json", ctx)
+    return render(request, "infoscreen_screen/ajax/update_vehicles.html", ctx)
     
     
 def update_utils(request):
@@ -79,7 +79,7 @@ def update_utils(request):
     ctx = {
         'utils': utils
     }
-    return render(request, "infoscreen_screen/ajax/update_utils.json", ctx)
+    return render(request, "infoscreen_screen/ajax/update_utils.html", ctx)
     
 
 def update_vehicle_order(request):

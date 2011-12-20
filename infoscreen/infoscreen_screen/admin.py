@@ -24,7 +24,10 @@ class AusrueckeordnungAdmin(admin.TabularInline):
     
 class FahrzeugAdmin(admin.ModelAdmin):
 	list_display = ('kuerzel', 'beschreibung')	
-    
+
+class GeraetAdmin(admin.ModelAdmin):
+	list_display = ('beschreibung',)	
+
 class MeldebildAdmin(admin.ModelAdmin):	
 	list_display = ('beschreibung', 'stufe');
 	ordering = ('stufe',)
@@ -39,3 +42,4 @@ admin.site.register(News, NewsAdmin)
 admin.site.register(Einsaetze, EinsatzAdmin)
 admin.site.register(Meldebilder, MeldebildAdmin)
 admin.site.register(Fahrzeuge, FahrzeugAdmin)
+admin.site.register(Geraete, GeraetAdmin)
