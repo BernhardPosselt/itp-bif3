@@ -19,7 +19,12 @@ urlpatterns = patterns('infoscreen.infoscreen_screen.views.views',
 # ajax views
 urlpatterns += patterns('infoscreen.infoscreen_screen.views.ajax',
     url(r'^ajax/update/(?P<screen>\d{1})/$', 'update', name='update'),
-    url(r'^ajax/reload/data/$', 'reload_data', name='reload_data'),
+    url(r'^ajax/update/welcome/$', 'update_welcome', name='update_welcome'),
+    url(r'^ajax/update/news/$', 'update_news', name='update_news'),
+    url(r'^ajax/update/vehicles/$', 'update_vehicles', name='update_vehicles'),
+    url(r'^ajax/update/utils/$', 'update_utils', name='update_utils'),
+    url(r'^ajax/update/vehicle/order/(?P<missionid>\d+)/$', 'update_vehicle_order', name='update_vehicle_order'),
+    url(r'^ajax/update/mission/(?P<missionid>\d+)/$', 'update_mission', name='update_mission'),
 )
 
 # pdf views

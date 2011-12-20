@@ -1,12 +1,13 @@
 # System includes
 from time import mktime
+import datetime
 
 # Django includes
 from django.conf import settings
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
-from infoscreen.inc.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from infoscreen.inc.config import WebsiteConfig
 
 
@@ -113,13 +114,72 @@ def update(request, screen):
     }
     return render(request, "infoscreen_screen/ajax/update.json", ctx)
 
-    
-def reload_data(request):
-    """
-    Doku
-    """
-    div = request.GET.get(id, '')
-    # TODO: write reloads
-    ctx = {}
-    return render(request, "infoscreen_screen/ajax/update_einsatz.json", ctx)
 
+#-------------------------------------------------------------------------------
+# Update requests
+#-------------------------------------------------------------------------------
+def update_welcome(request):
+    """Returns json with the welcome msg
+    """
+    config = WebsiteConfig(settings.WEBSITE_CFG)
+    ctx = {
+        'welcome_msg': config.welcome_msg
+    }
+    return render(request, "infoscreen_screen/ajax/update_welcome.json", ctx)
+
+
+def update_news(request):
+    """Returns html with all news
+    """
+    news = News.objects.filter(datum__gte=datetime.datetime.now())
+    ctx = {
+        'news': news
+    }
+    return render(request, "infoscreen_screen/ajax/update_news.html", ctx)
+    
+    
+def update_vehicles(request):
+    """Returns html with all broken vehicles
+    """
+    vehicles = Fahrzeuge.objects.filter(reperatur=True)
+    ctx = {
+        'vehicles': vehicles
+    }
+    return render(request, "infoscreen_screen/ajax/update_vehicles.json", ctx)
+    
+    
+def update_utils(request):
+    """Returns html with all broken utils
+    """
+    utils = Geraete.objects.filter(reperatur=True)
+    ctx = {
+        'utils': utils
+    }
+    return render(request, "infoscreen_screen/ajax/update_utils.json", ctx)
+    
+
+def update_vehicle_order(request, missionid):
+    """Returns html for the mission with the vehicle order
+    
+    Keyword arguments:
+    missionid -- The id of the mission
+    """
+    mission = get_object_or_404(Einsaetze, id=missionid)
+    vehicle_order = mission.meldebild.ausrueckordnungen_set.all()
+    ctx = {
+        'vehicle_order': vehicle_order
+    }
+    return render(request, "infoscreen_screen/ajax/update_vehicle_order.html", ctx)
+
+
+def update_mission(request, missionid):
+    """Returns json for the mission
+    
+    Keyword arguments:
+    missionid -- The id of the mission
+    """
+    mission = get_object_or_404(Einsaetze, id=missionid)
+    ctx = {
+        'mission': mission
+    }
+    return render(request, "infoscreen_screen/ajax/update_mission.json", ctx)

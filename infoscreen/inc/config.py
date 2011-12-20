@@ -44,6 +44,7 @@ class WebsiteConfig(object):
         self.parserError = False
         self.url = '/'
         self.xml_url = '/'
+        self.kml_url = '/'
         self.welcome_msg = 'Hallo'
         self.update_interval = 5 # in seconds
         
@@ -54,6 +55,11 @@ class WebsiteConfig(object):
                 
             try:
                 self.xml_url = config.get('settings', 'xml_url')
+            except ConfigParser.NoOptionError:
+                self.parserError = True
+                
+            try:
+                self.kml_url = config.get('settings', 'kml_url')
             except ConfigParser.NoOptionError:
                 self.parserError = True
 
@@ -94,7 +100,8 @@ class WebsiteConfig(object):
         config = ConfigParser.SafeConfigParser()
         config.add_section('settings')
         # music settings
-        config.set('settings', 'xml_path', str(self.xml_url))
+        config.set('settings', 'xml_url', str(self.xml_url))
+        config.set('settings', 'kml_url', str(self.kml_url))
         config.set('settings', 'update_interval', str(self.update_interval))
         config.set('settings', 'welcome_msg', str(self.welcome_msg))
         try:
