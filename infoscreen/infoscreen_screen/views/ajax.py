@@ -20,8 +20,11 @@ def update(request, screen):
     request -- The request object
     screen -- which page we're on, 0 for left screen, 1 for right screen
     """
+    # FIXME: performance and working updates!!!
+    
     config = WebsiteConfig(settings.WEBSITE_CFG)
     update_interval = config.update_interval
+    willkommen =  config.welcome_msg
     
     # set default values
     news_len = 0
@@ -106,7 +109,7 @@ def update(request, screen):
         'anzahl': anzahl,
         'update_interval': update_interval,
         'einsatz': not frieden,
-        'willkommen': config.welcome_msg
+        'willkommen': willkommen
     }
     return render(request, "infoscreen_screen/ajax/update.json", ctx)
 

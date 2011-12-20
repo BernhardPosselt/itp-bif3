@@ -16,6 +16,8 @@ class SettingsForm(forms.ModelForm):
     """
     xml_url = forms.CharField(label='XML URL', 
         help_text='Die URL die für neue Einsätze abgefragt wird.')
+    kml_url = forms.CharField(label='KML URL', 
+        help_text='Die URL von der das KML für Google Maps abgefragt wird.')
     welcome_msg = forms.CharField(label='Willkommensnachricht', 
         help_text='Die Nachricht, die in Friedenszeiten links angezeigt wird.')
     update_interval = forms.IntegerField(label='Update Intervall in Sekunden', 
@@ -29,5 +31,6 @@ class SettingsForm(forms.ModelForm):
         config = WebsiteConfig(settings.WEBSITE_CFG)
         config.update_interval = self.cleaned_data['update_interval']
         config.xml_url = self.cleaned_data['xml_url']
+        config.kml_url = self.cleaned_data['kml_url']
         config.welcome_msg = self.cleaned_data['welcome_msg']
         config.save()
