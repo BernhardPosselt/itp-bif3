@@ -39,10 +39,11 @@ function Update(screen, mission) {
     this.news_id = 'news';
     this.utils_id = 'geraete';
     this.vehicles_id = 'fahrzeuge';
-    this.vehicle_order_id = 'fahrzeugordnung';
+    this.vehicle_order_id = 'ausrueckeordnung';
     this.mission_data_id = 'einsatzdaten';
     this.dispos_id = 'dispos';
     this.stats_id = 'stats';
+    this.map_id = 'karte';
 
     // ids of the mission div
     this.street_id = 'street';
@@ -54,7 +55,7 @@ function Update(screen, mission) {
     this.notes_id = 'notes';
     this.object_id = 'object';
     this.classification_id = 'classification';
-    this.alarmnr = 'alarmnr';
+    this.alarmnr = 'alarmstufe';
     this.notifier = 'notifier';
         
     // run initial reloads
@@ -218,7 +219,7 @@ Update.prototype.screen_mission_left_update = function(){
         $('#' + this.object_id).html(data.object);
         $('#' + this.classification_id).html(data.classification);
         $('#' + this.alarmnr).html(data.alarmnr);
-        $('#' + this.notifier).html(data.notifier);
+        //$('#' + this.notifier).html(data.notifier);
     });
     $('#' + this.vehicle_order_id).load(this.url_update_vehicle_order, data);
 }
@@ -230,6 +231,10 @@ Update.prototype.screen_mission_right_update = function(){
     // FIXME: map reloading?
     var data = { missionid: this.current_mission };
     $('#' + this.dispos_id).load(this.url_update_dispos, data);
+    $.getJSON(self.url_update_mission, data, function(data){
+        $('#' + this.classification_id).html(data.classification);
+        $('#' + this.alarmnr).html(data.alarmnr);
+    });
 }
 
 
