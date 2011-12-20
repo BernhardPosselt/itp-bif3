@@ -107,10 +107,21 @@ def javascript(request, src):
     Keyword arguments:
     src -- The javascript part which should be generated 
     """
-    if src == 'main':
-        tpl = 'javascript/main.js'
-    elif src == 'loader':
-        tpl = 'javascript/loader.js'
+    if src == 'update':
+        tpl = 'javascript/update.js'
     elif src == 'gmaps':
         tpl = 'javascript/gmaps.js'
     return render(request, tpl)
+
+
+def javascript_main(request, screen):
+    """Generates the main javascript, we need this extra function to set screen
+    and mission variables
+
+    Keyword arguments:
+    screen -- The screen where the js is loaded to, 0 for left, 1 for right
+    """
+    ctx = {
+        'screen': screen
+    }
+    return render(request, 'javascript/main.js', ctx)

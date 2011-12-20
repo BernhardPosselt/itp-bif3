@@ -51,6 +51,7 @@ def update(request, screen):
             news = News.objects.all().order_by('-modifiziert')  
             fahrzeug = Fahrzeuge.objects.all().order_by('-modifiziert')
             geraet = Geraete.objects.filter(reperatur=True).order_by('-modifiziert')
+            # FIXME: len of 0 elements returns none apparently
             # get nr of elements
             news_len = len(news)
             geraet_len = len(geraet)
@@ -61,10 +62,16 @@ def update(request, screen):
             # check if we have to push a lastchange
             if news_len != 0:
                 letze_aenderung.append(int(mktime(news[0].modifiziert.timetuple())))
+            else:
+                letze_aenderung.append(0)
             if geraet_len != 0:
                 letze_aenderung.append(int(mktime(geraet[0].modifiziert.timetuple())))
+            else:
+                letze_aenderung.append(0)
             if fahrzeug_len != 0:
                 letze_aenderung.append(int(mktime(fahrzeug[0].modifiziert.timetuple())))
+            else:
+                letze_aenderung.append(0)
             
     else:
 
@@ -79,6 +86,8 @@ def update(request, screen):
             # check if we have to push a lastchange
             if ausrueckordnung_len != 0:
                 letze_aenderung.append(int(mktime(ausrueckordnung[0].modifiziert.timetuple())))
+            else:
+                letze_aenderung.append(0)
             
         elif screen == 1:
             dispo = Dispos.objects.all().order_by('-modifiziert')
@@ -89,43 +98,25 @@ def update(request, screen):
             # check if we have to push a lastchange
             if dispo_len != 0:
                 letze_aenderung.append(int(mktime(fahrzeug[0].modifiziert.timetuple())))
+            else:
+                letze_aenderung.append(0)
     
     ctx = {
         'letze_aenderung': letze_aenderung,
         'anzahl': anzahl,
         'update_interval': update_interval,
-        'frieden': frieden
+        'einsatz': not frieden,
+        'willkommen': config.welcome_msg
     }
     return render(request, "infoscreen_screen/ajax/update.json", ctx)
 
     
-def update_einsatz(request):
+def reload_data(request):
     """
     Doku
     """
+    div = request.GET.get(id, '')
+    # TODO: write reloads
     ctx = {}
     return render(request, "infoscreen_screen/ajax/update_einsatz.json", ctx)
 
-
-def update_news(request):
-    """
-    Doku
-    """
-    ctx = {}
-    return render(request, "infoscreen_screen/ajax/update_news.json", ctx)
-    
-    
-def update_willkommen(request):
-    """
-    Doku
-    """
-    ctx = {}
-    return render(request, "infoscreen_screen/ajax/update_willkommen.json", ctx)
-
-
-def update_karte(request):
-    """
-    Doku
-    """
-    ctx = {}
-    return render(request, "infoscreen_screen/ajax/update_karte.json", ctx)

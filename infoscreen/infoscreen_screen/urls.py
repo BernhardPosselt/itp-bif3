@@ -12,12 +12,14 @@ urlpatterns = patterns('infoscreen.infoscreen_screen.views.views',
     
     # javascript
     url(r'javascript/(?P<src>\w+)/$', 'javascript', name='javascript'),
+    url(r'javascript/main/(?P<screen>\d+)/$', 'javascript_main', name='javascript_main'),
     url(r'settings/(?P<src>\w+)/$', 'settings', name='settings'),
 )
 
 # ajax views
 urlpatterns += patterns('infoscreen.infoscreen_screen.views.ajax',
-    url(r'^update/(?P<screen>\d{1})/$', 'update', name='update'),
+    url(r'^ajax/update/(?P<screen>\d{1})/$', 'update', name='update'),
+    url(r'^ajax/reload/data/$', 'reload_data', name='reload_data'),
 )
 
 # pdf views
