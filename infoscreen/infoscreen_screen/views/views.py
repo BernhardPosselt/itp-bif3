@@ -121,7 +121,15 @@ def javascript_main(request, screen):
     Keyword arguments:
     screen -- The screen where the js is loaded to, 0 for left, 1 for right
     """
+    # check if we got frieden or einsatz
+    missions = Einsaetze.objects.filter(abgeschlossen=False).aggregate( Count('id') )
+    missions_len = mission['id__count']
+    if missions_len == 0:
+        mission = False
+    else:
+        mission = True
     ctx = {
-        'screen': screen
+        'screen': screen,
+        'mission': mission
     }
     return render(request, 'javascript/main.js', ctx)

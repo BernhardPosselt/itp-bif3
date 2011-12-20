@@ -6,7 +6,7 @@
  * @param last_change: an array with the last changed timestamp of all reloadable elements
  * @param nr_elements: an array with the count of all reloadable elements
  */
-function Update(screen, mission, last_change, nr_elements) {
+function Update(screen, mission) {
     
     // TODO: implement more than 1 concurrent mission
     
@@ -14,8 +14,7 @@ function Update(screen, mission, last_change, nr_elements) {
     this.mission = mission;
     
     // url which should be called for checking changes
-    this.update_url_left = '{% url screen:update "0" %}';
-    this.update_url_right = '{% url screen:update "1" %}';
+    this.url_update = '{% url screen:update %}';
     
     // urls to redirect
     this.url_peace_left = '{% url screen:bildschirm_frieden_links %}';
@@ -23,14 +22,14 @@ function Update(screen, mission, last_change, nr_elements) {
     this.url_mission_left = '{% url screen:bildschirm_einsatz_links %}';
     this.url_mission_right = '{% url screen:bildschirm_einsatz_rechts %}';
     
-    // url for reloads
-    this.reload_url = '';
-    
-    if(screen === 0){
-        this.update_url = this.update_url_left;
-    } else {
-        this.update_url = this.update_url_right;
-    }
+    // urls for reloads
+    this.url_update_welcome = '{% url screen:update_welcome %}';
+    this.url_update_news = '{% url screen:update_news %}';
+    this.url_update_vehicles = '{% url screen:update_vehicles %}';
+    this.url_update_utils = '{% url screen:update_utils %}';
+    this.url_update_vehicle_order = '{% url screen:update_vehicle_order %}';
+    this.url_update_mission = '{% url screen:update_mission %}';
+    this.url_running_mission = '{% url screen:running_missions %}';
     
     // ids of each div field we need to load data into
     // peace left
@@ -47,135 +46,56 @@ function Update(screen, mission, last_change, nr_elements) {
     // loading element
     this.loading_class = 'loading';
     
+    // run initial reloads
+    this.update();
     
-    // update interval in seconds
-    this.update_interval = 5;
-    
-    // context, 0 is for peace, 1 for mission
-    this.context = 0;
-    
-    // welcome screen timestamp and number of entries
-    this.last_change = last_change;
-    this.nr_elements = nr_elements;
-    
-    // set timer to 
-    this.timer = setTimeout('this.update', this.update_interval*1000);
-}
+    // set update interval in seconds
+    this.screen_view_change_interval = -1;
+    this.update_interval = 7;
+    this.update_timer = setTimeout('this.update', this.update_interval*1000);
 
+}
 
 /**
  * Periodically checks the server for updates
  */
 Update.prototype.update = function () {
     var self = this;
-    $.getJSON(self.update_url, function(data){
-        // when the timestamp != the timestamp from the server or the number
-        // of elements is not the same as on the server, reload the area which needs
-        // reloading
-        if(!self.last_change.compare(data.letze_aenderung) || 
-           !self.nr_elements.compare(data.anzahl)){
-            self.screen_update(data.letzte_aenderung, data.anzahl, data.willkommen);
-        }
-
+    $.getJSON(self.url_update, function(data){
+    
         // check if we have to change the context
-        if(self.mission !== data.einsatz){
-            self.change_context(self.screen, data.einsatz, data.willkommen);
+        if(self.mission !== data.mission){
+            self.change_context(self.screen, data.mission);
         }
         
         // check if we have to change the update interval
-        if(self.update_interval !== data.update_interval){
-            self.change_update_interval(data.update_interval, data.willkommen);
+        if(self.screen_view_change_interval !== data.update_interval ||
+           self.screen_view_change_interval < 0){
+            self.set_screen_view_change_interval(data.update_interval);
         }
-        
-        // trigger welcome message update
-        if(screen === 0 && data.einsatz === 0){
-            self.screen_update([], [], data.willkommen);
-        }
+    
+        // run website reloads
+        this.screen_update(); 
+           
     });
 }
 
 /**
- * Sets a new update interval
+ * Sets a new screen change interval. We need screen changes for changing between
+ * News, Vehicles and Utils or when multiple missions are running
  *
- * @param seconds: The update interval in seconds
+ * @param seconds: The screen change interval in seconds
  */
-Update.prototype.change_update_interval = function (seconds) {
-    // check for wrong arguments
-    if(seconds < 1){
-        seconds = 1;
+Update.prototype.set_screen_view_change_interval = function (seconds) {
+    // check for too low update interval
+    if(seconds < 3){
+        seconds = 3;
     }
-    this.update_interval = seconds;
-    clearTimeout(this.timer);
-    this.timer = setTimeout('this.update', this.update_interval*1000);
-}
-
-/**
- * Handles the reloadable elements on the page
- *
- * @param last_change: an array with the last changed timestamp of all reloadable elements
- * @param nr_elements: an array with the count of all reloadable elements
- * @param welcome_msg: The welcome message for the leftmost screen, peace
- */
-Update.prototype.screen_update = function (last_change, nr_elements, welcome_msg) {
-    if(this.screen === 0){
-    
-        // peace left
-        if(mission === 0){
-        
-            $('#' + this.welcome_id).html(welcome_msg);
-            
-        // mission left
-        } else {
-        
-            // order: mission, vehicle_order_id
-            if( last_change[0]  != this.last_change[0] ||
-                nr_elements[0] != this.nr_elements[0]){
-                this.reload(this.mission_data_id);
-            }
-            if( last_change[1]  != this.last_change[1] ||
-                nr_elements[1] != this.nr_elements[1]){
-                this.reload(this.vehicle_order_id);
-            }
-            
-        }
-        
-    } else {
-    
-        // peace right
-        if(mission === 0){
-        
-            // order: news, geraet, fahrzeug
-            if( last_change[0]  != this.last_change[0] ||
-                nr_elements[0] != this.nr_elements[0]){
-                this.reload(this.news_id);
-            }
-            if( last_change[1]  != this.last_change[1] ||
-                nr_elements[1] != this.nr_elements[1]){
-                this.reload(this.utils_id);
-            }
-            if( last_change[2]  != this.last_change[2] ||
-                nr_elements[2] != this.nr_elements[2]){
-                this.reload(this.vehicles_id);
-            }
-        
-        // mission right
-        } else {
-        
-            // order: einsatz, dispo
-            if( last_change[0]  != this.last_change[0] ||
-                nr_elements[0] != this.nr_elements[0]){
-                // to reload the map we have to do a redirect
-                window.location = this.url_mission_right;
-            }
-            if( last_change[1]  != this.last_change[1] ||
-                nr_elements[1] != this.nr_elements[1]){
-                this.reload(this.dispo_id);
-            }
-            
-        }
+    this.screen_view_change_interval = seconds;
+    if(this.screen_timer){
+        clearTimeout(this.screen_timer);
     }
-    this.last_change = last_change;
-    this.nr_elements = nr_elements;
+    this.screen_timer = setTimeout('this.screen_view_change', this.screen_view_change_interval*1000);
 }
 
 /**
@@ -196,6 +116,25 @@ Update.prototype.change_context = function (screen, mission) {
             window.location = this.url_peace_right;
         } else {
             window.location = this.url_mission_right;
+        }
+    }
+}
+
+/**
+ * Reloads all elements on the screen 
+ */
+Update.prototype.screen_update = function () {
+    if(this.screen === 0){
+        if(mission === 0){
+            this.screen_peace_left_update();
+        } else {
+            this.screen_mission_left_update();            
+        }
+    } else {
+        if(mission === 0){
+            this.screen_peace_right_update();
+        } else {
+            this.screen_mission_right_update();
         }
     }
 }
@@ -222,6 +161,42 @@ Update.prototype.change_context = function (screen, mission) {
     }
 }
 
+/**
+ * Reloads and sets all elements on the peace left screen
+ */
+Update.prototype.screen_peace_left_update = function(){
+    $.getJSON(self.url_peace_left, function(data){
+        $('#' + this.welcome_id).html(data.welcome_msg);
+    }
+}
+
+/**
+ * Reloads and sets all elements on the peace right screen
+ */
+Update.prototype.screen_peace_right_update = function(){
+    $.getJSON(self.url_peace_right, function(data){
+        $('#' + this.welcome_id).html(data.welcome_msg);
+    }
+}
+
+/**
+ * Reloads and sets all elements on the mission left screen
+ */
+Update.prototype.screen_mission_left_update = function(){
+    $.getJSON(self.url_mission_left, function(data){
+        $('#' + this.welcome_id).html(data.welcome_msg);
+    }
+}
+
+
+/**
+ * Reloads and sets all elements on the peace left screen
+ */
+Update.prototype.screen_mission_right_update = function(){
+    $.getJSON(self.url_mission_right, function(data){
+        $('#' + this.welcome_id).html(data.welcome_msg);
+    }
+}
 
 /**
  * Loads new data into the given field
