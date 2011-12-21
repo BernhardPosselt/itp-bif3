@@ -32,7 +32,7 @@ def bildschirm_einsatz_links(request):
     """
     Doku
     """
-    testxml = XML("tests/xml/dummy.xml")
+    testxml = XML("tests/xml/testxml1.xml")
     ctx = {}
     return render(request, "infoscreen_screen/bildschirm_einsatz_links.html", ctx)
 

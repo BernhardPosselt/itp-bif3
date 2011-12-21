@@ -10,21 +10,24 @@ class EinsatzKlasse(object):
     DOKU
     """
     def __init__(self):
+        datal  = date(2001,01,01)
+        zeital = time(0,0,0)
+        tstamp = datetime.combine(datal,zeital)
         self.einsatz = 0
-        self.alarmstufe = "DEF"
-        self.meldebild= "DEFAULT"
-        self.nummer1 = -1
-        self.nummer2 = -1
-        self.nummer3 = -1
-        self.plz= -1
-        self.strasse = "DEFAULT"
-        self.ort = "DEFAULT"
-        self.bemerkung = "DEFAULT"
-        self.objekt = "DEFAULT"
-        self.melder = "DEFAULT"
-        self.einsatznr = -1
-        self.einsatzerzeugt = date(2001,01,01)
-        self.abgeschlossen = date(2001,01,01)
+        self.alarmstufe = ""
+        self.meldebild= ""
+        self.nummer1 = 0
+        self.nummer2 = 0
+        self.nummer3 = 0
+        self.plz= 0
+        self.strasse = ""
+        self.ort = ""
+        self.bemerkung = ""
+        self.objekt = ""
+        self.melder = ""
+        self.einsatznr = 0
+        self.einsatzerzeugt = tstamp
+        self.abgeschlossen = False
         self.ausgedruckt = False 
       
     
@@ -57,7 +60,7 @@ class EinsatzKlasse(object):
         """if self.isModified(einsatz):     """      
         einsatztags = [ "einsatz", "alarmstufe", "meldebild", "nummer1", "nummer2",
             "nummer3", "plz", "strasse", "objekt","ort", "bemerkung", "einsatzerzeugt", 
-            "melder", "einsatznr","ausgedruckt"] 
+            "melder", "einsatznr", "abgeschlossen", "ausgedruckt"] 
         for attr in einsatztags:
             if attr == "meldebild":
                 meldebild_beschreibung = MeldebildModel.objects.get(beschreibung = self.meldebild)
@@ -80,20 +83,36 @@ class EinsatzKlasse(object):
                 setattr(einsatzmod, attr, getattr(self, attr) )
         
         einsatzmod.save()
+        
+    def closeeinsatz(self, closeeinsatz_id):
+        """
+        DOKU
+        """
+        try:  
+            einsatz = EinsatzModel.objects.get(einsatz = closeeinsatz_id)
+        except EinsatzModel.DoesNotExist:
+            return False
+        if einsatz:
+            einsatz.abgeschlossen = True
+            einsatz.save()
+
 
 class DispoKlasse(object):
     """
     DOKU
     """
     def __init__(self):
+        datal  = date(2001,01,01)
+        zeital = time(0,0,0)
+        tstamp = datetime.combine(datal,zeital)
         self.einsatz = 0
         self.dispo = 0
-        self.disponame= "DEFAULT"
-        self.zeitdispo = date(2001,01,01)
-        self.zeitalarm = date(2001,01,01)
-        self.zeitaus = date(2001,01,01)
-        self.zeitein = date(2001,01,01)
-        self.hintergrund = "DEFAULT"
+        self.disponame= ""
+        self.zeitdispo = tstamp
+        self.zeitalarm = tstamp
+        self.zeitaus = tstamp
+        self.zeitein = tstamp
+        self.hintergrund = ""
         
     
     
@@ -147,27 +166,7 @@ class DispoKlasse(object):
         
         dispomod.save()
         
-    def closeeinsatz(self):
-        """
-        DOKU
-        """
-        xml_tree = etree.parse(xml)
-        xml_root = xml_tree.getroot()
-        context = etree.iterwalk(xml_root, events=("start",))
-        unabgeschl = EinsatzModel.objects.filter(abgeschlossen = False)
-        for unab in test:
-            for action,elem in context:
-                if elem.tag == "einsatz":
-                    if elem.get("id") != unab.einsatz
-                        closeeinsatz(unab.einsatz)
-        try:  
-            einsatz = EinsatzModel.objects.get(einsatz = closeeinsatz_id)
-        except EinsatzModel.DoesNotExist:
-            return False
-        if einsatz:
-            einsatz.abgeschlossen = true
-            einsatz.save()
-
+    
  
 
 class XML(object):
@@ -205,5 +204,21 @@ class XML(object):
                     dispoobj.save()
                 elif elem.text:
                     setattr(einsatzobj,elem.tag,elem.text)
-                
-
+        
+        """Suche nicht abgeschlossene Einsaetze"""
+        xml_tree = etree.parse(xml)
+        xml_root = xml_tree.getroot()
+        context = etree.iterwalk(xml_root, events=("start",))
+        unabgeschl = EinsatzModel.objects.filter(abgeschlossen = False)
+        for unab in unabgeschl:
+            close = 0 
+            xml_tree = etree.parse(xml)
+            xml_root = xml_tree.getroot()
+            context = etree.iterwalk(xml_root, events=("start",), tag = "einsatz")
+            for action,elem in context:
+               if elem.tag == "einsatz":
+                    if elem.get("id") == unab.einsatz:
+                        close = 1
+            if close == 0: 
+                closeeins = EinsatzKlasse()
+                closeeins.closeeinsatz(unab.einsatz)
