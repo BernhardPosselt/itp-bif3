@@ -7,6 +7,11 @@
  * @param nr_elements: an array with the count of all reloadable elements
  */
 function Update(screen, mission) {
+    // set true when you dont want to develope the design so the screen fade ins
+    // wont happen. Developement only!!
+    this._developement = true;
+
+
     this.screen = screen;
     this.mission = mission;
     
@@ -232,6 +237,7 @@ Update.prototype.update_title_msg = function(){
 Update.prototype.screen_mission_left_update = function(){
     var data = { mission_id: this.current_mission };
     var self = this;
+    // TODO: update color depending on mission alarmnr
     $.getJSON(this.url_update_mission, data, function(data){
         $('#' + self.street_id).html(data.street);
         $('#' + self.housenr_id).html(data.housenr);
@@ -253,6 +259,7 @@ Update.prototype.screen_mission_left_update = function(){
  */
 Update.prototype.screen_mission_right_update = function(){
     // FIXME: map reloading?
+    // TODO: update color depending on mission alarmnr
     var data = { mission_id: this.current_mission };
     var self = this;
     $('#' + this.dispos_id).load(this.url_update_dispos, data);
@@ -268,29 +275,32 @@ Update.prototype.screen_mission_right_update = function(){
  * the news screen
  */
 Update.prototype.screen_view_change = function(){
-    var self = this;
-    if(this.mission === false){
-        switch(this.screen_view){
-            case 0:
-                $('#' + this.news_id).fadeOut(function(){
-                    $('#' + self.stats_id).fadeIn();
-                });
-                this.screen_view = 1;
-                break;
-            case 1:
-                $('#' + this.stats_id).fadeOut(function(){
-                    $('#' + self.news_id).fadeIn();
-                });
-                this.screen_view = 0;
-                break;
-            default:
-                this.screen_view = 0;
-                break;
+    if(!this._developement){
+        var self = this;
+        if(this.mission === false){
+            switch(this.screen_view){
+                case 0:
+                    $('#' + this.news_id).fadeOut(function(){
+                        $('#' + self.stats_id).fadeIn();
+                    });
+                    this.screen_view = 1;
+                    break;
+                case 1:
+                    $('#' + this.stats_id).fadeOut(function(){
+                        $('#' + self.news_id).fadeIn();
+                    });
+                    this.screen_view = 0;
+                    break;
+                default:
+                    this.screen_view = 0;
+                    break;
+            }
+        } else {
+            // TODO: show running missions in header
+            this.screen_view += 1;
+            this.screen_view %= this.running_missions.length;
+            this.current_mission = this.running_missions[this.screen_view];
         }
-    } else {
-        this.screen_view += 1;
-        this.screen_view %= this.running_missions.length;
-        this.current_mission = this.running_missions[this.screen_view];
     }
 }
 
