@@ -9,12 +9,11 @@ urlpatterns = patterns('infoscreen.infoscreen_screen.views.views',
     url(r'^bildschirm/frieden/rechts/$', 'bildschirm_frieden_rechts', name='bildschirm_frieden_rechts'),
     url(r'^bildschirm/einsatz/links/$', 'bildschirm_einsatz_links', name='bildschirm_einsatz_links'),
     url(r'^bildschirm/einsatz/rechts/$', 'bildschirm_einsatz_rechts', name='bildschirm_einsatz_rechts'),
-    url(r'^settings$', 'settings', name='settings'),
+    url(r'^website_settings$', 'website_settings', name='website_settings'),
     
     # javascript
     url(r'javascript/(?P<src>\w+)/$', 'javascript', name='javascript'),
-    url(r'javascript/main/(?P<screen>\d+)/$', 'javascript_main', name='javascript_main'),
-    url(r'settings/(?P<src>\w+)/$', 'settings', name='settings'),
+    url(r'javascript/main/(?P<screen>\d+)/(?P<mission>\d+)/$', 'javascript_main', name='javascript_main'),
 )
 
 # ajax views

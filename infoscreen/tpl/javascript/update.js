@@ -191,6 +191,7 @@ Update.prototype.change_context = function (screen, mission) {
  */
 Update.prototype.screen_peace_left_update = function(){
     var self = this;
+    this.update_title_msg();
     $.getJSON(this.url_update_welcome, function(data){
         $('#' + self.welcome_id).html(data.welcome_msg);
     });
@@ -200,10 +201,19 @@ Update.prototype.screen_peace_left_update = function(){
  * Reloads and sets all elements on the peace right screen
  */
 Update.prototype.screen_peace_right_update = function(){
+    this.update_title_msg();
     $('#' + this.news_id).load(this.url_update_news);
     $('#' + this.vehicles_id).load(this.url_update_vehicles);
     $('#' + this.utils_id).load(this.url_update_utils);
 }
+
+/**
+ * Sets the title msg to the standard
+ */
+Update.prototype.update_title_msg = function(){
+    $('#header h1').html('{{ config.title_msg }}'); 
+}
+
 
 /**
  * Reloads and sets all elements on the mission left screen
