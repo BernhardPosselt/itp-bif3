@@ -6,6 +6,7 @@
 {% block content %}
     <div class="links">
         <h1>Bitte wählen sie den anzuzeigenden Bildschirm aus</h1>
+        <a href="{% url admin:index %}">Admin</a>
         <a href="{% url screen:bildschirm_frieden_links %}">Bildschirm links</a>
         <a href="{% url screen:bildschirm_frieden_rechts %}">Bildschirm rechts</a>
     </div>

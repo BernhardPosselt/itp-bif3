@@ -55,7 +55,12 @@ def update_welcome(request):
 def update_news(request):
     """Returns html with all news
     """
-    news = News.objects.all()[:5]
+    preview = request.POST.get('preview', '')
+    if preview != '':
+        news = News.objects.all().order_by('-datum')[:5]
+    else:
+        news = News.objects.filter(released=True).order_by('-datum')[:5]
+    
     ctx = {
         'news': news
     }

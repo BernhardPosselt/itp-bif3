@@ -11,6 +11,7 @@ class News(models.Model):
     titel = models.CharField("Titel", max_length=400)
     text = models.TextField("Beschreibung")
     modifiziert = models.DateTimeField(auto_now=True)
+    released = models.BooleanField("Veröffentlicht", blank=True)
 
     class Meta:
         verbose_name = "News"

@@ -97,7 +97,7 @@ Update.prototype.update = function () {
         
         // run website reloads
         self.screen_update(); 
-           
+        
     });
 }
 
@@ -148,6 +148,7 @@ Update.prototype.change_context = function (screen, mission) {
  * Reloads all elements on the screen 
  */
 Update.prototype.screen_update = function () {
+    
     if(this.screen === 0){
         if(this.mission === false){
             this.screen_peace_left_update();
@@ -202,7 +203,17 @@ Update.prototype.screen_peace_left_update = function(){
  */
 Update.prototype.screen_peace_right_update = function(){
     this.update_title_msg();
-    $('#' + this.news_id).load(this.url_update_news);
+    var data;
+    var getvar = window.location.search;
+    if (getvar.length > 0){
+        data = {
+            preview: 'true'
+        }
+    } else {
+        data = {};
+    }
+    
+    $('#' + this.news_id).load(this.url_update_news, data);
     $('#' + this.vehicles_id).load(this.url_update_vehicles);
     $('#' + this.utils_id).load(this.url_update_utils);
 }
