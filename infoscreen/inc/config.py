@@ -46,6 +46,7 @@ class WebsiteConfig(object):
         self.xml_url = '/'
         self.kml_url = '/'
         self.welcome_msg = 'Hallo'
+        self.title_msg = 'Feuerwehr Infoscreen'
         self.update_interval = 5 # in seconds
         
         # read in main config
@@ -68,6 +69,11 @@ class WebsiteConfig(object):
             except ConfigParser.NoOptionError:
                 self.parserError = True
             
+            try:
+                self.title_msg = config.get('settings', 'title_msg')
+            except ConfigParser.NoOptionError:
+                self.parserError = True
+
             try:
                 self.update_interval = config.getint('settings', 'update_interval')
             except (ConfigParser.NoOptionError, ValueError):
@@ -104,6 +110,7 @@ class WebsiteConfig(object):
         config.set('settings', 'kml_url', str(self.kml_url))
         config.set('settings', 'update_interval', str(self.update_interval))
         config.set('settings', 'welcome_msg', str(self.welcome_msg))
+        config.set('settings', 'title_msg', str(self.title_msg))
         try:
             with open(self.mainConfig, 'wb') as confFile:
                 config.write(confFile)

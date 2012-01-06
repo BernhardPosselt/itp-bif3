@@ -142,16 +142,15 @@ ul {
     padding: 20px;
 }
 
-    #content .left_row {
-        float: left;
-        width: 50%;
-    }
-    
-    #content .right_row {
-        float: left;
-        width: 50%;
+    #content .links {
+        text-align: center;
+        font-size: 18pt;
     }
 
+        #content .links h1 {
+            margin-bottom: 30px;
+        }
+    
 
 /**
  * Einsatz links
