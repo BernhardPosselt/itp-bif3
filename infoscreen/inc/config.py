@@ -47,7 +47,7 @@ class WebsiteConfig(object):
         self.kml_url = '/'
         self.welcome_msg = 'Hallo'
         self.title_msg = 'Feuerwehr Infoscreen'
-        self.update_interval = 5 # in seconds
+        self.update_interval = 10 # in seconds
         
         # read in main config
         try:

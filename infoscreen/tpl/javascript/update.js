@@ -42,7 +42,7 @@ function Update(screen, mission) {
     this.vehicle_order_id = 'ausrueckeordnung';
     this.mission_data_id = 'einsatzdaten';
     this.dispos_id = 'dispos';
-    this.stats_id = 'stats';
+    this.stats_id = 'repair';
     this.map_id = 'karte';
 
     // ids of the mission div
@@ -119,7 +119,7 @@ Update.prototype.set_screen_view_change_interval = function (seconds) {
     var self = this;
     this.screen_timer = setInterval(function(){
         self.screen_view_change();
-    }, this.screen_view_change_interval*1000);
+    }, self.screen_view_change_interval*1000);
 }
 
 /**
@@ -268,17 +268,18 @@ Update.prototype.screen_mission_right_update = function(){
  * the news screen
  */
 Update.prototype.screen_view_change = function(){
-    if(this.mission === 0){
+    var self = this;
+    if(this.mission === false){
         switch(this.screen_view){
             case 0:
-                $('#' + this.news_id).fadeToggle(function(){
-                    $('#' + this.stats_id).fadeToggle();
+                $('#' + this.news_id).fadeOut(function(){
+                    $('#' + self.stats_id).fadeIn();
                 });
                 this.screen_view = 1;
                 break;
             case 1:
-                $('#' + this.stats_id).fadeToggle(function(){
-                    $('#' + this.news_id).fadeToggle();
+                $('#' + this.stats_id).fadeOut(function(){
+                    $('#' + self.news_id).fadeIn();
                 });
                 this.screen_view = 0;
                 break;
