@@ -1,7 +1,7 @@
 <root>
-	<einsatz id="MI 947">
-		<alarmstufe>B3</alarmstufe>
-		<meldebild>Wohnhausbrand</meldebild>
+	<einsatz >
+		<alarmstufe></alarmstufe>
+		<meldebild></meldebild>
 		<nummer1>3</nummer1>
 		<nummer2></nummer2>
 		<nummer3></nummer3>

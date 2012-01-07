@@ -16,9 +16,9 @@ class EinsatzKlasse(object):
         self.einsatz = 0
         self.alarmstufe = ""
         self.meldebild= ""
-        self.nummer1 = 0
-        self.nummer2 = 0
-        self.nummer3 = 0
+        self.nummer1 = ""
+        self.nummer2 = ""
+        self.nummer3 = ""
         self.plz= 0
         self.strasse = ""
         self.ort = ""
@@ -42,8 +42,6 @@ class EinsatzKlasse(object):
         except EinsatzModel.DoesNotExist:
             return False
 
-
-
     def save(self):
         """
         Saves the values of the object into the database
@@ -61,28 +59,36 @@ class EinsatzKlasse(object):
         einsatztags = [ "einsatz", "alarmstufe", "meldebild", "nummer1", "nummer2",
             "nummer3", "plz", "strasse", "objekt","ort", "bemerkung", "einsatzerzeugt", 
             "melder", "einsatznr", "abgeschlossen", "ausgedruckt"] 
-        for attr in einsatztags:
-            if attr == "meldebild":
-                meldebild_beschreibung = MeldebildModel.objects.get(beschreibung = self.meldebild)
-                einsatzmod.meldebild = meldebild_beschreibung
-            elif attr == "einsatzerzeugt":
-                try:
-                    hilf = re.split('\.+|\:+|\ +',self.einsatzerzeugt,5)
-                    datal = date(int(hilf[2]),int(hilf[1]),int(hilf[0]))
-                except:
-                    datal = date(2001,01,01)
-                try:
-                    if hilf[3]:
-                        zeital = time(int(hilf[3]),int(hilf[4]),int(hilf[5]))
-                
-                except:
-                    zeital = time(0,0,0)
-                tstamp = datetime.combine(datal,zeital)
-                einsatzmod.einsatzerzeugt  = tstamp
-            else:
-                setattr(einsatzmod, attr, getattr(self, attr) )
-        
-        einsatzmod.save()
+        try:
+            for attr in einsatztags:
+                if attr == "meldebild":
+                    try:
+                        meldebild_beschreibung = MeldebildModel.objects.get(beschreibung = self.meldebild)
+                        einsatzmod.meldebild = meldebild_beschreibung
+                    except:
+                        meldebild_beschreibung = MeldebildModel.objects.get(beschreibung = "Kein Meldebild vorhanden")
+                        einsatzmod.meldebild = meldebild_beschreibung
+                elif attr == "einsatzerzeugt":
+                    try:
+                        hilf = re.split('\.+|\:+|\ +',self.einsatzerzeugt,5)
+                        datal = date(int(hilf[2]),int(hilf[1]),int(hilf[0]))
+                    except:
+                        datal = date(2001,01,01)
+                    try:
+                        if hilf[3]:
+                            zeital = time(int(hilf[3]),int(hilf[4]),int(hilf[5]))
+                    
+                    except:
+                        zeital = time(0,0,0)
+                    tstamp = datetime.combine(datal,zeital)
+                    einsatzmod.einsatzerzeugt  = tstamp
+                else:
+                    setattr(einsatzmod, attr, getattr(self, attr) )
+            
+            einsatzmod.save()
+        except:
+            print "Fehler bei Einsatz mit Id: " + str(self.einsatz)
+            
         
     def closeeinsatz(self, closeeinsatz_id):
         """
@@ -99,7 +105,7 @@ class EinsatzKlasse(object):
 
 class DispoKlasse(object):
     """
-    DOKU
+    DOKU    
     """
     def __init__(self):
         datal  = date(2001,01,01)
@@ -124,7 +130,7 @@ class DispoKlasse(object):
             einsatz_id = EinsatzModel.objects.get(einsatz = self.einsatz)
             dispomod = DispoModel.objects.get(dispo=self.dispo,einsatz = einsatz_id)
             return dispomod
-        except DispoModel.DoesNotExist:
+        except :
             return False
 
 
@@ -143,28 +149,30 @@ class DispoKlasse(object):
 
         dispotags = [ "einsatz", "dispo", "disponame" ,"zeitdispo", "zeitalarm", "zeitaus", "zeitein",
             "hintergrund"] 
-        for attr in dispotags:
-            if attr == "einsatz":
-                einsatz_id = EinsatzModel.objects.get(einsatz = self.einsatz)
-                dispomod.einsatz = einsatz_id
-            elif attr == "zeitdispo" or attr == "zeitalarm" or attr == "zeitaus" or attr =="zeitein":
-                try: 
-                    hilf = re.split('\.+|\:+|\ +',getattr(self,attr),5)
-                    datal = date(int(hilf[2]),int(hilf[1]),int(hilf[0]))
-                except:
-                    datal = date(2001,01,01)
-                try:
-                    if hilf[3]:
-                        zeital = time(int(hilf[3]),int(hilf[4]),int(hilf[5]))
-                
-                except:
-                    zeital = time(0,0,0)
-                tstamp = datetime.combine(datal,zeital)
-                setattr(dispomod,attr,tstamp)
-            else:
-                setattr(dispomod, attr, getattr(self, attr) )
-        
-        dispomod.save()
+        try:
+            for attr in dispotags:
+                if attr == "einsatz":
+                    einsatz_id = EinsatzModel.objects.get(einsatz = self.einsatz)
+                    dispomod.einsatz = einsatz_id
+                elif attr == "zeitdispo" or attr == "zeitalarm" or attr == "zeitaus" or attr =="zeitein":
+                    try: 
+                        hilf = re.split('\.+|\:+|\ +',getattr(self,attr),5)
+                        datal = date(int(hilf[2]),int(hilf[1]),int(hilf[0]))
+                    except:
+                        datal = date(2001,01,01)
+                    try:
+                        if hilf[3]:
+                            zeital = time(int(hilf[3]),int(hilf[4]),int(hilf[5]))
+                    
+                    except:
+                        zeital = time(0,0,0)
+                    tstamp = datetime.combine(datal,zeital)
+                    setattr(dispomod,attr,tstamp)
+                else:
+                    setattr(dispomod, attr, getattr(self, attr) )
+            dispomod.save()
+        except:
+            print "Fehler bei Dispo mit ID: " + str(self.dispo)
         
     
  
