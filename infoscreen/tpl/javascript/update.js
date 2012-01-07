@@ -9,7 +9,7 @@
 function Update(screen, mission) {
     // set true when you dont want to develope the design so the screen fade ins
     // wont happen. Developement only!!
-    this._developement = true;
+    this._developement = false;
 
 
     this.screen = screen;
@@ -50,6 +50,8 @@ function Update(screen, mission) {
     this.dispos_id = 'dispos';
     this.stats_id = 'repair';
     this.map_id = 'karte';
+    this.running_missions_id = 'lauf_missionen';
+    this.header_id = 'header';
 
     // ids of the mission div
     this.street_id = 'street';
@@ -77,7 +79,7 @@ function Update(screen, mission) {
     
     // set update interval in seconds
     var self = this;
-    this.update_interval = 17;
+    this.update_interval = 10;
     this.update_timer = setInterval(function(){
         self.update();
     }, this.update_interval*1000);
@@ -259,6 +261,7 @@ Update.prototype.screen_mission_left_update = function(){
         $('#' + self.classification_id).html(data.classification);
         $('#' + self.alarmnr).html(data.alarmnr);
         //$('#' + this.notifier).html(data.notifier);
+        self.update_alarmnr_color(data.alarmnr);
     });
     $('#' + this.vehicle_order_id).load(this.url_update_vehicle_order, data);
 }
@@ -297,7 +300,8 @@ Update.prototype.screen_mission_right_update = function(){
             self.cache_place = data.place;
             self.cache_object = data.object;
         }
-        
+        self.update_running_missions();
+        self.update_alarmnr_color(data.alarmnr);
     });
 }
 
@@ -328,7 +332,6 @@ Update.prototype.screen_view_change = function(){
                     break;
             }
         } else {
-            // TODO: show running missions in header
             this.screen_view += 1;
             this.screen_view %= this.running_missions.length;
             this.current_mission = this.running_missions[this.screen_view];
@@ -336,3 +339,33 @@ Update.prototype.screen_view_change = function(){
     }
 }
 
+
+/**
+ * Updates the running missions on the screen to inform the users how many missions
+ * are running in paralell
+ */
+Update.prototype.update_running_missions = function(){
+    $('#' + this.running_missions_id).html(this.running_missions.length);
+}
+
+/**
+ * Updates the header background to the class for the according alarmnr
+ *
+ * @param alarmnr: The alarmnr 
+ */
+Update.prototype.update_alarmnr_color = function(alarmnr){
+    switch(alarmnr.charAt(0).toLowerCase()){
+        case 'b':
+            $('#' + this.header_id).attr('class', 'brand');
+            break;
+        case 's':
+            $('#' + this.header_id).attr('class', 'schadstoff');
+            break;
+        case 't':
+            $('#' + this.header_id).attr('class', 'technisch');
+            break;
+        default:
+            $('#' + this.header_id).attr('class', 'frieden');        
+            break;
+    }
+}
