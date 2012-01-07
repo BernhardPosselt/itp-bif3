@@ -56,7 +56,7 @@ class Einsaetze(models.Model):
     :model:`infoscreen_screen.Dispo` vergeben werden. 
     """
     einsatz = models.CharField("Einsatz ID", unique=True, max_length=200,
-        help_text="Die Nummer die für den Einsatz von der Leistelle vergeben \
+        help_text="Die Nummer die für den Einsatz von der Leitstelle vergeben \
             wird. Ist immer eindeutig.")
     strasse = models.CharField("Adresse", max_length=300, blank=True)
     nummer1 = models.CharField("Hausnummer", max_length=50, blank=True)
