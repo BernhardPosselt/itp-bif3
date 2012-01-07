@@ -7,6 +7,11 @@
  * @param nr_elements: an array with the count of all reloadable elements
  */
 function Update(screen, mission) {
+    // set true when you dont want to develope the design so the screen fade ins
+    // wont happen. Developement only!!
+    this._developement = true;
+
+
     this.screen = screen;
     this.mission = mission;
     
@@ -42,7 +47,7 @@ function Update(screen, mission) {
     this.vehicle_order_id = 'ausrueckeordnung';
     this.mission_data_id = 'einsatzdaten';
     this.dispos_id = 'dispos';
-    this.stats_id = 'stats';
+    this.stats_id = 'repair';
     this.map_id = 'karte';
 
     // ids of the mission div
@@ -97,7 +102,7 @@ Update.prototype.update = function () {
         
         // run website reloads
         self.screen_update(); 
-           
+        
     });
 }
 
@@ -119,7 +124,7 @@ Update.prototype.set_screen_view_change_interval = function (seconds) {
     var self = this;
     this.screen_timer = setInterval(function(){
         self.screen_view_change();
-    }, this.screen_view_change_interval*1000);
+    }, self.screen_view_change_interval*1000);
 }
 
 /**
@@ -148,6 +153,7 @@ Update.prototype.change_context = function (screen, mission) {
  * Reloads all elements on the screen 
  */
 Update.prototype.screen_update = function () {
+    
     if(this.screen === 0){
         if(this.mission === false){
             this.screen_peace_left_update();
@@ -191,6 +197,7 @@ Update.prototype.change_context = function (screen, mission) {
  */
 Update.prototype.screen_peace_left_update = function(){
     var self = this;
+    this.update_title_msg();
     $.getJSON(this.url_update_welcome, function(data){
         $('#' + self.welcome_id).html(data.welcome_msg);
     });
@@ -200,10 +207,29 @@ Update.prototype.screen_peace_left_update = function(){
  * Reloads and sets all elements on the peace right screen
  */
 Update.prototype.screen_peace_right_update = function(){
-    $('#' + this.news_id).load(this.url_update_news);
+    this.update_title_msg();
+    var data;
+    var getvar = window.location.search;
+    if (getvar.length > 0){
+        data = {
+            preview: 'true'
+        }
+    } else {
+        data = {};
+    }
+    
+    $('#' + this.news_id).load(this.url_update_news, data);
     $('#' + this.vehicles_id).load(this.url_update_vehicles);
     $('#' + this.utils_id).load(this.url_update_utils);
 }
+
+/**
+ * Sets the title msg to the standard
+ */
+Update.prototype.update_title_msg = function(){
+    $('#header h1').html('{{ config.title_msg }}'); 
+}
+
 
 /**
  * Reloads and sets all elements on the mission left screen
@@ -211,6 +237,7 @@ Update.prototype.screen_peace_right_update = function(){
 Update.prototype.screen_mission_left_update = function(){
     var data = { mission_id: this.current_mission };
     var self = this;
+    // TODO: update color depending on mission alarmnr
     $.getJSON(this.url_update_mission, data, function(data){
         $('#' + self.street_id).html(data.street);
         $('#' + self.housenr_id).html(data.housenr);
@@ -232,6 +259,7 @@ Update.prototype.screen_mission_left_update = function(){
  */
 Update.prototype.screen_mission_right_update = function(){
     // FIXME: map reloading?
+    // TODO: update color depending on mission alarmnr
     var data = { mission_id: this.current_mission };
     var self = this;
     $('#' + this.dispos_id).load(this.url_update_dispos, data);
@@ -247,28 +275,32 @@ Update.prototype.screen_mission_right_update = function(){
  * the news screen
  */
 Update.prototype.screen_view_change = function(){
-    if(this.mission === 0){
-        switch(this.screen_view){
-            case 0:
-                $('#' + this.news_id).fadeToggle(function(){
-                    $('#' + this.stats_id).fadeToggle();
-                });
-                this.screen_view = 1;
-                break;
-            case 1:
-                $('#' + this.stats_id).fadeToggle(function(){
-                    $('#' + this.news_id).fadeToggle();
-                });
-                this.screen_view = 0;
-                break;
-            default:
-                this.screen_view = 0;
-                break;
+    if(!this._developement){
+        var self = this;
+        if(this.mission === false){
+            switch(this.screen_view){
+                case 0:
+                    $('#' + this.news_id).fadeOut(function(){
+                        $('#' + self.stats_id).fadeIn();
+                    });
+                    this.screen_view = 1;
+                    break;
+                case 1:
+                    $('#' + this.stats_id).fadeOut(function(){
+                        $('#' + self.news_id).fadeIn();
+                    });
+                    this.screen_view = 0;
+                    break;
+                default:
+                    this.screen_view = 0;
+                    break;
+            }
+        } else {
+            // TODO: show running missions in header
+            this.screen_view += 1;
+            this.screen_view %= this.running_missions.length;
+            this.current_mission = this.running_missions[this.screen_view];
         }
-    } else {
-        this.screen_view += 1;
-        this.screen_view %= this.running_missions.length;
-        this.current_mission = this.running_missions[this.screen_view];
     }
 }
 

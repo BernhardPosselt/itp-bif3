@@ -3,7 +3,7 @@
 {% block title %}Feuerwehr Infoscreen - Bildschirm links{% endblock %}
 
 {% block head %}
-    <script src="{% url screen:javascript_main '0' %}" type="text/javascript"></script>
+    <script src="{% url screen:javascript_main '0' '1' %}" type="text/javascript"></script>
 {% endblock %}
 
 
@@ -16,6 +16,7 @@
 
 {% block content %}
 <div id="einsatz_links">    
+    <audio autoplay="autoplay" src="{{ STATIC_URL }}audio/alarm.ogg"></audio>
     <div id="details">
 		<ul>
 			<li><span id="street"></span> <span id="housenr"></span> <span id="stairnr"></span> <span id="doornr"></span></li>

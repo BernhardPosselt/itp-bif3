@@ -51,6 +51,7 @@ kuler:
 
 html, body {
     height: 100%;
+    overflow: hidden;
 }
 
 h1 {
@@ -69,6 +70,18 @@ ul {
     list-style-type: none;
 }
 
+
+img.left {
+    float: left;
+    margin: 20px;
+    box-shadow: #333 0 0 5px;
+}
+
+img.right {
+    float: right;
+    margin: 20px;
+    box-shadow: #333 0 0 5px;
+}
 
 #site {
     min-height: 100%;
@@ -142,16 +155,15 @@ ul {
     padding: 20px;
 }
 
-    #content .left_row {
-        float: left;
-        width: 50%;
-    }
-    
-    #content .right_row {
-        float: left;
-        width: 50%;
+    #content .links {
+        text-align: center;
+        font-size: 18pt;
     }
 
+        #content .links h1 {
+            margin-bottom: 30px;
+        }
+    
 
 /**
  * Einsatz links
@@ -249,68 +261,87 @@ ul {
 {
 	width:100%;
 }
+
+    /**
+     * News
+     */
 	#frieden_rechts #news
 	{
-		width:33%;
-		float:left;
+		width:100%;
 	}
 	
 		#frieden_rechts #news .news_entry		
 		{
-			background-color:#fcffb2;
-			padding:2%;
-			margin:2% 1%;
-			width:90%;
+			padding: 20px 20px 0px 20px;
+			margin-bottom: 20px;
+			border-bottom: 1px dashed #ddd;
 		}
 		
 		#frieden_rechts #news .news_entry h1		
 		{
-			font-size:18pt;
+			font-size: 28pt;
 			margin-bottom:5px;
+			color: #19587F;
 		}
 		
 		#frieden_rechts #news .news_entry .text		
 		{
-			font-size:12pt;
+			font-size:20pt;
 			margin-bottom:5px;
 		}
 		
-		#frieden_rechts #news .news_entry .date		
+		#frieden_rechts #news .news_entry .date
 		{
-			font-size:12pt;
+			font-size:16pt;
 			text-align:right;
+			clear: both;
 		}
-	
+
+    /**
+     * Fahrzeuge
+     */	
+    #repair {
+        display: none;
+    }
+    
+        #repair h1 {
+            text-align: center;
+            font-size: 30pt;
+            margin: 20px 0;
+        }
+    
 	#frieden_rechts #fahrzeuge
 	{
-		width:33%;
-		float:left;		
+		width: 50%;
+		float: left;
 	}
 	
 		#frieden_rechts #fahrzeuge .vehicle_entry
 		{
-			background-color:#fcffb2;
-			padding:2%;
-			margin:2% 1%;
-			width:90%;
-			font-size:20pt;
-			font-weight:bold;
+		    width: 50%;
+		    float: right;
+		    padding: 40px;
+			padding-right: 150px;
+			font-size:25pt;
+			text-align: center;
+			border-bottom: 1px solid #333;
 		}
 	
 	
 	#frieden_rechts #geraete
 	{
-		width:33%;
-		float:left;
+		width:50%;
+		float: left;
 	}
 		
 		#frieden_rechts #geraete .util_entry
 		{
-			background-color:#fcffb2;
-			padding:2%;
-			margin:2% 1%;
-			width:90%;
-			font-size:20pt;
-			font-weight:bold;
+		    width: 50%;
+		    float: left;
+		    padding: 40px;
+			padding-left: 150px;
+			font-size:25pt;
+			text-align: center;
+			border-bottom: 1px solid #166799;
 		}
 

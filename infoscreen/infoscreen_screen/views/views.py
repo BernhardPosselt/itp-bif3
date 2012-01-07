@@ -6,11 +6,14 @@ from lxml import etree
 
 # Django includes
 from django.db.models import Count
+from django.conf import settings
 from django.shortcuts import render
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
 from infoscreen.infoscreen_screen.parser import *
+from infoscreen.inc.config import WebsiteConfig
+from infoscreen.inc.shortcuts import is_mission
 import gtk.gdk
 
 def index(request):
@@ -21,7 +24,7 @@ def index(request):
     return render(request, "infoscreen_screen/index.html", ctx)
 
 
-def settings(request):
+def website_settings(request):
     """
     Doku
     """
@@ -66,27 +69,31 @@ def javascript(request, src):
     Keyword arguments:
     src -- The javascript part which should be generated 
     """
+    config = WebsiteConfig(settings.WEBSITE_CFG)
+    ctx = {
+        'config': config
+    }
     if src == 'update':
         tpl = 'javascript/update.js'
     elif src == 'gmaps':
         tpl = 'javascript/gmaps.js'
-    return render(request, tpl)
+    return render(request, tpl, ctx)
 
 
-def javascript_main(request, screen):
+def javascript_main(request, screen, mission):
     """Generates the main javascript, we need this extra function to set screen
     and mission variables
 
     Keyword arguments:
     screen -- The screen where the js is loaded to, 0 for left, 1 for right
+    missino -- If the current view represents a mission 1, otherwise 0
     """
     # check if we got frieden or einsatz
-    missions = Einsaetze.objects.filter(abgeschlossen=False).aggregate( Count('id') )
-    missions_len = missions['id__count']
-    if missions_len == 0:
-        mission = False
-    else:
+    mission = int(mission)
+    if mission == 1:
         mission = True
+    else:
+        mission = False
     ctx = {
         'screen': screen,
         'mission': mission

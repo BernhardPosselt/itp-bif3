@@ -3,20 +3,23 @@
 {% block title %}Feuerwehr Infoscreen - Bildschirm rechts{% endblock %}
 
 {% block head %}
-    <script src="{% url screen:javascript_main '1' %}" type="text/javascript"></script>
+    <script src="{% url screen:javascript_main '1' '0' %}" type="text/javascript"></script>
 {% endblock %}
 
 {% block header %}
 <div id="header" class="frieden">
-    <h1>Feuerwehr Infoscreen</h1>
+    <h1></h1>
 </div>    
 {% endblock %}
 
 {% block content %}
 <div id="frieden_rechts">
 	<div id="news"></div>
-	<div id="fahrzeuge"></div>
-	<div id="geraete"></div>
+	<div id="repair">
+	    <h1>Fahrzeuge - In Reperatur - Geräte</h1>
+	    <div id="fahrzeuge"></div>
+	    <div id="geraete"></div>
+	</div>
 </div>
 {% endblock %}
 
