@@ -79,7 +79,7 @@ function Update(screen, mission) {
     
     // set update interval in seconds
     var self = this;
-    this.update_interval = 10;
+    this.update_interval = 1;
     this.update_timer = setInterval(function(){
         self.update();
     }, this.update_interval*1000);
@@ -248,7 +248,6 @@ Update.prototype.update_title_msg = function(){
 Update.prototype.screen_mission_left_update = function(){
     var data = { mission_id: this.current_mission };
     var self = this;
-    // TODO: update color depending on mission alarmnr
     $.getJSON(this.url_update_mission, data, function(data){
         $('#' + self.street_id).html(data.street);
         $('#' + self.housenr_id).html(data.housenr);
@@ -270,7 +269,6 @@ Update.prototype.screen_mission_left_update = function(){
  * Reloads and sets all elements on the mission right screen
  */
 Update.prototype.screen_mission_right_update = function(){
-    // TODO: update color depending on mission alarmnr
     var data = { mission_id: this.current_mission };
     var self = this;
 
