@@ -7,11 +7,26 @@ from django.db import models
 
 #News  
 class News(models.Model):
-    datum = models.DateTimeField("Datum")
-    titel = models.CharField("Titel", max_length=400)
-    text = models.TextField("Beschreibung")
+    datum = models.DateTimeField("Datum", help_text="Das Datum des Eintrages. \
+        Die Einträge werden absteigend nach dem neuesten Datum sortiert. Nur \
+        die neuesten 5 Einträge werden angezeigt.")
+    titel = models.CharField("Titel", max_length=400, help_text="Die Überschrift \
+        des Newseintrages")
+    text = models.TextField("Beschreibung", help_text="Die Beschreibung beinhaltet \
+        den eigentlichen Newstext. In der Beschreibung ist HTML erlaubt. Für \
+        Bilder sind 2 CSS Klassen definiert: left und right. Damit werden die \
+        Bilder im Textfluss links oder rechts platziert. Um ein Bild zB. rechts \
+        im Textfluss zu platzieren tragen sie das Bild folgendermaßen ein:\
+            &lt;img src=\"http://pfad.com/zum/bild.jpg\" class=\"left\" /&gt;\
+        Absätze werden Automatisch in HTML Absätze umgewandelt.")
     modifiziert = models.DateTimeField(auto_now=True)
-    released = models.BooleanField("Veröffentlicht", blank=True)
+    released = models.BooleanField("Veröffentlicht", blank=True, 
+        help_text="Ob der Newsbeitrag veröffentlicht \
+            werden soll. Ist die Checkbox bei \"Veröffentlicht\" nicht gesetzt,\
+             kann der Beitrag nur aufgerufen werden, wenn man ein ?preview=true\
+              an der URL anhängt, zB:\
+            /bildschirm/frieden/rechts/?preview=true\
+            Das ermöglicht eine Vorschau des Beitrages ohne ihn zu veröffentlichen.")
 
     class Meta:
         verbose_name = "News"
