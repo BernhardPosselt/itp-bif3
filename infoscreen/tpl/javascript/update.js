@@ -38,6 +38,7 @@ function Update(screen, mission) {
     this.url_update_vehicle_order = '{% url screen:update_vehicle_order %}';
     this.url_update_mission = '{% url screen:update_mission %}';
     this.url_update_dispos = '{% url screen:update_dispos %}';
+    this.url_update_map = '{% url screen:update_map %}';
     
     // ids of each div field we need to load data into
     this.welcome_id = 'willkommen';
@@ -62,7 +63,15 @@ function Update(screen, mission) {
     this.classification_id = 'classification';
     this.alarmnr = 'alarmstufe';
     this.notifier = 'notifier';
-        
+    
+    // cache variables to check for reloading map
+    this.cache_street = '';
+    this.cache_housnr = '';
+    this.cache_stairnr = '';
+    this.cache_zip = '';
+    this.cache_place = '';
+    this.cache_object = '';
+    
     // run initial reloads
     this.update();
     
@@ -258,14 +267,37 @@ Update.prototype.screen_mission_left_update = function(){
  * Reloads and sets all elements on the mission right screen
  */
 Update.prototype.screen_mission_right_update = function(){
-    // FIXME: map reloading?
     // TODO: update color depending on mission alarmnr
     var data = { mission_id: this.current_mission };
     var self = this;
+
     $('#' + this.dispos_id).load(this.url_update_dispos, data);
     $.getJSON(this.url_update_mission, data, function(data){
+        
         $('#' + self.classification_id).html(data.classification);
-        $('#' + self.alarmnr).html(data.alarmnr);
+        $('#' + self.alarmnr).html(data.alarmnr);        
+        var iframe_url = self.url_update_map + "?mission_id=" + data.id;
+        var $frame = $('#' + self.map_id + ' iframe');
+
+        // set url for iframe only if the url or data has changed
+        if($frame.attr('src') !== iframe_url ||
+            self.cache_street !== data.street ||
+            self.cache_housenr !== data.housenr ||
+            self.cache_stairnr !== data.stairnr ||
+            self.cache_zip !== data.zip ||
+            self.cache_place !== data.place ||
+            self.cache_object !== data.object)
+        {    
+            // set tmp values and map url for iframe
+            $frame.attr('src', iframe_url);
+            self.cache_street = data.street;
+            self.cache_housenr = data.housenr;
+            self.cache_stairnr = data.stairnr;
+            self.cache_zip = data.zip;
+            self.cache_place = data.place;
+            self.cache_object = data.object;
+        }
+        
     });
 }
 

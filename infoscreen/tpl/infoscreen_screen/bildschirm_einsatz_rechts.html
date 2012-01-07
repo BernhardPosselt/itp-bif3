@@ -3,15 +3,7 @@
 {% block title %}Feuerwehr Infoscreen - Bildschirm rechts{% endblock %}
 
 {% block head %}
-    <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAA6qiASEwfhYtcYhMd2vJTQRQorY6mP03n72EKZcQG5HcZqK1IwRSlvhuDn4o5b4Mzk8fUw0cst-Ix_Q" type="text/javascript"></script>
-    <script src="{{ STATIC_URL }}script/lib/geoxml.js" type="text/javascript"></script>
-    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}style/gmap.css" />
-
-    <script src="{% url screen:gmap_adresse '2'%}" type="text/javascript"></script>
-
-    <script src="{% url screen:javascript 'gmaps'%}" type="text/javascript"></script>
     <script src="{% url screen:javascript_main '1' '1' %}" type="text/javascript"></script>
-
 {% endblock %}
 
 
@@ -26,7 +18,8 @@
 <div id="einsatz_rechts">
     
     <div id="karte">
-    <div id="map" style="width: 596px; height: 520px; "></div>
+        <iframe id="map" height="596" width="520" src="" scrolling="no"> 
+        </iframe> 
     </div>
     
     <h2>Feuerwehren im Einsatz</h2>

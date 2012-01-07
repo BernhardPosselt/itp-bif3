@@ -8,9 +8,9 @@ from django.db.models import Count
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
+from infoscreen.infoscreen_screen.views.gmap import gmap
 from django.shortcuts import render, get_object_or_404
 from infoscreen.inc.config import WebsiteConfig
-
 
 def update(request):
     """
@@ -113,6 +113,13 @@ def update_mission(request):
     }
     return render(request, "infoscreen_screen/ajax/update_mission.json", ctx)
 
+
+def update_map(request):
+    """Returns a fullscreen google maps image
+    """
+    mission_id = int(request.GET.get('mission_id', 0))
+    return gmap(request, mission_id)
+    
 
 def update_dispos(request):
     """Returns html for the dispos
