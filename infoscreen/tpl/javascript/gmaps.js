@@ -11,7 +11,6 @@ window.onload = function() {
         strasse = '{{ strasse }}';
         hausnummer = '{{ hausnummer }}';
         var adresse = hausnummer + "," + strasse + ", " + plz + "," + ort;
-        alert(adresse);
         showAddress(adresse);
        // gxmlopts["nozoom"]=true;
         gml = new GeoXml("gml", mmap, "{{ STATIC_URL }}kml/Hydranten.kml");

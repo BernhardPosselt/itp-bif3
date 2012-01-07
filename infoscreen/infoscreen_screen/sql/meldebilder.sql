@@ -63,3 +63,4 @@ INSERT INTO infoscreen_screen_meldebilder (beschreibung, stufe_id, modifiziert) 
 INSERT INTO infoscreen_screen_meldebilder (beschreibung, stufe_id, modifiziert) VALUES ('Menschenrettung (mehrere eingekl. Personen)', 'T3',datetime('now'));
 INSERT INTO infoscreen_screen_meldebilder (beschreibung, stufe_id, modifiziert) VALUES ('Schiffsunglück', 'T3',datetime('now'));
 INSERT INTO infoscreen_screen_meldebilder (beschreibung, stufe_id, modifiziert) VALUES ('VU mit mehreren eingekl. Personen', 'T3',datetime('now'));
+INSERT INTO infoscreen_screen_meldebilder (beschreibung, stufe_id, modifiziert) VALUES ('Kein Meldebild vorhanden', 'E0',datetime('now'));
