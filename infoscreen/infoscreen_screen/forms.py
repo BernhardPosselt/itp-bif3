@@ -11,7 +11,7 @@ from infoscreen.infoscreen_screen.models import *
 from infoscreen.inc.config import WebsiteConfig
 
 
-class SettingsForm(forms.ModelForm):
+class SettingsForm(forms.Form):
     """This form is used to set values
     """
     xml_url = forms.CharField(label='XML URL', 

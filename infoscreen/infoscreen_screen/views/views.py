@@ -8,12 +8,15 @@ from lxml import etree
 from django.db.models import Count
 from django.conf import settings
 from django.shortcuts import render
+from django.shortcuts import render_to_response
+from django.shortcuts import HttpResponseRedirect
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
 from infoscreen.infoscreen_screen.parser import *
 from infoscreen.inc.config import WebsiteConfig
 from infoscreen.inc.shortcuts import is_mission
+from infoscreen.infoscreen_screen.forms import SettingsForm
 import gtk.gdk
 
 def index(request):
@@ -27,15 +30,27 @@ def index(request):
 def website_settings(request):
     """
     Doku
-    """
-    ctx = {}
-    return render(request, "infoscreen_screen/index.html", ctx)
+    """    
+    if request.method == 'POST': # If the form has been submitted...
+        form = SettingsForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            # ...
+            return HttpResponseRedirect('/admin/') # Redirect after POST
+    else:
+        form = SettingsForm() # An unbound form
+
+    return render_to_response('admin/config.html', {
+        'form': form,
+    })
 
 def bildschirm_einsatz_links(request):
     """
     Doku
     """
     ctx = {}
+    
+    
     return render(request, "infoscreen_screen/bildschirm_einsatz_links.html", ctx)
 
 
