@@ -79,7 +79,7 @@ class MeldebildAdmin(admin.ModelAdmin):
 	
 class NewsAdmin(admin.ModelAdmin):
 	list_display = ('titel', 'datum')
-	list_filter = ("veršffentlicht", "datum")
+	list_filter = ("released", "datum")
 	search_fields = ["titel", "beschreibung"] 
 
 
