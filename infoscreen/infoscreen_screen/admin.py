@@ -14,11 +14,11 @@ unfinish.short_description = "Einsaetze aktivieren"
 
 def printed(modeladmin, request, queryset):
 	queryset.update(ausgedruckt=True)
-printed.short_description = "Einsaetze ausgedruckt"
+printed.short_description = "Einsaetze als ausgedruckt markieren"
 
 def notprinted(modeladmin, request, queryset):
 	queryset.update(ausgedruckt=False)
-notprinted.short_description = "Einsaetze nicht ausgedruckt"
+notprinted.short_description = "Einsaetze als nicht ausgedruckt markieren"
 
 def inrepairvehicles(modeladmin, request, queryset):
 	queryset.update(reperatur=True)
@@ -36,6 +36,13 @@ def notinrepairutils(modeladmin, request, queryset):
 	queryset.update(reperatur=False)
 notinrepairutils.short_description = "Geraete nicht in Reparatur"
 
+def released(modeladmin, request, queryset):
+	queryset.update(released=True)
+released.short_description = "News veroeffentlichen"
+
+def unreleased(modeladmin, request, queryset):
+	queryset.update(released=False)
+unreleased.short_description = "News nicht veroeffentlichen"
 
 
 class DispoAdmin(admin.TabularInline):
@@ -81,6 +88,7 @@ class NewsAdmin(admin.ModelAdmin):
 	list_display = ('titel', 'datum')
 	list_filter = ("released", "datum")
 	search_fields = ["titel", "beschreibung"] 
+	actions = [released, unreleased]
 
 
 admin.site.register(News, NewsAdmin)	    
