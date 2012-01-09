@@ -1,8 +1,26 @@
-{% extends "admin/base.html" %}
+{% extends "admin/change_form.html" %}
+{% load i18n admin_modify adminmedia %}
+
+{% block form_top %}
+  <p>Website Konfiguration: Editieren Sie die Grundeinstellungen der Website</p>
+{% endblock %}
 
 {% block content %}
-<form method="post">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
-</form>
+{% if errors %}
+    <p class="errornote">
+        Bitte korrigieren sie die Fehler, um die gesetzten Werte zu speichern.
+    </p>
+    {{ form.form.non_field_errors }}
+{% endif %}
+<div id="content-main">
+    <form method="post" action=".">
+
+        {% csrf_token %}
+        {{ form.as_table }}
+        {% for fieldset in adminform %}
+          {% include "admin/includes/fieldset.html" %}
+        {% endfor %}
+        {% submit_row %}
+    </form>
+</div>
 {% endblock %}

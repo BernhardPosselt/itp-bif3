@@ -109,6 +109,13 @@ Update.prototype.update = function () {
             self.screen_view = 0;
             self.current_mission = data.running_missions[0];
         }
+        // if the running missions array is not the same as we got we have to
+        // reset the screenview to the first position to keep sync
+        if(!self.running_missions.compareArrays(data.running_missions)){
+            self.screen_view = 0;
+            self.current_mission = data.running_missions[0];    
+        }
+        
         self.running_missions = data.running_missions;
         
         // run website reloads
