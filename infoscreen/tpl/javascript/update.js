@@ -9,7 +9,7 @@
 function Update(screen, mission) {
     // set true when you dont want to develope the design so the screen fade ins
     // wont happen. Developement only!!
-    this._developement = false;
+    this._developement = true;
 
 
     this.screen = screen;
