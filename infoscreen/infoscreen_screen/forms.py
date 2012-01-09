@@ -22,7 +22,7 @@ class SettingsForm(forms.Form):
         help_text='Der Key, der benötigt wird, um sich mit Google Maps zu verbinden')
     title_msg = forms.CharField(label='Titel', 
         help_text='Der Titel der zuoberst auf der Website standardmäßig angezeigt wird')
-    welcome_msg = forms.CharField(label='Willkommensnachricht', 
+    welcome_msg = forms.CharField(label='Willkommens Nachricht', 
         help_text='Die Nachricht, die in Friedenszeiten links angezeigt wird.')
     update_interval = forms.IntegerField(label='Update Intervall in Sekunden', 
         help_text='Die Geschwindigkeit in der die Website auf neue Elemente prüfen \

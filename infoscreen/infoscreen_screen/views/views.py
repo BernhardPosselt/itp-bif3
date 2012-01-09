@@ -11,6 +11,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
@@ -28,6 +29,7 @@ def index(request):
     return render(request, "infoscreen_screen/index.html", ctx)
 
 
+@staff_member_required
 def website_settings(request):
     """
     Doku

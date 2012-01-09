@@ -1,26 +1,58 @@
 {% extends "admin/change_form.html" %}
 {% load i18n admin_modify adminmedia %}
 
+{% block extrahead %}
+    {{ block.super }}
+    {% url 'admin:jsi18n' as jsi18nurl %}
+    {{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="{% url admin:index %}">{% trans "Home" %}</a> &rsaquo;
+     <a href=".">{% trans "Website Konfiguration" %}</a>
+</div>
+{% endblock %}
+
 {% block form_top %}
   <p>Website Konfiguration: Editieren Sie die Grundeinstellungen der Website</p>
 {% endblock %}
 
 {% block content %}
-{% if errors %}
-    <p class="errornote">
-        Bitte korrigieren sie die Fehler, um die gesetzten Werte zu speichern.
-    </p>
-    {{ form.form.non_field_errors }}
-{% endif %}
-<div id="content-main">
-    <form method="post" action=".">
 
-        {% csrf_token %}
-        {{ form.as_table }}
-        {% for fieldset in adminform %}
-          {% include "admin/includes/fieldset.html" %}
-        {% endfor %}
-        {% submit_row %}
+<div id="content-main">
+    <h1>Website Konfiguration</h1>
+    <form method="post" action=".">
+        <div>
+            {% csrf_token %}
+            {% if form.errors %}
+                <p class="errornote">
+                    Bitte korrigieren sie die Fehler, um die gesetzten Werte zu speichern.
+                </p>
+                {{ form.form.non_field_errors }}
+            {% endif %}
+            <fieldset class="module aligned">
+                {% for field in form %}
+                    <div class="form-row{% if field.errors %} errors{% endif %} {{ field.html_name }}">
+                        {% if field.errors %}
+                            <ul class="errorlist">
+                            {% for error in field.errors %}
+                                <li><strong>{{ error|escape }}</strong></li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <label class="required" for="id_einsatznr">{{ field.label}}:</label>
+                        {{ field }}
+                        <p class="help">{{ field.help_text }}</p>
+                    </div>
+                {% endfor %}
+                <div class="submit-row">
+                    <input class="default" type="submit" name="_save" value="Sichern">
+                </div>
+            </fieldset>
+        </div>
     </form>
 </div>
 {% endblock %}
