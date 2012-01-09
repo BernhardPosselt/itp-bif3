@@ -45,10 +45,10 @@ class DispoAdmin(admin.TabularInline):
 class EinsatzAdmin(admin.ModelAdmin):
     list_display = ('einsatz', 'bemerkung','nummer1', 'strasse', 'plz', 'ort',
                     'meldebild', 'einsatzerzeugt', 'abgeschlossen')
-    list_filter = ("meldebild__stufe", "meldebild", 'modifiziert')
+    list_filter = ("meldebild__stufe", "abgeschlossen", "meldebild", 'modifiziert')
     ordering = ("modifiziert",)
     date_hierarchy = 'einsatzerzeugt'
-    search_fields = ["nummer1", 'nummer2']
+    search_fields = ["nummer1", "strasse", "plz", "ort", "bemerkung"]
     inlines = (DispoAdmin, )
     actions = [finish, unfinish, printed, notprinted]
     
@@ -59,13 +59,15 @@ class AusrueckeordnungAdmin(admin.TabularInline):
 	extra = 0
     
 class FahrzeugAdmin(admin.ModelAdmin):
-	list_display = ('kuerzel', 'beschreibung', 'reperatur')
+	list_display = ('kuerzel', 'funkrufname', 'beschreibung', 'reperatur')
 	list_filter = ("reperatur", )
+	search_fields = ["kuerzel", "funkrufname", "beschreibung"]
 	actions = [inrepairvehicles, notinrepairvehicles]	
 
 class GeraetAdmin(admin.ModelAdmin):
 	list_display = ('beschreibung', 'reperatur')
 	list_filter = ("reperatur", )	
+	search_fields = ["beschreibung"]
 	actions = [inrepairutils, notinrepairutils]
 
 class MeldebildAdmin(admin.ModelAdmin):	
@@ -77,6 +79,8 @@ class MeldebildAdmin(admin.ModelAdmin):
 	
 class NewsAdmin(admin.ModelAdmin):
 	list_display = ('titel', 'datum')
+	list_filter = ("veršffentlicht", "datum")
+	search_fields = ["titel", "beschreibung"] 
 
 
 admin.site.register(News, NewsAdmin)	    
