@@ -19,7 +19,7 @@ from infoscreen.infoscreen_screen.parser import *
 from infoscreen.inc.config import WebsiteConfig
 from infoscreen.inc.shortcuts import is_mission
 from infoscreen.infoscreen_screen.forms import SettingsForm
-import gtk.gdk
+#import gtk.gdk
 
 def index(request):
     """
