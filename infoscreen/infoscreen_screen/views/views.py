@@ -10,6 +10,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 # Project includes
 from infoscreen.infoscreen_screen.models import *
@@ -31,15 +32,22 @@ def website_settings(request):
     """
     Doku
     """    
-    if request.method == 'POST': # If the form has been submitted...
-        form = SettingsForm(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            # Process the data in form.cleaned_data
-            # ...
-            return HttpResponseRedirect('/admin/') # Redirect after POST
+    if request.method == 'POST':
+        form = SettingsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect( reverse('admin:index') )
     else:
-        form = SettingsForm() # An unbound form
-
+        config = WebsiteConfig(settings.WEBSITE_CFG)
+        config_values = {
+            'xml_url': config.xml_url,
+            'kml_url': config.kml_url,
+            'gmap_key': config.gmap_key,
+            'welcome_msg': config.welcome_msg,
+            'title_msg': config.title_msg,
+            'update_interval': config.update_interval
+        }
+        form = SettingsForm(initial=config_values)
     return render_to_response('admin/config.html', {
         'form': form,
     })

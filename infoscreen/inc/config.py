@@ -66,6 +66,11 @@ class WebsiteConfig(object):
                 self.parserError = True
 
             try:
+                self.gmap_key = config.get('settings', 'gmap_key')
+            except ConfigParser.NoOptionError:
+                self.parserError = True
+
+            try:
                 self.welcome_msg = config.get('settings', 'welcome_msg')
             except ConfigParser.NoOptionError:
                 self.parserError = True
@@ -112,6 +117,7 @@ class WebsiteConfig(object):
         config.set('settings', 'update_interval', str(self.update_interval))
         config.set('settings', 'welcome_msg', str(self.welcome_msg))
         config.set('settings', 'title_msg', str(self.title_msg))
+        config.set('settings', 'gmap_key', str(self.gmap_key))
         try:
             with open(self.mainConfig, 'wb') as confFile:
                 config.write(confFile)
