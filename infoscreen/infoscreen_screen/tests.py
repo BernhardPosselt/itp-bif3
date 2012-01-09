@@ -21,7 +21,7 @@ import gtk.gdk
 class Testparser(unittest.TestCase):
     def test_tags(self):
         """
-        Einlesen mit Parser
+        Der Parser wird überprüft
         """
         createdb = DBCREATE()
         createdb.create_database()
@@ -36,6 +36,9 @@ class Testparser(unittest.TestCase):
     
 class DBCREATE(object):
     def create_database(self):
+        """
+        Die Testdatenbank wird mit Testdaten befüllt
+        """
         alarmstufen = ["B1","B2","B3","B4","T1","T2","T3","S1","S2","S3"]
         MeldB1 = ["Autobahn - Fahrzeugbrand", "Bahndammbrand", "Brandverdacht",
         "Flurbrand", "Kaminbrand", "Kleinbrand", "Muellbehaelterbrand", "TUS- od. Infranet-Alarm",
@@ -139,7 +142,7 @@ class DBCREATE(object):
 class Testdb(unittest.TestCase):
     def test_db(self):
         """
-        Eintragen in die Einsatztabelle"
+        Funktion der Datenbankmodels und deren Beziehungen wird überprüft
         """
         alarm = AlarmModel()
         alarm.stufe = "B1"
@@ -170,6 +173,9 @@ class Testdb(unittest.TestCase):
         
 class Testdates(unittest.TestCase):
     def test_dates(self):
+        """
+        Erstellen der Timestamps wird getestet
+        """
         datumeinsatz = "25.04.2008 18:56:58"
         hilf = re.split('\.+|\:+|\ +',datumeinsatz,5)
         datal = date(int(hilf[2]),int(hilf[1]),int(hilf[0]))
@@ -185,7 +191,7 @@ class Testdates(unittest.TestCase):
 class Testscreenshot(unittest.TestCase):
     def test_sshot(self):
         """
-        Screenshottest
+        Screenshot unter Linux 
         """
         # Calculate the size of the whole screen
         screenw = gtk.gdk.screen_width()

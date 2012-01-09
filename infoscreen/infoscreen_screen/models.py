@@ -37,7 +37,7 @@ class News(models.Model):
 
 #Alarmstufen        
 class Alarmstufen(models.Model):
-	stufe = models.CharField("Alarmstufe", max_length=2, primary_key=True)
+	stufe = models.CharField("Alarmstufe", max_length=2, primary_key=True, help_text="Alarmstufe mit max. Länge von 2 Zeichen, muss eindeutig sein")
 	modifiziert = models.DateTimeField(auto_now=True)
 	
 	class Meta:
@@ -49,8 +49,8 @@ class Alarmstufen(models.Model):
 		
 #Meldebilder        
 class Meldebilder(models.Model):
-	beschreibung = models.CharField("Beschreibung", max_length=200)
-	stufe = models.ForeignKey("Alarmstufen")
+	beschreibung = models.CharField("Beschreibung", max_length=200, help_text = "Beschreibung des Meldebildes")
+	stufe = models.ForeignKey("Alarmstufen", help_text = "Jedes Meldebild muss einer Alarmstufe zugewiesen sein")
 	modifiziert = models.DateTimeField(auto_now=True)
 	
 	class Meta:
@@ -80,13 +80,13 @@ class Einsaetze(models.Model):
     plz = models.IntegerField("Postleitzahl", blank=True, null=True)
     ort = models.CharField("Ort", max_length=200, blank=True)    
     bemerkung = models.TextField("Bemerkungen", blank=True)
-    objekt = models.CharField("Objekt", blank=True, max_length=200)
-    einsatznr = models.IntegerField("Einsatznummer", unique=True) # unique?
-    einsatzerzeugt = models.DateTimeField("Einsatz erzeugt")    
-    meldebild = models.ForeignKey("Meldebilder")    
-    melder = models.TextField("Melder", blank = True, max_length=200)
-    abgeschlossen = models.BooleanField("Abgeschlossen", blank=True)
-    ausgedruckt = models.BooleanField("Ausgedruckt", blank=True)
+    objekt = models.CharField("Objekt", blank=True, max_length=200, help_text = "Objekt in dem ein Einsatz nötig ist (z.B.: Krankenhaus, Schule, ...")
+    einsatznr = models.IntegerField("Einsatznummer", unique=True, help_text = "Eindeutige Nummer") # unique?
+    einsatzerzeugt = models.DateTimeField("Einsatz erzeugt", help_text = "Datum und Uhrzeit an dem der Einsatz angelegt wird")    
+    meldebild = models.ForeignKey("Meldebilder", help_text = "Meldebild des Einsatzes")    
+    melder = models.TextField("Melder", blank = True, max_length=200, help_text ="Wer hat den Einsatz gemeldet.")
+    abgeschlossen = models.BooleanField("Abgeschlossen", blank=True, help_text= "Wurde der Einsatz bereits abgeschlossen" )
+    ausgedruckt = models.BooleanField("Ausgedruckt", blank=True, help_text = "Wurde der Einsatz bereits ausgedruckt")
     modifiziert = models.DateTimeField(auto_now=True)
     
     class Meta:
@@ -98,9 +98,9 @@ class Einsaetze(models.Model):
     
 #Dispo - Feuerwehren alarmiert  
 class Dispos(models.Model):
-    einsatz = models.ForeignKey("Einsaetze")
-    dispo = models.IntegerField("Dispo ID")
-    disponame = models.CharField("Name", max_length=200)
+    einsatz = models.ForeignKey("Einsaetze", help_text ="Einsatz dem der Dispo zugeordnet wird")
+    dispo = models.IntegerField("Dispo ID", help_text = "ID des Dispo, muss nicht eindeutig sein")
+    disponame = models.CharField("Name", max_length=200, help_text = "Name der alarmierten Feuerwehr")
     zeitdispo = models.DateTimeField("Dispozeit")
     zeitalarm = models.DateTimeField("Alarmierungszeit", blank=True, null=True)
     zeitaus = models.DateTimeField("Ausrückzeit", blank=True, null=True)
@@ -118,12 +118,12 @@ class Dispos(models.Model):
         
 #Fahrzeuge    
 class Fahrzeuge(models.Model):
-    kennzeichen = models.CharField("Kennzeichen", max_length=200, blank=True)
+    kennzeichen = models.CharField("Kennzeichen", max_length=200, blank=True, help_text = "Kennzeichen (Nummernschild) des Einsatzfahrzeuges")
     funkrufname = models.CharField("Funkrufname", max_length=200, blank=True)
-    kuerzel = models.CharField("Kürzel", max_length=12)
-    beschreibung = models.CharField("Beschreibung", max_length=100)
+    kuerzel = models.CharField("Kürzel", max_length=12 , help_text = "Kürzel des Fahrzeugs welches am Einsatzbildschirm unter Ausrückeordnung eingezeigt wird")
+    beschreibung = models.CharField("Beschreibung", max_length=100, help_text = "Beschreibung des Fahrzeuges")
     modifiziert = models.DateTimeField(auto_now=True)
-    reperatur = models.BooleanField("In Reperatur", blank=True)
+    reperatur = models.BooleanField("In Reperatur", blank=True, help_text= "Befindet sich das Fahrzeug in Reperatur")
 
     class Meta:
         verbose_name = "Fahrzeug"
@@ -135,9 +135,9 @@ class Fahrzeuge(models.Model):
         
 # Geraete    
 class Geraete(models.Model):
-    beschreibung = models.CharField("Beschreibung", max_length=100)
+    beschreibung = models.CharField("Beschreibung", max_length=100, help_text="Kurze Beschreibung des Gerätes")
     modifiziert = models.DateTimeField(auto_now=True)
-    reperatur = models.BooleanField("In Reperatur", blank=True)
+    reperatur = models.BooleanField("In Reperatur", blank=True, help_text = "Befindet sich das Gerät in Reperatur")
 
     class Meta:
         verbose_name = "Gerät"
@@ -148,9 +148,9 @@ class Geraete(models.Model):
         
    
 class Ausrueckordnungen(models.Model):
-    fahrzeug = models.ForeignKey("Fahrzeuge")
-    meldebild = models.ForeignKey("Meldebilder")
-    position = models.PositiveSmallIntegerField("Position")
+    fahrzeug = models.ForeignKey("Fahrzeuge", help_text ="Bitte ein bereits angelegtes Fahrzeug auswählen")
+    meldebild = models.ForeignKey("Meldebilder", help_text = "Bitte ein bereits angelegtes Meldebild auswählen")
+    position = models.PositiveSmallIntegerField("Position", "Reichenfolge des Fahrzeuges bei einem Einsatz")
     modifiziert = models.DateTimeField(auto_now=True)
  
     class Meta:		

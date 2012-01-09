@@ -10,7 +10,8 @@ from infoscreen.inc.config import WebsiteConfig
 
 def gmap(request, id):
     """
-    Doku
+    Gmap.html wird augerufen und der Googlemap_API key
+    wird aus der Config-Datei übergeben
     """
     config = WebsiteConfig(settings.WEBSITE_CFG)
    
@@ -22,10 +23,9 @@ def gmap(request, id):
 
 
 def gmap_adresse(request, id):
-    """Generates the javascript from templates
-
-    Keyword arguments:
-    src -- The javascript part which should be generated 
+    """
+    Der Javascript Datei gmaps.js werden die Werte des 
+    angefragten Einsatzes übergeben
     """
     einsatz = Einsaetze.objects.get(id=id)
     
