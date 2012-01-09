@@ -24,12 +24,7 @@ class WebsiteConfig(object):
         # set default values
         self.parserError = False
         self.url = '/'
-<<<<<<< HEAD
         self.xml_url = "http://127.0.0.1:8000/static/xml/infoscreen.xml"
-        self.kml_url = "infoscreen/static/kml/Hydranten.kml"
-=======
-        self.xml_url = 'http://example.com/xml_api.php'
->>>>>>> bc3c47f0a75a12954f2f04ccea98066a359d99ef
         self.gmap_key = "ABQIAAAA6qiASEwfhYtcYhMd2vJTQRQorY6mP03n72EKZcQG5HcZqK1IwRSlvhuDn4o5b4Mzk8fUw0cst-Ix_Q"
         self.welcome_msg = 'Hallo'
         self.title_msg = 'Feuerwehr Infoscreen'
