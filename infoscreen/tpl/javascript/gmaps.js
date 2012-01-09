@@ -18,7 +18,7 @@ window.onload = function() {
         var adresse = hausnummer + "," + strasse + ", " + plz + "," + ort;
         showAddress(adresse);
        // gxmlopts["nozoom"]=true;
-        gml = new GeoXml("gml", mmap, '{{ kml_url }}');
+        gml = new GeoXml("gml", mmap, '{{ MEDIA_URL }}kml/hydranten.kml');
         gml.parse();
     }
 }

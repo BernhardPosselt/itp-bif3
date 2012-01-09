@@ -24,8 +24,7 @@ class WebsiteConfig(object):
         # set default values
         self.parserError = False
         self.url = '/'
-        self.xml_url = '/'
-        self.kml_url = "infoscreen/static/kml/Hydranten.kml"
+        self.xml_url = "http://127.0.0.1:8000/static/xml/infoscreen.xml"
         self.gmap_key = "ABQIAAAA6qiASEwfhYtcYhMd2vJTQRQorY6mP03n72EKZcQG5HcZqK1IwRSlvhuDn4o5b4Mzk8fUw0cst-Ix_Q"
         self.welcome_msg = 'Hallo'
         self.title_msg = 'Feuerwehr Infoscreen'
@@ -38,11 +37,6 @@ class WebsiteConfig(object):
                 
             try:
                 self.xml_url = config.get('settings', 'xml_url')
-            except ConfigParser.NoOptionError:
-                self.parserError = True
-                
-            try:
-                self.kml_url = config.get('settings', 'kml_url')
             except ConfigParser.NoOptionError:
                 self.parserError = True
 
@@ -94,7 +88,6 @@ class WebsiteConfig(object):
         config.add_section('settings')
         # music settings
         config.set('settings', 'xml_url', str(self.xml_url))
-        config.set('settings', 'kml_url', str(self.kml_url))
         config.set('settings', 'update_interval', str(self.update_interval))
         config.set('settings', 'welcome_msg', str(self.welcome_msg))
         config.set('settings', 'title_msg', str(self.title_msg))

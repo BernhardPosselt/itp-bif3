@@ -29,10 +29,7 @@
             <strong>{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</strong>.
             {% block userlinks %}
                 {% url 'django-admindocs-docroot' as docsroot %}
-                {% if docsroot %}
-                    <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
-                {% endif %}
-					<a href="{% url 'screen:website_settings' %}">{% trans 'Website Konfiguration' %}</a> /
+				<a href="{% url 'website_settings' %}">{% trans 'Website Konfiguration' %}</a> /
                 {% url 'admin:password_change' as password_change_url %}
                 {% if password_change_url %}
                     <a href="{{ password_change_url }}">
