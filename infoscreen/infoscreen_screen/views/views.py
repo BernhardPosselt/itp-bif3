@@ -52,7 +52,7 @@ def website_settings(request):
             'update_interval': config.update_interval
         }
         form = SettingsForm(initial=config_values)
-    return render_to_response('admin/config.html', {
+    return render(request, 'admin/config.html', {
         'form': form,
     })
 

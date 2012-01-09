@@ -212,34 +212,44 @@ img.right {
 #einsatz_rechts {
     font-size: 60pt;
 }
+    
+    #einsatz_rechts h1 {
+        font-size: 35pt;
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
     #karte {
-        padding-left:2%;
-		width:76%;
 		float:left;
+    }
+
+    #karte iframe {
+        border: 0;
+    }
+
+
+    #dispos_info {
+        width: 500px;
+		padding: 20px;
+		padding-top: 0;
+		float: left;
+		min-height: 100%;
+		text-align: center;
+		width: 300px;
     }
 
     #dispos {
-        width:20%;
-		padding:1%;
-		float:left;
-		background-color:#fcffb2;
-		min-height:100%;
+        line-height: 1.5;
     }
     
-    #dispos h2
-    {
-		font-size:20pt;
-		padding-bottom:5%;
-    }
     
-    #dispos .dispo_entry
-    {
-		font-size:20pt;	
-    }
- /*
-  * Frieden links
-*/
+        #dispos .dispo_entry
+        {
+		    font-size:30pt;	
+        }
+/**
+ * Frieden links
+ */
 #frieden_links
 {
 	width:100%;
