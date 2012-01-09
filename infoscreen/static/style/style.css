@@ -225,21 +225,23 @@ img.right {
 
     #karte iframe {
         border: 0;
+        box-shadow: 0 0 2px #333;
     }
 
 
     #dispos_info {
-        width: 500px;
 		padding: 20px;
 		padding-top: 0;
 		float: left;
 		min-height: 100%;
 		text-align: center;
-		width: 300px;
+		width: 560px;
+		min-height: 100%;
     }
 
     #dispos {
         line-height: 1.5;
+        min-height: 100%;
     }
     
     
