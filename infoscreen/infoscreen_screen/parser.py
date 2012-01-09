@@ -8,6 +8,7 @@ import re
 from infoscreen.infoscreen_screen.models import Meldebilder as MeldebildModel
 from infoscreen.infoscreen_screen.models import Dispos as DispoModel
 
+
 class EinsatzKlasse(object):
     """
     Diese Klasse dient dazu die geparsten Einsätze zu 
@@ -204,7 +205,7 @@ class XML(object):
         DOKU
         """
         einsatz_id = 0
-        xml_tree = etree.parse(xml)
+        xml_tree = etree.XML(xml)
         xml_root = xml_tree.getroot()
         context = etree.iterwalk(xml_root, events=("start",))
        

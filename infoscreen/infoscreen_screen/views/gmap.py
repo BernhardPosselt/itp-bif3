@@ -34,13 +34,11 @@ def gmap_adresse(request, id):
     
    
     tpl = 'javascript/gmaps.js'
-    config = WebsiteConfig(settings.WEBSITE_CFG)
-    
+   
     ctx = {
         'plz': str(einsatz.plz),
         'ort': str(einsatz.ort),
         'strasse': str(einsatz.strasse),
         'hausnummer': str(einsatz.nummer1),
-        'kml_url': config.kml_url
     }
     return render(request, tpl,ctx)

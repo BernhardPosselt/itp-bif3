@@ -120,10 +120,10 @@ class Dispos(models.Model):
 class Fahrzeuge(models.Model):
     kennzeichen = models.CharField("Kennzeichen", max_length=200, blank=True, help_text = "Kennzeichen (Nummernschild) des Einsatzfahrzeuges")
     funkrufname = models.CharField("Funkrufname", max_length=200, blank=True)
-    kuerzel = models.CharField("Kürzel", max_length=12 , help_text = "Kürzel des Fahrzeugs welches am Einsatzbildschirm unter Ausrückeordnung eingezeigt wird")
-    beschreibung = models.CharField("Beschreibung", max_length=100, help_text = "Beschreibung des Fahrzeuges")
+    kuerzel = models.CharField("Kürzel", max_length=12 , help_text = "Kürzel des Fahrzeugs welches am Einsatzbildschirm unter Ausrückeordnung angezeigt wird")
+    beschreibung = models.CharField("Beschreibung", max_length=100, help_text = "Beschreibung des Fahrzeuges die zu Friedenszeiten auf dem rechten Bildschirm angezeigt wird.")
     modifiziert = models.DateTimeField(auto_now=True)
-    reperatur = models.BooleanField("In Reperatur", blank=True, help_text= "Befindet sich das Fahrzeug in Reperatur")
+    reperatur = models.BooleanField("In Reperatur", blank=True, help_text= "Zeigt an ob das Fahrzeug in Reperatur ist")
 
     class Meta:
         verbose_name = "Fahrzeug"
@@ -135,9 +135,9 @@ class Fahrzeuge(models.Model):
         
 # Geraete    
 class Geraete(models.Model):
-    beschreibung = models.CharField("Beschreibung", max_length=100, help_text="Kurze Beschreibung des Gerätes")
+    beschreibung = models.CharField("Beschreibung", max_length=100, help_text="Kurze Beschreibung des Gerätes, welche zu Friedenszeiten auf dem rechten Bildschirm angezeigt wird")
     modifiziert = models.DateTimeField(auto_now=True)
-    reperatur = models.BooleanField("In Reperatur", blank=True, help_text = "Befindet sich das Gerät in Reperatur")
+    reperatur = models.BooleanField("In Reperatur", blank=True, help_text = "Zeigt an ob sich das Gerät in Reperatur befindet")
 
     class Meta:
         verbose_name = "Gerät"

@@ -24,7 +24,7 @@ class WebsiteConfig(object):
         # set default values
         self.parserError = False
         self.url = '/'
-        self.xml_url = '/'
+        self.xml_url = "http://127.0.0.1:8000/static/xml/infoscreen.xml"
         self.kml_url = "infoscreen/static/kml/Hydranten.kml"
         self.gmap_key = "ABQIAAAA6qiASEwfhYtcYhMd2vJTQRQorY6mP03n72EKZcQG5HcZqK1IwRSlvhuDn4o5b4Mzk8fUw0cst-Ix_Q"
         self.welcome_msg = 'Hallo'
