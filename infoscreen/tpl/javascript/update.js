@@ -53,7 +53,6 @@ function Update(screen, mission) {
     this.map_id = 'karte';
     this.running_missions_id = 'lauf_missionen';
     this.header_id = 'header';
-    this.title_id = 'header h1';
 
     // ids of the mission div
     this.street_id = 'street';
@@ -248,8 +247,9 @@ Update.prototype.screen_peace_right_update = function(){
  * Sets the title msg to the standard
  */
 Update.prototype.update_title_msg = function(){
+    var self = this;
     $.getJSON(this.url_update_title_msg, function(data){
-        $('#' + self.title_id).html(data.title_msg);
+        $('#' + self.classification_id).html(data.title_msg);
     });
 }
 
