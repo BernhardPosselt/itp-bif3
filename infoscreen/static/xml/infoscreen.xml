@@ -1,13 +1,13 @@
 <root>
 	<einsatz id="MI 947">
 		<alarmstufe>B3</alarmstufe>
-		<meldebild></meldebild>
+		<meldebild>Dachstuhlbrand</meldebild>
 		<nummer1>3</nummer1>
 		<nummer2></nummer2>
 		<nummer3></nummer3>
-		<plz></plz>
+		<plz>3161</plz>
 		<strasse></strasse>
-		<ort></ort>
+		<ort>St.Veit/Gölsen</ort>
 		<abschnitt></abschnitt>
 		<objekt></objekt>
 		<bemerkung>Hier steht eine beliebige Bemerkung!</bemerkung>
@@ -97,4 +97,6 @@
 			<hintergrund>0</hintergrund>
 		</dispo>
 	</einsatz>
+
+	
 </root>
