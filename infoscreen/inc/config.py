@@ -89,8 +89,8 @@ class WebsiteConfig(object):
         # music settings
         config.set('settings', 'xml_url', str(self.xml_url))
         config.set('settings', 'update_interval', str(self.update_interval))
-        config.set('settings', 'welcome_msg', str(self.welcome_msg))
-        config.set('settings', 'title_msg', str(self.title_msg))
+        config.set('settings', 'welcome_msg', self.welcome_msg)
+        config.set('settings', 'title_msg', self.title_msg)
         config.set('settings', 'gmap_key', str(self.gmap_key))
         try:
             with open(self.mainConfig, 'wb') as confFile:

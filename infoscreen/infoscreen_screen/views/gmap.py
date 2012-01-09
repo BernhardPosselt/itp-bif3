@@ -34,11 +34,11 @@ def gmap_adresse(request, id):
     
    
     tpl = 'javascript/gmaps.js'
-   
+    print einsatz.ort
     ctx = {
-        'plz': str(einsatz.plz),
-        'ort': str(einsatz.ort),
-        'strasse': str(einsatz.strasse),
-        'hausnummer': str(einsatz.nummer1),
+        'plz': einsatz.plz,
+        'ort': einsatz.ort,
+        'strasse': einsatz.strasse,
+        'hausnummer': einsatz.nummer1,
     }
     return render(request, tpl,ctx)
