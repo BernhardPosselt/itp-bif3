@@ -81,7 +81,7 @@ class Einsaetze(models.Model):
     ort = models.CharField("Ort", max_length=200, blank=True)    
     bemerkung = models.TextField("Bemerkungen", blank=True)
     objekt = models.CharField("Objekt", blank=True, max_length=200, help_text = "Objekt in dem ein Einsatz nötig ist (z.B.: Krankenhaus, Schule, ...")
-    einsatznr = models.IntegerField("Einsatznummer", unique=True, help_text = "Eindeutige Nummer") # unique?
+    einsatznr = models.IntegerField("Einsatznummer", help_text = "Eindeutige Nummer")
     einsatzerzeugt = models.DateTimeField("Einsatz erzeugt", help_text = "Datum und Uhrzeit an dem der Einsatz angelegt wird")    
     meldebild = models.ForeignKey("Meldebilder", help_text = "Meldebild des Einsatzes")    
     melder = models.TextField("Melder", blank = True, max_length=200, help_text ="Wer hat den Einsatz gemeldet.")
