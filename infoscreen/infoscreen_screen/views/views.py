@@ -43,7 +43,6 @@ def website_settings(request):
         config = WebsiteConfig(settings.WEBSITE_CFG)
         config_values = {
             'xml_url': config.xml_url,
-            'kml_url': config.kml_url,
             'gmap_key': config.gmap_key,
             'welcome_msg': config.welcome_msg,
             'title_msg': config.title_msg,

@@ -14,10 +14,8 @@ from infoscreen.inc.config import WebsiteConfig
 class SettingsForm(forms.Form):
     """This form is used to set values
     """
-    xml_url = forms.CharField(label='XML URL', 
+    xml_url = forms.URLField(label='XML URL', 
         help_text='Die URL die für neue Einsätze abgefragt wird.')
-    kml_url = forms.CharField(label='KML URL', 
-        help_text='Die URL von der das KML für Google Maps abgefragt wird.')
     gmap_key = forms.CharField(label='Google Maps API key', 
         help_text='Der Key, der benötigt wird, um sich mit Google Maps zu verbinden')
     title_msg = forms.CharField(label='Titel', 
@@ -35,7 +33,6 @@ class SettingsForm(forms.Form):
         config = WebsiteConfig(settings.WEBSITE_CFG)
         config.update_interval = self.cleaned_data['update_interval']
         config.xml_url = self.cleaned_data['xml_url']
-        config.kml_url = self.cleaned_data['kml_url']
         config.gmap_key = self.cleaned_data['gmap_key']
         config.welcome_msg = self.cleaned_data['welcome_msg']
         config.title_msg = self.cleaned_data['title_msg']
