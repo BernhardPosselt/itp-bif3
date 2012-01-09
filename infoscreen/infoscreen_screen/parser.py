@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
 from lxml import etree
 from infoscreen.infoscreen_screen.models import Einsaetze as EinsatzModel
 from datetime import *
