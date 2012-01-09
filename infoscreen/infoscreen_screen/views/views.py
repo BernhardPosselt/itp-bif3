@@ -56,6 +56,7 @@ def website_settings(request):
         'form': form,
     })
 
+
 def bildschirm_einsatz_links(request):
     """
     Doku
