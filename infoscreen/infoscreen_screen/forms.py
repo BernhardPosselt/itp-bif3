@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
+# System imports
+import os
+
 # Django imports
 from django import forms
 from django.contrib.auth.models import User
@@ -51,7 +54,7 @@ class SettingsForm(forms.Form):
         Keyword arguments:
         upload_file -- The upload file object which we get from request.FILES
         """
-        name = 'infoscreen.kml'
+        name = 'hydranten.kml'
         upload_theme_path = os.path.join( settings.MEDIA_ROOT, 'kml/' )
         dest_name = '%s%s' % (upload_theme_path, name)
         
