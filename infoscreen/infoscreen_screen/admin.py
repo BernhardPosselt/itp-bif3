@@ -4,6 +4,40 @@
 from django.contrib import admin
 from infoscreen.infoscreen_screen.models import *
 
+def finish(modeladmin, request, queryset):
+	queryset.update(abgeschlossen=True)
+finish.short_description = "Einsaetze abschliessen"
+
+def unfinish(modeladmin, request, queryset):
+	queryset.update(abgeschlossen=False)
+unfinish.short_description = "Einsaetze aktivieren"
+
+def printed(modeladmin, request, queryset):
+	queryset.update(ausgedruckt=True)
+printed.short_description = "Einsaetze ausgedruckt"
+
+def notprinted(modeladmin, request, queryset):
+	queryset.update(ausgedruckt=False)
+notprinted.short_description = "Einsaetze nicht ausgedruckt"
+
+def inrepairvehicles(modeladmin, request, queryset):
+	queryset.update(reperatur=True)
+inrepairvehicles.short_description = "Fahrzeuge in Reparatur"
+
+def notinrepairvehicles(modeladmin, request, queryset):
+	queryset.update(reperatur=False)
+notinrepairvehicles.short_description = "Fahrzeuge nicht in Reparatur"
+
+def inrepairutils(modeladmin, request, queryset):
+	queryset.update(reperatur=True)
+inrepairutils.short_description = "Geraete in Reparatur"
+
+def notinrepairutils(modeladmin, request, queryset):
+	queryset.update(reperatur=False)
+notinrepairutils.short_description = "Geraete nicht in Reparatur"
+
+
+
 class DispoAdmin(admin.TabularInline):
 	model = Dispos
 	extra = 0
@@ -16,6 +50,7 @@ class EinsatzAdmin(admin.ModelAdmin):
     date_hierarchy = 'einsatzerzeugt'
     search_fields = ["nummer1", 'nummer2']
     inlines = (DispoAdmin, )
+    actions = [finish, unfinish, printed, notprinted]
     
     
 class AusrueckeordnungAdmin(admin.TabularInline):
@@ -24,13 +59,18 @@ class AusrueckeordnungAdmin(admin.TabularInline):
 	extra = 0
     
 class FahrzeugAdmin(admin.ModelAdmin):
-	list_display = ('kuerzel', 'beschreibung')	
+	list_display = ('kuerzel', 'beschreibung', 'reperatur')
+	list_filter = ("reperatur", )
+	actions = [inrepairvehicles, notinrepairvehicles]	
 
 class GeraetAdmin(admin.ModelAdmin):
-	list_display = ('beschreibung',)	
+	list_display = ('beschreibung', 'reperatur')
+	list_filter = ("reperatur", )	
+	actions = [inrepairutils, notinrepairutils]
 
 class MeldebildAdmin(admin.ModelAdmin):	
 	list_display = ('beschreibung', 'stufe');
+	list_filter = ("stufe", )
 	ordering = ('stufe',)
 	search_fields = ['beschreibung']
 	inlines = (AusrueckeordnungAdmin, )
