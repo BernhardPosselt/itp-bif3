@@ -141,11 +141,11 @@ class DispoKlasse(object):
         Besteht bereits ein Einsatz mit der derselben ID,
         wird dieser herangezogen und geupdatet
         """
-        try:  
+        try: 
             einsatz_id = EinsatzModel.objects.get(einsatz = self.einsatz)
             dispomod = DispoModel.objects.get(dispo=self.dispo,einsatz = einsatz_id)
             return dispomod
-        except EinsatzModel.DoesNotExist:
+        except (EinsatzModel.DoesNotExist, DispoModel.DoesNotExist):
             return False
 
 
@@ -156,7 +156,7 @@ class DispoKlasse(object):
         """
         
         # get the database model of the dispo
-        
+       
         dispomod = self.getModel()
         if not dispomod:
             dispomod = DispoModel()
@@ -205,8 +205,7 @@ class XML(object):
         DOKU
         """
         einsatz_id = 0
-        xml_tree = etree.XML(xml)
-        xml_root = xml_tree.getroot()
+        xml_root = etree.fromstring(xml)
         context = etree.iterwalk(xml_root, events=("start",))
        
         # Alle Attribute des XML-Files werden durchgelaufen
@@ -232,16 +231,13 @@ class XML(object):
                     setattr(einsatzobj,elem.tag,elem.text)
         
         #Suche nicht abgeschlossene Einsaetze und schliesse sie ggfls. ab
-        xml_tree = etree.parse(xml)
-        xml_root = xml_tree.getroot()
-        context = etree.iterwalk(xml_root, events=("start",))
+       
         unabgeschl = EinsatzModel.objects.filter(abgeschlossen = False)
         # Alle unabgeschlossenen Einsätze werden durchgelaufen
         for unab in unabgeschl:
             close = 0 
-            xml_tree = etree.parse(xml)
-            xml_root = xml_tree.getroot()
-            context = etree.iterwalk(xml_root, events=("start",), tag = "einsatz")
+            xml_root = etree.fromstring(xml)
+            context = etree.iterwalk(xml_root, events=("start",))
             for action,elem in context:
                if elem.tag == "einsatz":
                     if elem.get("id") == unab.einsatz:
