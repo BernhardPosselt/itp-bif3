@@ -1,20 +1,20 @@
 <root>
 	<einsatz id="MI 947">
 		<alarmstufe>B3</alarmstufe>
-		<meldebild>Wohnhausbrand</meldebild>
+		<meldebild></meldebild>
 		<nummer1>3</nummer1>
 		<nummer2></nummer2>
 		<nummer3></nummer3>
-		<plz>3500</plz>
-		<strasse>Hoher Markt</strasse>
-		<ort>Krems</ort>
+		<plz></plz>
+		<strasse></strasse>
+		<ort></ort>
 		<abschnitt></abschnitt>
 		<objekt></objekt>
 		<bemerkung>Hier steht eine beliebige Bemerkung!</bemerkung>
 		<einsatzerzeugt>25.04.2008 18:56:58</einsatzerzeugt>
 		<melder></melder>
 		<meldertel></meldertel>
-		<einsatznr>1986638816</einsatznr>
+		<einsatznr>1986638816333</einsatznr>
 		<dispo id="1">
 			<disponame>Gaweinstal</disponame>
 			<zeitdispo>25.04.2008 18:57:41</zeitdispo>
@@ -47,7 +47,7 @@
 		<einsatzerzeugt>01.12.2011 12:56:58</einsatzerzeugt>
 		<melder></melder>
 		<meldertel></meldertel>
-		<einsatznr>19863488343</einsatznr>
+		<einsatznr>198634883433</einsatznr>
 		<dispo id="1">
 			<disponame>Tulln</disponame>
 			<zeitdispo>01.12.2011 12:57:41</zeitdispo>

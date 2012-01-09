@@ -44,7 +44,8 @@ class WebsiteConfig(object):
         self.parserError = False
         self.url = '/'
         self.xml_url = '/'
-        self.kml_url = '/'
+        self.kml_url = "infoscreen/static/kml/Hydranten.kml"
+        self.gmap_key = "ABQIAAAA6qiASEwfhYtcYhMd2vJTQRQorY6mP03n72EKZcQG5HcZqK1IwRSlvhuDn4o5b4Mzk8fUw0cst-Ix_Q"
         self.welcome_msg = 'Hallo'
         self.title_msg = 'Feuerwehr Infoscreen'
         self.update_interval = 10 # in seconds

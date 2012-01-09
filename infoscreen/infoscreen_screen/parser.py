@@ -65,7 +65,7 @@ class EinsatzKlasse(object):
                     try:
                         meldebild_beschreibung = MeldebildModel.objects.get(beschreibung = self.meldebild)
                         einsatzmod.meldebild = meldebild_beschreibung
-                    except:
+                    except Meldebild.DoesNotExist:
                         meldebild_beschreibung = MeldebildModel.objects.get(beschreibung = "Kein Meldebild vorhanden")
                         einsatzmod.meldebild = meldebild_beschreibung
                 elif attr == "einsatzerzeugt":
@@ -130,7 +130,7 @@ class DispoKlasse(object):
             einsatz_id = EinsatzModel.objects.get(einsatz = self.einsatz)
             dispomod = DispoModel.objects.get(dispo=self.dispo,einsatz = einsatz_id)
             return dispomod
-        except :
+        except EinsatzModel.DoesNotExist:
             return False
 
 

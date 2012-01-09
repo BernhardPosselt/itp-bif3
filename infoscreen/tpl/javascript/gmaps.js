@@ -10,10 +10,15 @@ window.onload = function() {
         plz = '{{ plz }}';
         strasse = '{{ strasse }}';
         hausnummer = '{{ hausnummer }}';
+        if (!ort)
+        {
+            plz = "3161";
+            ort = "St. Veit/Gölsen";
+        }
         var adresse = hausnummer + "," + strasse + ", " + plz + "," + ort;
         showAddress(adresse);
        // gxmlopts["nozoom"]=true;
-        gml = new GeoXml("gml", mmap, "{{ STATIC_URL }}kml/Hydranten.kml");
+        gml = new GeoXml("gml", mmap, '{{ kml_url }}');
         gml.parse();
     }
 }
