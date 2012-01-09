@@ -39,6 +39,7 @@ function Update(screen, mission) {
     this.url_update_mission = '{% url screen:update_mission %}';
     this.url_update_dispos = '{% url screen:update_dispos %}';
     this.url_update_map = '{% url screen:update_map %}';
+    this.url_update_title_msg = '{% url screen:update_title_msg %}';
     
     // ids of each div field we need to load data into
     this.welcome_id = 'willkommen';
@@ -52,6 +53,7 @@ function Update(screen, mission) {
     this.map_id = 'karte';
     this.running_missions_id = 'lauf_missionen';
     this.header_id = 'header';
+    this.title_id = 'header h1';
 
     // ids of the mission div
     this.street_id = 'street';
@@ -63,8 +65,9 @@ function Update(screen, mission) {
     this.notes_id = 'notes';
     this.object_id = 'object';
     this.classification_id = 'classification';
-    this.alarmnr = 'alarmstufe';
-    this.notifier = 'notifier';
+    this.alarmnr_id = 'alarmstufe';
+    this.notifier_id = 'notifier';
+    
     
     // cache variables to check for reloading map
     this.cache_street = '';
@@ -245,7 +248,9 @@ Update.prototype.screen_peace_right_update = function(){
  * Sets the title msg to the standard
  */
 Update.prototype.update_title_msg = function(){
-    $('#header h1').html('{{ config.title_msg }}'); 
+    $.getJSON(this.url_update_title_msg, function(data){
+        $('#' + self.title_id).html(data.title_msg);
+    });
 }
 
 
@@ -265,8 +270,8 @@ Update.prototype.screen_mission_left_update = function(){
         $('#' + self.notes_id).html(data.notes);
         $('#' + self.object_id).html(data.object);
         $('#' + self.classification_id).html(data.classification);
-        $('#' + self.alarmnr).html(data.alarmnr);
-        //$('#' + this.notifier).html(data.notifier);
+        $('#' + self.alarmnr_id).html(data.alarmnr);
+        //$('#' + this.notifier_id).html(data.notifier);
         self.update_alarmnr_color(data.alarmnr);
     });
     $('#' + this.vehicle_order_id).load(this.url_update_vehicle_order, data);
@@ -283,7 +288,7 @@ Update.prototype.screen_mission_right_update = function(){
     $.getJSON(this.url_update_mission, data, function(data){
         
         $('#' + self.classification_id).html(data.classification);
-        $('#' + self.alarmnr).html(data.alarmnr);        
+        $('#' + self.alarmnr_id).html(data.alarmnr);        
         var iframe_url = self.url_update_map + "?mission_id=" + data.id;
         var $frame = $('#' + self.map_id + ' iframe');
 

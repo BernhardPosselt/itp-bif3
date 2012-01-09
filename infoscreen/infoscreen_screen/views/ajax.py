@@ -52,6 +52,16 @@ def update_welcome(request):
     return render(request, "infoscreen_screen/ajax/update_welcome.json", ctx)
 
 
+def update_title_msg(request):
+    """Returns json with the title msg
+    """
+    config = WebsiteConfig(settings.WEBSITE_CFG)
+    ctx = {
+        'title_msg': config.title_msg
+    }
+    return render(request, "infoscreen_screen/ajax/update_title_msg.json", ctx)
+
+
 def update_news(request):
     """Returns html with all news
     """
