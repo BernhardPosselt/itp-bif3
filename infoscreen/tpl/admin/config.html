@@ -24,7 +24,7 @@
 
 <div id="content-main">
     <h1>Website Konfiguration</h1>
-    <form method="post" action=".">
+    <form method="post" action="." enctype="multipart/form-data">
         <div>
             {% csrf_token %}
             {% if form.errors %}

@@ -35,10 +35,13 @@ def website_settings(request):
     Doku
     """    
     if request.method == 'POST':
-        form = SettingsForm(request.POST)
+        form = SettingsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect( reverse('admin:index') )
+            # check if we upload a file, otherwise skip file upload
+            if 'kml_file' in request.FILES:
+                form.upload_kml(request.FILES['kml_file'])
+            return HttpResponseRedirect( reverse('website_settings') )
     else:
         config = WebsiteConfig(settings.WEBSITE_CFG)
         config_values = {
