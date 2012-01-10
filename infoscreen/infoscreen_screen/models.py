@@ -77,7 +77,7 @@ class Einsaetze(models.Model):
     nummer1 = models.CharField("Hausnummer", max_length=50, blank=True, help_text = "Hausnummer der Einsatzadresse")
     nummer2 = models.CharField("Stiege", max_length=50, blank=True, help_text = "Stiege der Einsatzadresse")
     nummer3 = models.CharField("Tür", max_length=50, blank=True, help_text = "Türnummer der Einsatzadresse")
-    plz = models.IntegerField("Postleitzahl", blank=True, null=True, help_text = "Postleitzahl der Einsatzadresse")
+    plz = models.CharField("Postleitzahl", blank=True, max_length=10, help_text = "Postleitzahl der Einsatzadresse")
     ort = models.CharField("Ort", max_length=200, blank=True, help_text = "Ort der Einsatzdresse")    
     bemerkung = models.TextField("Bemerkungen", blank=True, help_text = "Die Bemerkungen des Einsatzes, welche beim \
 	Erstellen des Einsatzes angegeben wurden, enthalten meist wichtige Informationen zum Einsatz selbst")
