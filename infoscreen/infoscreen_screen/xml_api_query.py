@@ -16,7 +16,7 @@ def xml_api_query():
             response = urllib2.urlopen(config.xml_url)
             xmlfile = response.read()
             einsatzxml = XML(xmlfile)
-        except(HTTPError, URLError):
+        except(urllib2.HTTPError, urllib2.URLError):
             pass
         finally:
             time.sleep(5)

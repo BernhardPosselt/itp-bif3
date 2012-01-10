@@ -65,7 +65,7 @@ class EinsatzKlasse(object):
         #Alle möglichen Attribute werden durchgegangen
         einsatztags = [ "einsatz", "alarmstufe", "meldebild", "nummer1", "nummer2",
             "nummer3", "plz", "strasse", "objekt","ort", "bemerkung", "einsatzerzeugt", 
-            "melder", "einsatznr", "abgeschlossen", "ausgedruckt"] 
+            "melder", "meldertel", "einsatznr", "abgeschlossen", "ausgedruckt"] 
         try:
             for attr in einsatztags:
                 if attr == "meldebild":
