@@ -1,0 +1,59 @@
+<root>
+	<einsatz id="GF 2786">
+		<alarmstufe>B1</alarmstufe>
+		<meldebild>Müllbehälterbrand</meldebild>
+		<nummer1>36</nummer1>
+		<nummer2></nummer2>
+		<nummer3>4</nummer3>
+		<plz>1220</plz>
+		<strasse>Markomannenstrasse</strasse>
+		<ort>Wien</ort>
+		<abschnitt></abschnitt>
+		<objekt></objekt>
+		<bemerkung>Brand wurde versucht von Haßan Ölum</bemerkung>
+		<einsatzerzeugt>12.12.2011 14:30:56</einsatzerzeugt>
+		<melder>Ümit Üzgür</melder>
+		<meldertel>0190666666</meldertel>
+		<einsatznr>24600323</einsatznr>
+		<dispo id="1">
+			<disponame>Hainfeld</disponame>
+			<zeitdispo>12.12.2011 14:31:42</zeitdispo>
+			<zeitalarm>12.12.2011 14:32:39</zeitalarm>
+			<zeitaus>12.12.2011 14:35:37</zeitaus>
+			<zeitein></zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="2">
+			<disponame>Rohrbach</disponame>
+			<zeitdispo>12.12.2011 14:31:42</zeitdispo>
+			<zeitalarm>12.12.2011 14:32:07</zeitalarm>
+			<zeitaus>12.12.2011 14:38:13</zeitaus>
+			<zeitein></zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="3">
+			<disponame>Rainfeld</disponame>
+			<zeitdispo>12.12.2011 14:31:42</zeitdispo>
+			<zeitalarm>12.12.2011 14:33:12</zeitalarm>
+			<zeitaus>12.12.2011 14:39:22</zeitaus>
+			<zeitein></zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="4">
+			<disponame>St.Veit/Gölsen</disponame>
+			<zeitdispo>12.12.2011 14:31:42</zeitdispo>
+			<zeitalarm>12.12.2011 14:33:44</zeitalarm>
+			<zeitaus>12.12.2011 14:39:44</zeitaus>
+			<zeitein></zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+		<dispo id="5">
+			<disponame>Ramsau</disponame>
+			<zeitdispo>12.12.2011 14:31:42</zeitdispo>
+			<zeitalarm>12.12.2011 14:34:16</zeitalarm>
+			<zeitaus>12.12.2011 14:39:44</zeitaus>
+			<zeitein></zeitein>
+			<hintergrund>0</hintergrund>
+		</dispo>
+	</einsatz>
+</root>
