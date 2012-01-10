@@ -42,6 +42,7 @@ $build_pkg
 # copy deb file into root folder and rm build folder
 cd ..
 cp *.deb ../../
+cd ../../
 rm -rf build/
 
 
