@@ -81,11 +81,11 @@ class Einsaetze(models.Model):
     ort = models.CharField("Ort", max_length=200, blank=True, help_text = "Ort der Einsatzdresse")    
     bemerkung = models.TextField("Bemerkungen", blank=True, help_text = "Die Bemerkungen des Einsatzes, welche beim \
 	Erstellen des Einsatzes angegeben wurden, enthalten meist wichtige Informationen zum Einsatz selbst")
-    objekt = models.CharField("Objekt", blank=True, max_length=200, help_text = "Objekt in dem ein Einsatz nötig ist (z.B.: Krankenhaus, Schule, ...")
-    einsatznr = models.IntegerField("Einsatznummer", help_text = "Eindeutige Nummer")
+    objekt = models.CharField("Objekt", blank=True, max_length=200, help_text = "Objekt in dem ein Einsatz nötig ist (z.B.: Krankenhaus, Schule, ...)")
+    einsatznr = models.IntegerField("Einsatznummer", help_text = "Eindeutige Nummer für den Einsatz")
     einsatzerzeugt = models.DateTimeField("Einsatz erzeugt", help_text = "Datum und Uhrzeit an dem der Einsatz angelegt wurde")    
     meldebild = models.ForeignKey("Meldebilder", help_text = "Meldebild des Einsatzes")    
-    melder = models.TextField("Melder", blank = True, max_length=200, help_text ="Wer den Einsatz gemeldet hat")
+    melder = models.TextField("Melder", blank = True, max_length=200, help_text ="Person, welche den Einsatz gemeldet hat")
     abgeschlossen = models.BooleanField("Abgeschlossen", blank=True, help_text= "Ob der Einsatz bereits abgeschlossen wurde")
     ausgedruckt = models.BooleanField("Ausgedruckt", blank=True, help_text = "Ob der Einsatz bereits ausgedruckt wurde")
     modifiziert = models.DateTimeField(auto_now=True)
@@ -99,13 +99,13 @@ class Einsaetze(models.Model):
     
 #Dispo - Feuerwehren alarmiert  
 class Dispos(models.Model):
-    einsatz = models.ForeignKey("Einsaetze", help_text ="Einsatz dem der Dispo zugeordnet wird")
+    einsatz = models.ForeignKey("Einsaetze", help_text ="Einsatz dem der Dispo zugeordnet ist")
     dispo = models.IntegerField("Dispo ID", help_text = "ID des Dispo, muss nicht eindeutig sein")
     disponame = models.CharField("Name", max_length=200, help_text = "Name der alarmierten Feuerwehr")
-    zeitdispo = models.DateTimeField("Dispozeit")
-    zeitalarm = models.DateTimeField("Alarmierungszeit", blank=True, null=True)
-    zeitaus = models.DateTimeField("Ausrückzeit", blank=True, null=True)
-    zeitein = models.DateTimeField("Einrückzeit", blank=True, null=True)
+    zeitdispo = models.DateTimeField("Dispozeit", help_text = "Zeit zu welcher der Dispo erstellt wurde")
+    zeitalarm = models.DateTimeField("Alarmierungszeit", blank=True, null=True, help_text = "Zeit zu welcher die Feuerwehr alarmiert wurde")
+    zeitaus = models.DateTimeField("Ausrückzeit", blank=True, null=True, help_text = "Zeitpunkt des Ausrückens der Feuerwehr")
+    zeitein = models.DateTimeField("Einrückzeit", blank=True, null=True, help_text = "Zeitpunkt des Zurückkehrens der Feuerwehr")
     hintergrund = models.CharField("Hintergrund", max_length =200,blank=True)
     modifiziert = models.DateTimeField(auto_now=True)
     
