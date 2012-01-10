@@ -12,6 +12,7 @@
 *.pyc
 *.db
 geany_run_script.sh
+*.deb
 
 # OS or Editor folders
 .DS_Store
