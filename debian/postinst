@@ -34,9 +34,11 @@ if [ "$1" = "configure" ]; then
 	else
 		python /usr/share/infoscreen/infoscreen/manage.py syncdb --noinput
 	fi
+	# load admin user fixture
+	python /usr/share/infoscreen/infoscreen/manage.py loaddata /usr/share/infoscreen/infoscreen/initial_data.json
 	#Ask to reload webserver config
 	db_get infoscreen/reload_webserver || true
-	#if yes, setup laudio
+	#if yes, setup infoscreen
 	if [ "$RET" = "true" ]; then
 		apache_link
 		prms_fix

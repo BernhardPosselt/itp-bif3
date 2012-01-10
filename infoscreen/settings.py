@@ -10,7 +10,7 @@ from inc.config import WebsiteConfig
 # infoscreen config vars
 WEBSITE_CFG = {
     'MAIN_CFG': '/etc/infoscreen/website.cfg',
-    'APACHE_CFG': '/etc/infoscreen/apache/infoscreen.conf',
+    'APACHE_CFG': '/etc/infoscreen/apache/infoscreen_apache.conf',
 }
 CONF = WebsiteConfig(WEBSITE_CFG)
 WEB_URL = CONF.url

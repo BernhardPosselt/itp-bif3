@@ -6,3 +6,4 @@ infoscreen/static /usr/share/infoscreen/infoscreen
 infoscreen/tests /usr/share/infoscreen/infoscreen
 infoscreen/tpl /usr/share/infoscreen/infoscreen
 infoscreen/wsgi /usr/share/infoscreen/infoscreen
+infoscreen/initial_data.json /usr/share/infoscreen/infoscreen
