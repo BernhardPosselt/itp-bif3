@@ -1,0 +1,5 @@
+include MANIFEST.in AUTHORS COPYING README.rst
+
+recursive-include infoscreen/ *
+recursive-include dist/ *
+

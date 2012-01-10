@@ -1,0 +1,10 @@
+Template: infoscreen/reload_webserver
+Type: boolean
+Default: true
+_Description: Configure and reload the web server?
+ The web server needs to be reconfigured and restarted to enable infoscreen.
+ Please choose whether you want to reload it automatically now or do it
+ yourself later.
+ .
+ To manually restart the web server, use the following command:
+ "/etc/init.d/apache2 restart"

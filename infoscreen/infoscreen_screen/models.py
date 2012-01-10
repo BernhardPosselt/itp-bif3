@@ -86,6 +86,7 @@ class Einsaetze(models.Model):
     einsatzerzeugt = models.DateTimeField("Einsatz erzeugt", help_text = "Datum und Uhrzeit an dem der Einsatz angelegt wurde")    
     meldebild = models.ForeignKey("Meldebilder", help_text = "Meldebild des Einsatzes")    
     melder = models.TextField("Melder", blank = True, max_length=200, help_text ="Person, welche den Einsatz gemeldet hat")
+    meldertel = models.IntegerField("Meldertelefon", blank = True, help_text = "Telefonnummer der Person, welche den Einsatz gemeldet hat")
     abgeschlossen = models.BooleanField("Abgeschlossen", blank=True, help_text= "Ob der Einsatz bereits abgeschlossen wurde")
     ausgedruckt = models.BooleanField("Ausgedruckt", blank=True, help_text = "Ob der Einsatz bereits ausgedruckt wurde")
     modifiziert = models.DateTimeField(auto_now=True)

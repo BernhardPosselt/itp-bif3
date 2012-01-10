@@ -1,0 +1,8 @@
+dist/infoscreen_apache.conf /etc/laudio/apache
+
+infoscreen/inc /usr/share/infoscreen/infoscreen
+infoscreen/infoscreen_screen /usr/share/infoscreen/infoscreen
+infoscreen/static /usr/share/infoscreen/infoscreen
+infoscreen/test /usr/share/infoscreen/infoscreen
+infoscreen/tpl /usr/share/infoscreen/infoscreen
+infoscreen/wsgi /usr/share/infoscreen/infoscreen
