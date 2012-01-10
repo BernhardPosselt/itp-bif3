@@ -20,13 +20,13 @@ class EinsatzKlasse(object):
         datal  = date(2001,01,01)
         zeital = time(0,0,0)
         tstamp = datetime.combine(datal,zeital)
-        self.einsatz = 0
+        self.einsatz = ""
         self.alarmstufe = ""
         self.meldebild= ""
         self.nummer1 = ""
         self.nummer2 = ""
         self.nummer3 = ""
-        self.plz= 0
+        self.plz= ""
         self.strasse = ""
         self.ort = ""
         self.bemerkung = ""
