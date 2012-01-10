@@ -11,6 +11,7 @@ set -e
 DB_FILE="/var/lib/infoscreen"
 INSTALL_DIR="/usr/share/infoscreen"
 alac="/etc/apache2/conf.d"
+webc="/etc/infoscreen/website.cfg"
 
 if [ "$1" = "purge" ]; then
 	if [ -e $INSTALL_DIR ]; then
@@ -21,6 +22,9 @@ if [ "$1" = "purge" ]; then
 	fi
 	if [ -e $alac ]; then
 		rm -f $alac/infoscreen_apache.conf
+	fi
+	if [ -e $webc ]; then
+		rm -f $webc
 	fi
 	if [ -x /usr/sbin/invoke-rc.d ]; then
 		invoke-rc.d apache2 reload 3>/dev/null || true
