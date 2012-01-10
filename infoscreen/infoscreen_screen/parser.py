@@ -101,8 +101,10 @@ class EinsatzKlasse(object):
                     tstamp = datetime.combine(datal,zeital)
                     einsatzmod.einsatzerzeugt  = tstamp
                 elif attr == "ausgedruckt":
-                    if einsatzmod.ausgedruckt:
+                    if einsatzmod.ausgedruckt == True:
                         einsatzmod.ausgedruckt = True
+                    else:
+                        einsatzmod.ausgedruckt = False
                 else:
                     setattr(einsatzmod, attr, getattr(self, attr) )
             #Objekt wird in die DB gespeichert
