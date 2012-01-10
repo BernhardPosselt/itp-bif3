@@ -28,6 +28,10 @@ apache_link() {
 
 
 if [ "$1" = "configure" ]; then
+    #create dummy config and rights
+    touch /etc/infoscreen/website.cfg
+    chown www-data:www-data /etc/infoscreen/website.cfg
+
 	#Set up the db
 	if [ -e /var/lib/infoscreen/infoscreen.db ]; then
 		printf "infoscreen.db already exists\n"
