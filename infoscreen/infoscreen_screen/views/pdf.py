@@ -47,9 +47,11 @@ def einsatzfax_pdf(request, id):
         p.setFont("Helvetica", 50)
         p.drawString(rand_links, 790, alarm.stufe + " " + meldeb.beschreibung)
         p.setFont("Helvetica", 25)
-        p.drawString(rand_links, 750, einsatz.strasse + " " + einsatz.nummer1)
+        p.drawString(rand_links, 750, einsatz.strasse + " " + einsatz.nummer1 + " " + einsatz.nummer2 + " " + einsatz.nummer3)
         p.drawString(rand_links, 720, str(einsatz.plz) + " " + einsatz.ort)
-        p.drawString(rand_links, 690, einsatz.bemerkung)
+        p.drawString(rand_links, 690, "Melder: " + einsatz.melder)
+        p.drawString(rand_links, 660, str(einsatz.einsatzerzeugt))
+        p.drawString(rand_links, 630, einsatz.bemerkung)
 
         # Close the PDF object cleanly, and we're done.
         p.showPage()
