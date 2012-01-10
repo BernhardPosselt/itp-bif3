@@ -10,6 +10,10 @@ if [ -e build ]; then
     rm -rf build/
 fi
 
+if [ -e infoscreen_1.0_all.deb ]; then
+    rm -f infoscreen_1.0_all.deb
+fi
+
 # create build dir and copy relevant files into it
 mkdir build
 cp -r infoscreen/ build/
