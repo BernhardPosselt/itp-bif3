@@ -11,7 +11,7 @@ from infoscreen.infoscreen_screen.xml_api_query import xml_api_query
 # enable admin interfaces
 admin.autodiscover()
 urlpatterns = patterns('',
-    url(r'^admin/website/configuration/$', 'infoscreen_screen.views.views.website_settings', name='website_settings'),
+    url(r'^admin/website/configuration/$', 'infoscreen.infoscreen_screen.views.views.website_settings', name='website_settings'),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
