@@ -8,6 +8,13 @@ import re
 from infoscreen.infoscreen_screen.models import Meldebilder as MeldebildModel
 from infoscreen.infoscreen_screen.models import Dispos as DispoModel
 
+#nur für Testzwecke
+import string
+import random
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for x in range(size))  
+
 
 class EinsatzKlasse(object):
     """
@@ -58,7 +65,7 @@ class EinsatzKlasse(object):
         """
         
         # get the database model of the einsatz
-        
+        #self.einsatz = id_generator()
         einsatzmod = self.getModel()
         if not einsatzmod:
             einsatzmod = EinsatzModel()
