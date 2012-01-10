@@ -1,4 +1,4 @@
-dist/infoscreen_apache.conf /etc/infoscreen/apache
+dist/infoscreen_apache.conf /etc/infoscreen/apache/infoscreen.conf
 
 infoscreen/inc /usr/share/infoscreen/infoscreen
 infoscreen/infoscreen_screen /usr/share/infoscreen/infoscreen

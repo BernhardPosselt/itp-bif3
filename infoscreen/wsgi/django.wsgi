@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys
+import sys, os
 from os.path import dirname, abspath
 
 # append infoscreens's parent directory to the sys path
