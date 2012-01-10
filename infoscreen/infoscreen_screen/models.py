@@ -73,13 +73,14 @@ class Einsaetze(models.Model):
     einsatz = models.CharField("Einsatz ID", unique=True, max_length=200,
         help_text="Die Nummer die für den Einsatz von der Leitstelle vergeben \
             wird. Ist immer eindeutig.")
-    strasse = models.CharField("Adresse", max_length=300, blank=True)
-    nummer1 = models.CharField("Hausnummer", max_length=50, blank=True)
-    nummer2 = models.CharField("Stiege", max_length=50, blank=True)
-    nummer3 = models.CharField("Tür", max_length=50, blank=True)
-    plz = models.IntegerField("Postleitzahl", blank=True, null=True)
-    ort = models.CharField("Ort", max_length=200, blank=True)    
-    bemerkung = models.TextField("Bemerkungen", blank=True)
+    strasse = models.CharField("Adresse", max_length=300, blank=True, help_text = "Die Adresse des Einsatzes")
+    nummer1 = models.CharField("Hausnummer", max_length=50, blank=True, help_text = "Hausnummer der Einsatzadresse")
+    nummer2 = models.CharField("Stiege", max_length=50, blank=True, help_text = "Stiege der Einsatzadresse")
+    nummer3 = models.CharField("Tür", max_length=50, blank=True, help_text = "Türnummer der Einsatzadresse")
+    plz = models.IntegerField("Postleitzahl", blank=True, null=True, help_text = "Postleitzahl der Einsatzadresse")
+    ort = models.CharField("Ort", max_length=200, blank=True, help_text = "Ort der Einsatzdresse")    
+    bemerkung = models.TextField("Bemerkungen", blank=True, help_text = "Die Bemerkungen des Einsatzes, welche beim \
+	Erstellen des Einsatzes angegeben wurden, enthalten meist wichtige Informationen zum Einsatz selbst")
     objekt = models.CharField("Objekt", blank=True, max_length=200, help_text = "Objekt in dem ein Einsatz nötig ist (z.B.: Krankenhaus, Schule, ...")
     einsatznr = models.IntegerField("Einsatznummer", help_text = "Eindeutige Nummer")
     einsatzerzeugt = models.DateTimeField("Einsatz erzeugt", help_text = "Datum und Uhrzeit an dem der Einsatz angelegt wird")    
