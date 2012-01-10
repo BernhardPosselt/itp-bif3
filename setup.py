@@ -18,6 +18,7 @@ setup(
 	],
 	package_data = {
 	    '' : [
+	        'infoscreen/initial_data.json',
 	        'infoscreen/infoscreen_screen/sql/*', 
 	        'infoscreen/static/*', 
 	            'infoscreen/static/admin/*', 

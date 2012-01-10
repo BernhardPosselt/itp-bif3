@@ -16,7 +16,7 @@ prms_fix() {
 
 #Create apache2 alias symlink
 apache_link() {
-	lac=/etc/infoscreen/apache/infoscreen.conf
+	lac=/etc/infoscreen/apache/infoscreen_apache.conf
 	alac=/etc/apache2/conf.d/infoscreen_apache.conf
 	if [ -f $lac ]; then
 		if [ ! -e $alac ]; then
@@ -28,15 +28,21 @@ apache_link() {
 
 
 if [ "$1" = "configure" ]; then
+    #create dummy config and rights
+    touch /etc/infoscreen/website.cfg
+    chown www-data:www-data /etc/infoscreen/website.cfg
+
 	#Set up the db
 	if [ -e /var/lib/infoscreen/infoscreen.db ]; then
 		printf "infoscreen.db already exists\n"
 	else
 		python /usr/share/infoscreen/infoscreen/manage.py syncdb --noinput
 	fi
+	# load admin user fixture
+	python /usr/share/infoscreen/infoscreen/manage.py loaddata /usr/share/infoscreen/infoscreen/initial_data.json
 	#Ask to reload webserver config
 	db_get infoscreen/reload_webserver || true
-	#if yes, setup laudio
+	#if yes, setup infoscreen
 	if [ "$RET" = "true" ]; then
 		apache_link
 		prms_fix
