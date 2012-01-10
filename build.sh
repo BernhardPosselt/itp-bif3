@@ -5,6 +5,10 @@
 
 build_pkg=/usr/bin/dpkg-buildpackage
 
+# remove previous build dirs
+if [ -e build ]; then
+    rm -rf build/
+fi
 
 # create build dir and copy relevant files into it
 mkdir build
