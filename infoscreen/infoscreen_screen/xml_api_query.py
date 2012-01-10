@@ -11,8 +11,13 @@ import threading
 
 def xml_api_query():
     while True:
-        config = WebsiteConfig(settings.WEBSITE_CFG)
-        response = urllib2.urlopen(config.xml_url)
-        xmlfile = response.read()
-        einsatzxml = XML(xmlfile)
-        time.sleep(5)
+        try:
+            config = WebsiteConfig(settings.WEBSITE_CFG)
+            response = urllib2.urlopen(config.xml_url)
+            xmlfile = response.read()
+            einsatzxml = XML(xmlfile)
+        except(HTTPError, URLError):
+            pass
+        finally:
+            time.sleep(5)
+        
