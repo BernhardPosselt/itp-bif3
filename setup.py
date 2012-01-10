@@ -14,11 +14,11 @@ setup(
 	            'infoscreen', 
 	                'infoscreen/infoscreen_screen', 
 	                    'infoscreen/infoscreen_screen/views', 
-	                    'infoscreen/infoscreen_screen/sql', 
 	                'infoscreen/inc', 
 	],
 	package_data = {
 	    '' : [
+	        'infoscreen/infoscreen_screen/sql/*', 
 	        'infoscreen/static/*', 
 	            'infoscreen/static/admin/*', 
 	                'infoscreen/static/admin/css/*',
