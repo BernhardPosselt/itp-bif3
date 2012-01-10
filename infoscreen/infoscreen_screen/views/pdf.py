@@ -68,7 +68,7 @@ def einsatzfax_pdf(request, id):
 	if einsatz.melder:
 		content.append(Paragraph("Melder: " + einsatz.melder, style['BodyText']))
 	if einsatz.meldertel:
-		content.append(Paragraph("Meldertelefon: " + einsatz.meldertel, style['BodyText']))
+		content.append(Paragraph("Meldertelefon: " + str(einsatz.meldertel), style['BodyText']))
 	if einsatz.einsatzerzeugt:
 		content.append(Paragraph("Meldezeitpunkt: " + str(einsatz.einsatzerzeugt), style['BodyText']))
 	content.append(Paragraph(einsatz.bemerkung, style['BodyText']))

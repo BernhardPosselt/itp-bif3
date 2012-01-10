@@ -32,7 +32,7 @@ class EinsatzKlasse(object):
         self.bemerkung = ""
         self.objekt = ""
         self.melder = ""
-        self.meldertel = 0
+        self.meldertel = ""
         self.einsatznr = 0
         self.einsatzerzeugt = tstamp
         self.abgeschlossen = False
