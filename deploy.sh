@@ -4,7 +4,7 @@
 apt-get -y install dpkg-dev debhelper build-essential dh-make
 
 # purge and install infoscreen
-apt-get -y purge infoscreen --
+apt-get -y purge infoscreen
 git pull
 ./build
 dpkg -i infoscreen*.deb
