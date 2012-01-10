@@ -1,0 +1,59 @@
+#!/bin/bash
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+#Set file and folder permissions
+prms_fix() {
+	dirs=( "/usr/share/infoscreen" "/var/lib/infoscreen" )
+	for elem in ${dirs[@]}; do
+		chown -R www-data:www-data $elem
+		chmod -R 0770 $elem
+	done
+}
+
+#Create apache2 alias symlink
+apache_link() {
+	lac=/etc/infoscreen/apache/infoscreen.conf
+	alac=/etc/apache2/conf.d/infoscreen_apache.conf
+	if [ -f $lac ]; then
+		if [ ! -e $alac ]; then
+			ln -s $lac $alac
+		fi
+	fi
+}
+
+
+
+if [ "$1" = "configure" ]; then
+	#Set up the db
+	if [ -e /var/lib/infoscreen/infoscreen.db ]; then
+		printf "infoscreen.db already exists\n"
+	else
+		python /usr/share/infoscreen/infoscreen/manage.py syncdb --noinput
+	fi
+	#Ask to reload webserver config
+	db_get infoscreen/reload_webserver || true
+	#if yes, setup laudio
+	if [ "$RET" = "true" ]; then
+		apache_link
+		prms_fix
+		if [ -x /usr/sbin/invoke-rc.d ]; then
+			invoke-rc.d apache2 reload 3>/dev/null || true
+		else
+			/etc/init.d/apache2 reload 3>/dev/null || true
+		fi
+	fi
+	#If answer is no setup symlink, fix perms then exit gracefully.
+	if [ "$RET" = "false" ]; then
+		apache_link
+		prms_fix
+		exit 0
+	fi
+fi
+
+#DEBHELPER#
+
+exit 0

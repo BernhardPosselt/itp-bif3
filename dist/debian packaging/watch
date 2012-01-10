@@ -1,0 +1,4 @@
+#Watch file for infoscreen
+
+version=3
+http://githubredir.debian.net/github/raydiation/itp-bif3 (.*).tar.gz
