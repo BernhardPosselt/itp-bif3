@@ -16,7 +16,7 @@ prms_fix() {
 
 #Create apache2 alias symlink
 apache_link() {
-	lac=/etc/infoscreen/apache/infoscreen.conf
+	lac=/etc/infoscreen/apache/infoscreen_apache.conf
 	alac=/etc/apache2/conf.d/infoscreen_apache.conf
 	if [ -f $lac ]; then
 		if [ ! -e $alac ]; then
