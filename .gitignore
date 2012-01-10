@@ -13,6 +13,7 @@
 *.db
 geany_run_script.sh
 *.deb
+build
 
 # OS or Editor folders
 .DS_Store
