@@ -1,0 +1,35 @@
+#!/bin/sh
+# prerm script for laudio
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+DB_FILE="/var/lib/infoscreen"
+INSTALL_DIR="/usr/share/infoscreen"
+alac="/etc/apache2/conf.d"
+
+if [ "$1" = "purge" ]; then
+	if [ -e $INSTALL_DIR ]; then
+		rm -rf $INSTALL_DIR
+	fi
+	if [ -e $DB_FILE ]; then
+		rm -rf $DB_FILE
+	fi
+	if [ -e $alac ]; then
+		rm -f $alac/infoscreen_apache.conf
+	fi
+	if [ -x /usr/sbin/invoke-rc.d ]; then
+		invoke-rc.d apache2 reload 3>/dev/null || true
+	else
+		/etc/init.d/apache2 reload 3>/dev/null || true
+	fi
+fi
+
+
+#DEBHELPER#
+
+exit 0
