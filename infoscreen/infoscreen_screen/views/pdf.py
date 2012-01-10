@@ -1,5 +1,12 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
 # System includes
 from reportlab.pdfgen import canvas
+from reportlab.lib.units import cm
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import Frame, Paragraph
 
 # Django includes
 from django.http import HttpResponse
@@ -35,23 +42,37 @@ def einsatzfax_pdf(request, id):
         response = HttpResponse(mimetype='application/pdf')
         response['Content-Disposition'] = 'attachment; filename=einsatzfax.pdf'
 
-        # Create the PDF object, using the response object as its "file."
-        p = canvas.Canvas(response)
+        # Create the PDF object, using the response object as its "file" in DIN A4 format
+        p = canvas.Canvas(response,pagesize=A4)
 
-        # Draw things on the PDF. Here's where the PDF generation happens.
+	# A4 width and height
+	breite, hoehe = A4
+	# Define the styles
+	style = getSampleStyleSheet()
+	# Creating a list, which contains the content
+	content = []
+	# Create the frame where the content will be placed
+	f = Frame(1*cm,1*cm,breite-(2*cm),hoehe-(2*cm))
+
+	# Draw things on the PDF. Here's where the PDF generation happens.
         # See the ReportLab documentation for the full list of functionality.
         
+	# Generate content
         meldeb = Meldebilder.objects.get(id = einsatz.meldebild_id)
         alarm = Alarmstufen.objects.get(stufe = meldeb.stufe_id)
-        rand_links = 50
-        p.setFont("Helvetica", 50)
-        p.drawString(rand_links, 790, alarm.stufe + " " + meldeb.beschreibung)
-        p.setFont("Helvetica", 25)
-        p.drawString(rand_links, 750, einsatz.strasse + " " + einsatz.nummer1 + " " + einsatz.nummer2 + " " + einsatz.nummer3)
-        p.drawString(rand_links, 720, str(einsatz.plz) + " " + einsatz.ort)
-        p.drawString(rand_links, 690, "Melder: " + einsatz.melder)
-        p.drawString(rand_links, 660, str(einsatz.einsatzerzeugt))
-        p.drawString(rand_links, 630, einsatz.bemerkung)
+	content.append(Paragraph(alarm.stufe + " " + meldeb.beschreibung, style['Heading1']))
+	content.append(Paragraph(einsatz.strasse + " " + einsatz.nummer1 + " " + einsatz.nummer2 + " " + einsatz.nummer3, style['BodyText']))
+	content.append(Paragraph(str(einsatz.plz) + " " + einsatz.ort, style['BodyText']))
+	if einsatz.objekt:
+		content.append(Paragraph("Objekt: " + einsatz.objekt, style['BodyText']))
+	if einsatz.melder:
+		content.append(Paragraph("Melder: " + einsatz.melder, style['BodyText']))
+	if einsatz.einsatzerzeugt:
+		content.append(Paragraph("Meldezeitpunkt: " + str(einsatz.einsatzerzeugt), style['BodyText']))
+	content.append(Paragraph(einsatz.bemerkung, style['BodyText']))
+
+	# Add content
+	f.addFromList(content,p)
 
         # Close the PDF object cleanly, and we're done.
         p.showPage()
