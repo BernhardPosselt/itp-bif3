@@ -53,6 +53,7 @@ function Update(screen, mission) {
     this.map_id = 'karte';
     this.running_missions_id = 'lauf_missionen';
     this.header_id = 'header';
+    this.time_id = 'time';
 
     // ids of the mission div
     this.street_id = 'street';
@@ -98,6 +99,9 @@ Update.prototype.update = function () {
         if(self.mission !== data.mission){
             self.change_context(self.screen, data.mission);
         }
+
+        // update time
+        self.update_time(data.time);
         
         // check if we have to change the update interval
         if(self.screen_view_change_interval !== data.update_interval ||
@@ -356,6 +360,15 @@ Update.prototype.screen_view_change = function(){
  */
 Update.prototype.update_running_missions = function(){
     $('#' + this.running_missions_id).html(this.running_missions.length);
+}
+
+/**
+ * Updates the current time display
+ *
+ * @param time: The time we want to set, a string
+ */
+Update.prototype.update_time = function(time){
+    $('#' + this.time_id).html(time);
 }
 
 /**

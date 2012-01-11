@@ -123,7 +123,7 @@ class Fahrzeuge(models.Model):
     kennzeichen = models.CharField("Kennzeichen", max_length=200, blank=True, help_text = "Kennzeichen (Nummernschild) des Einsatzfahrzeuges")
     funkrufname = models.CharField("Funkrufname", max_length=200, blank=True)
     kuerzel = models.CharField("Kürzel", max_length=12 , help_text = "Kürzel des Fahrzeugs welches am Einsatzbildschirm unter Ausrückeordnung angezeigt wird")
-    beschreibung = models.CharField("Beschreibung", max_length=100, help_text = "Beschreibung des Fahrzeuges die zu Friedenszeiten auf dem rechten Bildschirm angezeigt wird.")
+    beschreibung = models.TextField("Beschreibung", help_text = "Beschreibung des Fahrzeuges die zu Friedenszeiten auf dem rechten Bildschirm angezeigt wird.")
     modifiziert = models.DateTimeField(auto_now=True)
     reperatur = models.BooleanField("In Reperatur", blank=True, help_text= "Zeigt an ob das Fahrzeug in Reperatur ist")
 
@@ -137,7 +137,8 @@ class Fahrzeuge(models.Model):
         
 # Geraete    
 class Geraete(models.Model):
-    beschreibung = models.CharField("Beschreibung", max_length=100, help_text="Kurze Beschreibung des Gerätes, welche zu Friedenszeiten auf dem rechten Bildschirm angezeigt wird")
+    titel = models.CharField("Titel", max_length=100, help_text="Titel des Gerätes")
+    beschreibung = models.TextField("Beschreibung", help_text="Kurze Beschreibung warum das Gerät kaputt ist")
     modifiziert = models.DateTimeField(auto_now=True)
     reperatur = models.BooleanField("In Reperatur", blank=True, help_text = "Zeigt an ob sich das Gerät in Reperatur befindet")
 

@@ -1,5 +1,5 @@
 # System includes
-from time import mktime
+import time
 import datetime
 
 # Django includes
@@ -19,6 +19,7 @@ def update(request):
     element of the page
     """
     
+    curr_time = time.strftime('%H:%M:%S')
     config = WebsiteConfig(settings.WEBSITE_CFG)
     update_interval = config.update_interval
     
@@ -35,6 +36,7 @@ def update(request):
         'update_interval': update_interval,
         'mission': mission,
         'running_missions': running_missions,
+        'time': curr_time
     }
     return render(request, "infoscreen_screen/ajax/update.json", ctx)
 
