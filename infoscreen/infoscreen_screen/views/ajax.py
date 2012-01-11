@@ -73,20 +73,13 @@ def update_title_msg(request):
     return render(request, "infoscreen_screen/ajax/update_title_msg.json", ctx)
 
 
-#def update_news(request):
-#    """Returns html with all news
-#    """
-
-#    ctx = {
-#        'news': news
-#    }
-#    return render(request, "infoscreen_screen/ajax/update_news.html", ctx)
-
-
 def update_news(request):
     """Returns html with all news
     """
-    news_id = int(request.POST.get('news_id', 0))
+    try:
+        news_id = int(request.POST.get('news_id', 0))
+    except ValueError:
+        news_id = -1
     try:
         news = News.objects.get(id=news_id)
     except News.DoesNotExist:
