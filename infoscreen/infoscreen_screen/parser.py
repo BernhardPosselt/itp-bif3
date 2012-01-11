@@ -100,6 +100,9 @@ class EinsatzKlasse(object):
                     # Timestamp aus Datum und Zeit wird generiert
                     tstamp = datetime.combine(datal,zeital)
                     einsatzmod.einsatzerzeugt  = tstamp
+                elif attr == "ausgedruckt":
+                    if einsatzmod.ausgedruckt:
+                        self.ausgedruckt = True
                 else:
                     setattr(einsatzmod, attr, getattr(self, attr) )
             #Objekt wird in die DB gespeichert

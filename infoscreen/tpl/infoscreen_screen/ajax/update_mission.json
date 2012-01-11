@@ -1,14 +1,14 @@
 {
     "id": {{ mission.id }},
-    "street": "{{ mission.strasse }}",
-    "housenr": "{{ mission.nummer1 }}",
-    "stairnr": "{{ mission.nummer2 }}",
-    "doornr": "{{ mission.nummer3 }}",
-    "zip": "{{ mission.plz }}",
-    "place": "{{ mission.ort }}",
-    "notes": "{{ mission.bemerkung }}",
-    "object": "{{ mission.objekt }}",
-    "classification": "{{ mission.meldebild }}",
-    "alarmnr": "{{ mission.meldebild.stufe }}",
-    "notifier": "{{ mission.melder }}"
+    "street": "{{ mission.strasse|escapejs }}",
+    "housenr": "{{ mission.nummer1|escapejs }}",
+    "stairnr": "{{ mission.nummer2|escapejs }}",
+    "doornr": "{{ mission.nummer3|escapejs }}",
+    "zip": "{{ mission.plz|escapejs }}",
+    "place": "{{ mission.ort|escapejs }}",
+    "notes": "{{ mission.bemerkung|escapejs }}",
+    "object": "{{ mission.objekt|escapejs }}",
+    "classification": "{{ mission.meldebild|escapejs }}",
+    "alarmnr": "{{ mission.meldebild.stufe|escapejs }}",
+    "notifier": "{{ mission.melder|escapejs }}"
 }
