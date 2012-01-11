@@ -19,6 +19,8 @@ def update(request):
     element of the page
     """
     
+    preview = request.GET.get('preview', '')
+    
     curr_time = time.strftime('%H:%M:%S')
     config = WebsiteConfig(settings.WEBSITE_CFG)
     update_interval = config.update_interval
@@ -32,11 +34,18 @@ def update(request):
     else:
         mission = True
     
+    # get the news
+    if preview != '':
+        news = News.objects.all().order_by('-datum')[:5]
+    else:
+        news = News.objects.filter(released=True).order_by('-datum')[:5]#
+    
     ctx = {
         'update_interval': update_interval,
         'mission': mission,
         'running_missions': running_missions,
-        'time': curr_time
+        'time': curr_time,
+        'running_news': news
     }
     return render(request, "infoscreen_screen/ajax/update.json", ctx)
 
@@ -64,20 +73,29 @@ def update_title_msg(request):
     return render(request, "infoscreen_screen/ajax/update_title_msg.json", ctx)
 
 
+#def update_news(request):
+#    """Returns html with all news
+#    """
+
+#    ctx = {
+#        'news': news
+#    }
+#    return render(request, "infoscreen_screen/ajax/update_news.html", ctx)
+
+
 def update_news(request):
     """Returns html with all news
     """
-    preview = request.POST.get('preview', '')
-    if preview != '':
-        news = News.objects.all().order_by('-datum')[:5]
-    else:
-        news = News.objects.filter(released=True).order_by('-datum')[:5]
-    
+    news_id = int(request.POST.get('news_id', 0))
+    try:
+        news = News.objects.get(id=news_id)
+    except News.DoesNotExist:
+        news = None
     ctx = {
         'news': news
     }
-    return render(request, "infoscreen_screen/ajax/update_news.html", ctx)
-    
+    return render(request, "infoscreen_screen/ajax/update_news.html", ctx)    
+
     
 def update_vehicles(request):
     """Returns html with all broken vehicles

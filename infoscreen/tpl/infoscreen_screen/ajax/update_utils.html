@@ -1,5 +1,7 @@
+<h1>Geräte in Reperatur</h1>
 {% for util in utils %}
 <div class="util_entry">
-    {{ util.beschreibung }}
+    <div class="util_title">{{ util.titel }}</div>
+    <div class="util_desc">{{ util.beschreibung }}</div>
 </div>
 {% endfor %}

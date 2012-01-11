@@ -291,11 +291,12 @@ img.right {
 			border-bottom: 1px dashed #ddd;
 		}
 		
-		#frieden_rechts #news .news_entry h1		
+		#frieden_rechts #news .news_entry .title		
 		{
 			font-size: 28pt;
 			margin-bottom:5px;
 			color: #19587F;
+			text-align: left;
 		}
 		
 		#frieden_rechts #news .news_entry .text		
@@ -315,20 +316,22 @@ img.right {
      * Fahrzeuge
      */	
     #repair {
-        display: none;
+        
     }
     
-        #repair h1 {
+
+	#frieden_rechts #fahrzeuge, #frieden_rechts #geraete
+	{
+	    display: none;
+		width: 100%;
+	}
+
+        #frieden_rechts #fahrzeuge h1, #frieden_rechts #geraete h1, #frieden_rechts #news h1 {
             text-align: center;
             font-size: 30pt;
             margin: 20px 0;
         }
     
-	#frieden_rechts #fahrzeuge
-	{
-		width: 50%;
-		float: left;
-	}
 	
 		#frieden_rechts #fahrzeuge .vehicle_entry
 		{
@@ -340,13 +343,7 @@ img.right {
 			text-align: center;
 			border-bottom: 1px solid #333;
 		}
-	
-	
-	#frieden_rechts #geraete
-	{
-		width:50%;
-		float: left;
-	}
+		
 		
 		#frieden_rechts #geraete .util_entry
 		{
