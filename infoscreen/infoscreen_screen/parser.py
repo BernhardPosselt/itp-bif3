@@ -24,9 +24,6 @@ class EinsatzKlasse(object):
     def __init__(self):
         
         #Hier werden die Default-Werte gesetzt
-        datal  = date(2001,01,01)
-        zeital = time(0,0,0)
-        tstamp = datetime.combine(datal,zeital)
         self.einsatz = ""
         self.alarmstufe = ""
         self.meldebild= ""
@@ -41,7 +38,7 @@ class EinsatzKlasse(object):
         self.melder = ""
         self.meldertel = ""
         self.einsatznr = 0
-        self.einsatzerzeugt = tstamp
+        self.einsatzerzeugt = None
         self.abgeschlossen = False
         self.ausgedruckt = False 
       
@@ -89,17 +86,10 @@ class EinsatzKlasse(object):
                     try:
                         hilf = re.split('\.+|\:+|\ +',self.einsatzerzeugt,5)
                         datal = date(int(hilf[2]),int(hilf[1]),int(hilf[0]))
-                    except:
-                        datal = date(2001,01,01)
-                    try:
                         if hilf[3]:
                             zeital = time(int(hilf[3]),int(hilf[4]),int(hilf[5]))
-                    
                     except:
-                        zeital = time(0,0,0)
-                    # Timestamp aus Datum und Zeit wird generiert
-                    tstamp = datetime.combine(datal,zeital)
-                    einsatzmod.einsatzerzeugt  = tstamp
+                        einsatzmod.einsatzerzeugt  = None
                 elif attr == "ausgedruckt":
                     if einsatzmod.ausgedruckt:
                         self.ausgedruckt = True
