@@ -86,10 +86,20 @@ class EinsatzKlasse(object):
                     try:
                         hilf = re.split('\.+|\:+|\ +',self.einsatzerzeugt,5)
                         datal = date(int(hilf[2]),int(hilf[1]),int(hilf[0]))
-                        if hilf[3]:
-                            zeital = time(int(hilf[3]),int(hilf[4]),int(hilf[5]))
+                        weiter = True
                     except:
-                        einsatzmod.einsatzerzeugt  = None
+                        einsatzmod.einsatzerzeugt= None
+                        weiter = False
+                    if weiter == True:
+                        try:
+                            if hilf[3]:
+                                zeital = time(int(hilf[3]),int(hilf[4]),int(hilf[5]))
+                                tstamp = datetime.combine(datal,zeital)
+                                setattr(einsatzmod,attr,tstamp)
+                        except:
+                            zeital = time(0,0,0)
+                            tstamp = datetime.combine(datal,zeital)
+                            setattr(einsatzmod,attr,tstamp)
                 elif attr == "ausgedruckt":
                     if einsatzmod.ausgedruckt:
                         self.ausgedruckt = True
@@ -99,7 +109,7 @@ class EinsatzKlasse(object):
             einsatzmod.save()
         # Sollte ein unerwarteter Fehler auftreten wird dies auf der Console ausgegeben und nicht in die DB gespeichert
         except:
-            print "Fehler bei Einsatz mit Id: " + str(self.einsatz)
+            pass
             
         
     def closeeinsatz(self, closeeinsatz_id):
@@ -123,16 +133,13 @@ class DispoKlasse(object):
     """
     def __init__(self):
         # Default-Werte werden gesetzt
-        datal  = date(2001,01,01)
-        zeital = time(0,0,0)
-        tstamp = datetime.combine(datal,zeital)
         self.einsatz = 0
         self.dispo = 0
         self.disponame= ""
-        self.zeitdispo = tstamp
-        self.zeitalarm = tstamp
-        self.zeitaus = tstamp
-        self.zeitein = tstamp
+        self.zeitdispo = None
+        self.zeitalarm = None
+        self.zeitaus = None
+        self.zeitein = None
         self.hintergrund = ""
         
     
@@ -173,26 +180,30 @@ class DispoKlasse(object):
                     dispomod.einsatz = einsatz_id
                 # Datumangaben werden überprüft
                 elif attr == "zeitdispo" or attr == "zeitalarm" or attr == "zeitaus" or attr =="zeitein":
-                    try: 
+                    try:
                         hilf = re.split('\.+|\:+|\ +',getattr(self,attr),5)
                         datal = date(int(hilf[2]),int(hilf[1]),int(hilf[0]))
+                        weiter = True
                     except:
-                        datal = date(2001,01,01)
-                    try:
-                        if hilf[3]:
-                            zeital = time(int(hilf[3]),int(hilf[4]),int(hilf[5]))
-                    except:
-                        zeital = time(0,0,0)
-                    # Timestamp wird aus Datum und Zeit generiert
-                    tstamp = datetime.combine(datal,zeital)
-                    setattr(dispomod,attr,tstamp)
+                        setattr(dispomod, attr,None )
+                        weiter = False
+                    if weiter == True:
+                        try:
+                            if hilf[3]:
+                                zeital = time(int(hilf[3]),int(hilf[4]),int(hilf[5]))
+                                tstamp = datetime.combine(datal,zeital)
+                                setattr(dispomod,attr,tstamp)
+                        except:
+                            zeital = time(0,0,0)
+                            tstamp = datetime.combine(datal,zeital)
+                            setattr(dispomod,attr,tstamp)
                 else:
                     setattr(dispomod, attr, getattr(self, attr) )
             # Alle Attribute werden in die DB gespeichert
             dispomod.save()
         # Tritt ein unerwarteter Fehler auf wird dieser in der Console ausgegeben
         except:
-            print "Fehler bei Dispo mit ID: " + str(self.dispo)
+            pass
         
     
  
