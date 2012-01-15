@@ -1,0 +1,5 @@
+    adapter: mysql
+      database: pdns
+      host: localhost
+      username: root
+      password: bif3-b2
