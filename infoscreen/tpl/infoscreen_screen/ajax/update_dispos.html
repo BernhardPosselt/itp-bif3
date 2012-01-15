@@ -1,5 +1,12 @@
 {% for dispo in dispos %}
 <div class="dispo_entry">
-    {{ dispo.disponame }}
+    <div 
+        {% if dispo.zeitein %}
+            class="vorbei"
+        {% else %}
+            {% if dispo.zeitaus %}
+                class="einsatz"
+            {% endif %}
+        {% endif %}>{{ dispo.disponame }}</div>
 </div>
 {% endfor %}

@@ -34,7 +34,6 @@ def gmap_adresse(request, id):
     
    
     tpl = 'javascript/gmaps.js'
-    print einsatz.ort
     ctx = {
         'plz': einsatz.plz,
         'ort': einsatz.ort,

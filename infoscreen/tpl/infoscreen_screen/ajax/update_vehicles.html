@@ -1,5 +1,7 @@
+<h1>Fahrzeuge in Reperatur</h1>
 {% for vehicle in vehicles %}
 <div class="vehicle_entry">
-    {{ vehicle.kuerzel }}
+    <div class="vehicle_title">{{ vehicle.kuerzel }}</div>
+    <div class="vehicle_desc">{{ vehicle.beschreibung }}</div>
 </div>
 {% endfor %}

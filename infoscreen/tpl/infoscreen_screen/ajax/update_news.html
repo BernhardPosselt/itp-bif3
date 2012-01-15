@@ -1,7 +1,7 @@
-{% for new in news %}
+<h1>News</h1>
 <div class="news_entry">
-    <h1>{{ new.titel }}</h1>
-    <div class="text">{{ new.text|safe|linebreaks}}</div>
-    <p class="date">{{ new.datum }}</p>
+    <h1 class="title">{{ news.titel }}</h1>
+    <div class="text">{{ news.text|safe|linebreaks}}</div>
+    <p class="date">{{ news.datum }}</p>
 </div>
-{% endfor %}
+

@@ -18,8 +18,11 @@ function Update(screen, mission) {
     // default values, do not change these
     this.screen_view_change_interval = -1;
     this.screen_view = -1;
+    this.news_view = -1;
     this.current_mission = -1;
+    this.current_news = -1;
     this.running_missions = [];
+    this.running_news = [];
     
     // url which should be called for checking changes
     this.url_update = '{% url screen:update %}';
@@ -49,10 +52,12 @@ function Update(screen, mission) {
     this.vehicle_order_id = 'ausrueckeordnung';
     this.mission_data_id = 'einsatzdaten';
     this.dispos_id = 'dispos';
-    this.stats_id = 'repair';
+    this.util_stats_id = 'geraete';
+    this.vehicle_stats_id = 'fahrzeuge';
     this.map_id = 'karte';
     this.running_missions_id = 'lauf_missionen';
     this.header_id = 'header';
+    this.time_id = 'time';
 
     // ids of the mission div
     this.street_id = 'street';
@@ -92,12 +97,25 @@ function Update(screen, mission) {
  */
 Update.prototype.update = function () {
     var self = this;
-    $.getJSON(self.url_update, function(data){
+    // check for url params
+    var getvar = window.location.search;
+    var dat;
+    if (getvar.length > 0){
+        dat = {
+            preview: 'true'
+        }
+    } else {
+        dat = {};
+    }
+    $.getJSON(self.url_update, dat, function(data){
 
         // check if we have to change the context
         if(self.mission !== data.mission){
             self.change_context(self.screen, data.mission);
         }
+
+        // update time
+        self.update_time(data.time);
         
         // check if we have to change the update interval
         if(self.screen_view_change_interval !== data.update_interval ||
@@ -119,6 +137,7 @@ Update.prototype.update = function () {
         }
         
         self.running_missions = data.running_missions;
+        self.running_news = data.running_news;
         
         // run website reloads
         self.screen_update(); 
@@ -229,13 +248,10 @@ Update.prototype.screen_peace_left_update = function(){
 Update.prototype.screen_peace_right_update = function(){
     this.update_title_msg();
     var data;
-    var getvar = window.location.search;
-    if (getvar.length > 0){
-        data = {
-            preview: 'true'
-        }
+    if(this.news_view < 0){
+        data = { news_id: this.running_news[0] };
     } else {
-        data = {};
+        data = { news_id: this.current_news };
     }
     
     $('#' + this.news_id).load(this.url_update_news, data);
@@ -324,23 +340,31 @@ Update.prototype.screen_view_change = function(){
     if(!this._developement){
         var self = this;
         if(this.mission === false){
+        
+            this.screen_view += 1;
+            this.screen_view %= 3;
+            
             switch(this.screen_view){
                 case 0:
                     $('#' + this.news_id).fadeOut(function(){
-                        $('#' + self.stats_id).fadeIn();
+                        $('#' + self.util_stats_id).fadeIn();
                     });
-                    this.screen_view = 1;
                     break;
                 case 1:
-                    $('#' + this.stats_id).fadeOut(function(){
-                        $('#' + self.news_id).fadeIn();
+                    $('#' + this.util_stats_id).fadeOut(function(){
+                        $('#' + self.vehicle_stats_id).fadeIn();
+                        self.news_view += 1;
+                        self.news_view %= self.running_news.length;
                     });
-                    this.screen_view = 0;
                     break;
                 default:
-                    this.screen_view = 0;
+                    $('#' + this.vehicle_stats_id).fadeOut(function(){
+                        self.current_news = self.running_news[self.news_view];
+                        $('#' + self.news_id).fadeIn();
+                    });
                     break;
             }
+
         } else {
             this.screen_view += 1;
             this.screen_view %= this.running_missions.length;
@@ -356,6 +380,15 @@ Update.prototype.screen_view_change = function(){
  */
 Update.prototype.update_running_missions = function(){
     $('#' + this.running_missions_id).html(this.running_missions.length);
+}
+
+/**
+ * Updates the current time display
+ *
+ * @param time: The time we want to set, a string
+ */
+Update.prototype.update_time = function(time){
+    $('#' + this.time_id).html(time);
 }
 
 /**

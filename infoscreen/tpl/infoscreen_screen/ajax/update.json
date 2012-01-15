@@ -1,5 +1,7 @@
 {
+    "time": "{{ time }}",
     "mission": {{ mission|lower }},
     "update_interval": {{ update_interval }},
-    "running_missions": [{% for mission in running_missions %}{{ mission.id }}{% if not forloop.last %},{% endif %} {% endfor%}]
+    "running_missions": [{% for mission in running_missions %}{{ mission.id }}{% if not forloop.last %},{% endif %} {% endfor%}],
+    "running_news": [{% for news in running_news %}{{ news.id }}{% if not forloop.last %},{% endif %} {% endfor%}]
 }
