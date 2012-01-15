@@ -83,7 +83,7 @@ class Einsaetze(models.Model):
 	Erstellen des Einsatzes angegeben wurden, enthalten meist wichtige Informationen zum Einsatz selbst")
     objekt = models.CharField("Objekt", blank=True, max_length=200, help_text = "Objekt in dem ein Einsatz nötig ist (z.B.: Krankenhaus, Schule, ...)")
     einsatznr = models.IntegerField("Einsatznummer", help_text = "Eindeutige Nummer für den Einsatz")
-    einsatzerzeugt = models.DateTimeField("Einsatz erzeugt", help_text = "Datum und Uhrzeit an dem der Einsatz angelegt wurde")    
+    einsatzerzeugt = models.DateTimeField("Einsatz erzeugt", blank=True, null=True, help_text = "Datum und Uhrzeit an dem der Einsatz angelegt wurde")    
     meldebild = models.ForeignKey("Meldebilder", help_text = "Meldebild des Einsatzes")    
     melder = models.TextField("Melder", blank=True, max_length=200, help_text ="Person, welche den Einsatz gemeldet hat")
     meldertel = models.CharField("Meldertelefon", max_length=20, blank=True, help_text = "Telefonnummer der Person, welche den Einsatz gemeldet hat")
