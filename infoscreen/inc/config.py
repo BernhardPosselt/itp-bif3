@@ -5,6 +5,7 @@
 import os
 import ConfigParser
 import re
+import codecs
 
 
 class WebsiteConfig(object):
@@ -33,7 +34,8 @@ class WebsiteConfig(object):
         # read in main config
         try:
             config = ConfigParser.SafeConfigParser()
-            config.read(self.mainConfig)
+            with codecs.open(self.mainConfig, 'r', encoding='utf-8') as f:
+                config.readfp(f)
                 
             try:
                 self.xml_url = config.get('settings', 'xml_url')
@@ -46,12 +48,12 @@ class WebsiteConfig(object):
                 self.parserError = True
 
             try:
-                self.welcome_msg = config.get('settings', 'welcome_msg')
+                self.welcome_msg = config.get('settings', 'welcome_msg').encode('utf-8')
             except ConfigParser.NoOptionError:
                 self.parserError = True
             
             try:
-                self.title_msg = config.get('settings', 'title_msg')
+                self.title_msg = config.get('settings', 'title_msg').encode('utf-8')
             except ConfigParser.NoOptionError:
                 self.parserError = True
 
@@ -62,7 +64,7 @@ class WebsiteConfig(object):
 
         # if there was something wrong with the config or parsing, write default
         # values
-        except ConfigParser.NoSectionError:
+        except (ConfigParser.NoSectionError, IOError):
             self.save()
         if self.parserError:
             self.save()
@@ -87,11 +89,11 @@ class WebsiteConfig(object):
         config = ConfigParser.SafeConfigParser()
         config.add_section('settings')
         # music settings
-        config.set('settings', 'xml_url', str(self.xml_url))
-        config.set('settings', 'update_interval', str(self.update_interval))
-        config.set('settings', 'welcome_msg', self.welcome_msg)
-        config.set('settings', 'title_msg', self.title_msg)
-        config.set('settings', 'gmap_key', str(self.gmap_key))
+        config.set('settings', 'xml_url', self.xml_url)
+        config.set('settings', 'update_interval', str(self.update_interval).encode('utf-8'))
+        config.set('settings', 'welcome_msg', self.welcome_msg.encode('utf-8'))
+        config.set('settings', 'title_msg', self.title_msg.encode('utf-8'))
+        config.set('settings', 'gmap_key', self.gmap_key)
         try:
             with open(self.mainConfig, 'wb') as confFile:
                 config.write(confFile)
