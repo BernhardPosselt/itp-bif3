@@ -203,7 +203,6 @@ img.right {
 		width:460px;
 		padding:20px;
 		float:left;
-		background-color:#cfcfcf;
 		min-height:100%;
 	} 
 
@@ -231,7 +230,6 @@ img.right {
 
 
     #dispos_info {
-		background-color:#cfcfcf;
 		padding: 20px;
 		margin:0px 20px;
 		float: left;
@@ -250,6 +248,14 @@ img.right {
         #dispos .dispo_entry
         {
 		    font-size:30pt;	
+        }
+        
+        #dispos .dispo_entry .einsatz {
+            color: #66b263;
+        }
+        
+        #dispos .dispo_entry .vorbei {
+            color: #ccc;
         }
 /**
  * Frieden links
@@ -288,7 +294,6 @@ img.right {
 		{
 			padding: 20px 20px 0px 20px;
 			margin-bottom: 20px;
-			border-bottom: 1px dashed #ddd;
 		}
 		
 		#frieden_rechts #news .news_entry .title		
@@ -335,34 +340,32 @@ img.right {
 	
 		#frieden_rechts #fahrzeuge .vehicle_entry
 		{
-		    width: 50%;
-		    float: right;
-		    padding: 40px;
-			padding-right: 150px;
+		    padding: 20px;
 			font-size:25pt;
 			text-align: center;
-			border-bottom: 1px solid #333;
 		}
 		
+       		#frieden_rechts #fahrzeuge .vehicle_entry .vehicle_title {
+       		    font-weight: bold;
+       		}
 		
 		#frieden_rechts #geraete .util_entry
 		{
-		    width: 50%;
-		    float: left;
-		    padding: 40px;
-			padding-left: 150px;
+		    padding: 20px;
 			font-size:25pt;
 			text-align: center;
-			border-bottom: 1px solid #166799;
 		}
 
-
+       		#frieden_rechts #geraete .util_entry .util_title {
+       		    font-weight: bold;
+       		}
+		
 /**
  * Time field
  */
 #time {
-    position: absolute;
-
+    position: fixed;
+    z-index: 1000;
     bottom: 0;
     right: 0;
     height: 100px;

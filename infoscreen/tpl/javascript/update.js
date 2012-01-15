@@ -353,12 +353,12 @@ Update.prototype.screen_view_change = function(){
                 case 1:
                     $('#' + this.util_stats_id).fadeOut(function(){
                         $('#' + self.vehicle_stats_id).fadeIn();
+                        self.news_view += 1;
+                        self.news_view %= self.running_news.length;
                     });
                     break;
                 default:
                     $('#' + this.vehicle_stats_id).fadeOut(function(){
-                        self.news_view += 1;
-                        self.news_view %= self.running_news.length;
                         self.current_news = self.running_news[self.news_view];
                         $('#' + self.news_id).fadeIn();
                     });

@@ -85,7 +85,7 @@ class MeldebildAdmin(admin.ModelAdmin):
 	inlines = (AusrueckeordnungAdmin, )
 	
 class NewsAdmin(admin.ModelAdmin):
-	list_display = ('id', 'titel', 'datum')
+	list_display = ('id', 'titel', 'datum', 'released')
 	list_filter = ("released", "datum")
 	search_fields = ["titel", "beschreibung"] 
 	actions = [released, unreleased]
