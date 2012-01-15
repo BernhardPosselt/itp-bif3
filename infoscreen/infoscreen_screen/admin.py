@@ -51,11 +51,11 @@ class DispoAdmin(admin.TabularInline):
 
 class EinsatzAdmin(admin.ModelAdmin):
     list_display = ('einsatz', 'bemerkung','nummer1', 'strasse', 'plz', 'ort',
-                    'meldebild', 'einsatzerzeugt', 'abgeschlossen')
+                    'meldebild', 'einsatzerzeugt', 'abgeschlossen', 'ausgedruckt')
     list_filter = ("meldebild__stufe", "abgeschlossen", "meldebild", 'modifiziert')
     ordering = ("modifiziert",)
     date_hierarchy = 'einsatzerzeugt'
-    search_fields = ["nummer1", "strasse", "plz", "ort", "bemerkung"]
+    search_fields = ["nummer1", "strasse", "plz", "ort", "bemerkung", "objekt", "nummer2", "nummer3"]
     inlines = (DispoAdmin, )
     actions = [finish, unfinish, printed, notprinted]
     
@@ -72,9 +72,9 @@ class FahrzeugAdmin(admin.ModelAdmin):
 	actions = [inrepairvehicles, notinrepairvehicles]	
 
 class GeraetAdmin(admin.ModelAdmin):
-	list_display = ('beschreibung', 'reperatur')
+	list_display = ('titel', 'beschreibung', 'reperatur')
 	list_filter = ("reperatur", )	
-	search_fields = ["beschreibung"]
+	search_fields = ['beschreibung', 'titel']
 	actions = [inrepairutils, notinrepairutils]
 
 class MeldebildAdmin(admin.ModelAdmin):	
