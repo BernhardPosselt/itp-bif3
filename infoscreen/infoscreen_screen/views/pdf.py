@@ -50,7 +50,7 @@ def einsatzfax_pdf(request, id):
 	# A4 width and height
 	breite, hoehe = A4
 	# Define the styles
-	styleHeader = ParagraphStyle('Header', fontName='Helvetica', fontSize=36, spaceAfter=40, alignment=TA_LEFT)
+	styleHeader = ParagraphStyle('Header', fontName='Helvetica', fontSize=36, leading=40, spaceAfter=40, alignment=TA_LEFT)
 	styleText = ParagraphStyle('Text', fontName='Helvetica', fontSize=16, leading=20, alignment=TA_LEFT)
 	styleLine = ParagraphStyle('Line', fontName='Helvetica', fontSize=16, leading=20, alignment=TA_LEFT, textColor=HexColor(0xFFFFFF))
 	# Creating a list, which contains the content
