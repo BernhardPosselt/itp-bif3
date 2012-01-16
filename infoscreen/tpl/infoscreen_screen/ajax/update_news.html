@@ -1,7 +1,10 @@
 <h1>News</h1>
+
+{% if news %}
 <div class="news_entry">
     <h1 class="title">{{ news.titel }}</h1>
     <div class="text">{{ news.text|safe|linebreaks}}</div>
     <p class="date">{{ news.datum }}</p>
 </div>
+{% endif %}
 

@@ -248,7 +248,7 @@ Update.prototype.screen_peace_left_update = function(){
 Update.prototype.screen_peace_right_update = function(){
     this.update_title_msg();
     var data;
-    if(this.news_view < 0){
+    if(this.news_view < 0 || this.running_news.length <= 0){
         data = { news_id: this.running_news[0] };
     } else {
         data = { news_id: this.current_news };
@@ -353,13 +353,15 @@ Update.prototype.screen_view_change = function(){
                 case 1:
                     $('#' + this.util_stats_id).fadeOut(function(){
                         $('#' + self.vehicle_stats_id).fadeIn();
-                        self.news_view += 1;
-                        self.news_view %= self.running_news.length;
+                        if(self.running_news.length !== 0){
+                            self.news_view += 1;
+                            self.news_view %= self.running_news.length;
+                            self.current_news = self.running_news[self.news_view];
+                        }
                     });
                     break;
                 default:
                     $('#' + this.vehicle_stats_id).fadeOut(function(){
-                        self.current_news = self.running_news[self.news_view];
                         $('#' + self.news_id).fadeIn();
                     });
                     break;
