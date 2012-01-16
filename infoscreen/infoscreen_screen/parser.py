@@ -217,44 +217,47 @@ class XML(object):
         DOKU
         """
         einsatz_id = 0
-        xml_root = etree.fromstring(xml)
-        context = etree.iterwalk(xml_root, events=("start",))
-       
-        # Alle Attribute des XML-Files werden durchgelaufen
-        for action,elem in context:
-            if elem.tag != "root":
-                if elem.tag == "einsatz":
-                    einsatzobj = EinsatzKlasse()
-                    einsatz_id = elem.get("id")
-                    setattr(einsatzobj, elem.tag, elem.get("id"))
-                elif elem.tag == "einsatznr":
-                    setattr(einsatzobj,elem.tag,elem.text)
-                    einsatzobj.save()
-                elif elem.tag == "dispo":
-                    dispoobj = DispoKlasse()
-                    setattr(dispoobj, "einsatz", einsatz_id)
-                    setattr(dispoobj, elem.tag,elem.get("id"))
-                elif elem.tag == "disponame" or elem.tag == "zeitdispo" or elem.tag =="zeitalarm" or elem.tag =="zeitaus" or elem.tag =="zeitein":
-                    setattr(dispoobj, elem.tag,elem.text)
-                elif elem.tag == "hintergrund":
-                    setattr(dispoobj, elem.tag, elem.text)
-                    dispoobj.save()
-                elif elem.text:
-                    setattr(einsatzobj,elem.tag,elem.text)
-        
-        #Suche nicht abgeschlossene Einsaetze und schliesse sie ggfls. ab
-       
-        unabgeschl = EinsatzModel.objects.filter(abgeschlossen = False)
-        # Alle unabgeschlossenen Einsätze werden durchgelaufen
-        for unab in unabgeschl:
-            close = 0 
+        try:
             xml_root = etree.fromstring(xml)
             context = etree.iterwalk(xml_root, events=("start",))
+           
+            # Alle Attribute des XML-Files werden durchgelaufen
             for action,elem in context:
-               if elem.tag == "einsatz":
-                    if elem.get("id") == unab.einsatz:
-                        close = 1
-            # Befindet sich ein nicht abgeschlossener Einsatz nicht in dem XML-File, wird dieser abgeschlossen
-            if close == 0: 
-                closeeins = EinsatzKlasse()
-                closeeins.closeeinsatz(unab.einsatz)
+                if elem.tag != "root":
+                    if elem.tag == "einsatz":
+                        einsatzobj = EinsatzKlasse()
+                        einsatz_id = elem.get("id")
+                        setattr(einsatzobj, elem.tag, elem.get("id"))
+                    elif elem.tag == "einsatznr":
+                        setattr(einsatzobj,elem.tag,elem.text)
+                        einsatzobj.save()
+                    elif elem.tag == "dispo":
+                        dispoobj = DispoKlasse()
+                        setattr(dispoobj, "einsatz", einsatz_id)
+                        setattr(dispoobj, elem.tag,elem.get("id"))
+                    elif elem.tag == "disponame" or elem.tag == "zeitdispo" or elem.tag =="zeitalarm" or elem.tag =="zeitaus" or elem.tag =="zeitein":
+                        setattr(dispoobj, elem.tag,elem.text)
+                    elif elem.tag == "hintergrund":
+                        setattr(dispoobj, elem.tag, elem.text)
+                        dispoobj.save()
+                    elif elem.text:
+                        setattr(einsatzobj,elem.tag,elem.text)
+            
+            #Suche nicht abgeschlossene Einsaetze und schliesse sie ggfls. ab
+           
+            unabgeschl = EinsatzModel.objects.filter(abgeschlossen = False)
+            # Alle unabgeschlossenen Einsätze werden durchgelaufen
+            for unab in unabgeschl:
+                close = 0 
+                xml_root = etree.fromstring(xml)
+                context = etree.iterwalk(xml_root, events=("start",))
+                for action,elem in context:
+                   if elem.tag == "einsatz":
+                        if elem.get("id") == unab.einsatz:
+                            close = 1
+                # Befindet sich ein nicht abgeschlossener Einsatz nicht in dem XML-File, wird dieser abgeschlossen
+                if close == 0: 
+                    closeeins = EinsatzKlasse()
+                    closeeins.closeeinsatz(unab.einsatz)
+        except:
+            pass
