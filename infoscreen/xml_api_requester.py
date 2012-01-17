@@ -12,7 +12,6 @@ import os
 os.environ['DJANGO_SETTINGS_MODULE'] = infoscreen.settings
 
 # django imports
-from django.core.urlresolvers import reverse
 from django.conf import settings
 
 # Project includes
