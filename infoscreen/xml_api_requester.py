@@ -1,6 +1,8 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
 # This file can be called as standalone script to update the database entries
 # from the xml api interface
-
 
 # system imports
 import urllib, urllib2
