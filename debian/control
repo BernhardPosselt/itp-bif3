@@ -14,7 +14,7 @@ Vcs-Browser: https://github.com/Raydiation/itp-bif3
 Package: infoscreen
 Architecture: all
 Depends: ${python:Depends}, ${misc:Depends}, debconf (>= 0.5) | debconf-2.0,
- python-lxml, python-reportlab, python-reportlab, apache2, sqlite3, libapache2-mod-wsgi, python-pysqlite2
+ python-lxml, python-reportlab, python-reportlab, apache2, libapache2-mod-wsgi, python-mysqldb, mysql-server, mysql-client
 Description: Firefighters Infoscreen
  Infoscreen is a software for displaying missions and news for  firefighters 
 
