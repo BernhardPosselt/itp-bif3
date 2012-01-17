@@ -138,7 +138,7 @@ class Fahrzeuge(models.Model):
 # Geraete    
 class Geraete(models.Model):
     titel = models.CharField("Titel", max_length=100, help_text="Titel des Gerätes")
-    beschreibung = models.TextField("Beschreibung", help_text="Kurze Beschreibung warum das Gerät kaputt ist")
+    beschreibung = models.TextField("Beschreibung", help_text="Kurze Beschreibung über das Gerät")
     modifiziert = models.DateTimeField(auto_now=True)
     reperatur = models.BooleanField("In Reparatur", blank=True, help_text = "Zeigt an ob sich das Gerät in Reperatur befindet")
 
