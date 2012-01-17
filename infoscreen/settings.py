@@ -7,6 +7,9 @@ import os
 # Screen imports
 from inc.config import WebsiteConfig
 
+# use threading instead of cronjob. Not yet tested enough, can lead to errors
+THREAD_XML_API_REQ = True
+
 # infoscreen config vars
 WEBSITE_CFG = {
     'MAIN_CFG': '/etc/infoscreen/website.cfg',
@@ -166,5 +169,3 @@ LOGGING = {
     }
 }
 
-# Absolute path to the configuration file
-WEBSITE_CONFIG_PATH = '/etc/infoscreen/website.conf'

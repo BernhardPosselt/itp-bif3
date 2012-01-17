@@ -27,6 +27,7 @@ urlpatterns += patterns('',
 	url(r'^', include('infoscreen.infoscreen_screen.urls', namespace='screen', app_name='infoscreen_screen')),
 )
 
-t = threading.Thread(target=xml_api_query)
-t.setDaemon(True)
-t.start()
+if settings.THREAD_XML_API_REQ:
+    t = threading.Thread(target=xml_api_query)
+    t.setDaemon(True)
+    t.start()
