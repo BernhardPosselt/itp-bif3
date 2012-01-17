@@ -19,5 +19,5 @@ def xml_api_query():
         except(urllib2.HTTPError, urllib2.URLError):
             pass
         finally:
-            time.sleep(5)
+            time.sleep(10)
         
