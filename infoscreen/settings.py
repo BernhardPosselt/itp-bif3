@@ -8,7 +8,7 @@ import os
 from inc.config import WebsiteConfig
 
 # use threading instead of cronjob. Not yet tested enough, can lead to errors
-THREAD_XML_API_REQ = True
+THREAD_XML_API_REQ = False 
 
 # infoscreen config vars
 WEBSITE_CFG = {
