@@ -8,10 +8,10 @@
 import urllib, urllib2
 import os
 import sys
-sys.append("../")
+sys.path.append("../")
 
 # add settings to syspath to be able to execute code of the project
-os.environ['DJANGO_SETTINGS_MODULE'] = infoscreen.settings
+os.environ['DJANGO_SETTINGS_MODULE'] = 'infoscreen.settings'
 
 # django imports
 from django.conf import settings
