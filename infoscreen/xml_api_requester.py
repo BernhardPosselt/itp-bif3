@@ -7,6 +7,8 @@
 # system imports
 import urllib, urllib2
 import os
+import sys
+sys.append("../")
 
 # add settings to syspath to be able to execute code of the project
 os.environ['DJANGO_SETTINGS_MODULE'] = infoscreen.settings
@@ -19,7 +21,7 @@ from infoscreen.inc.config import WebsiteConfig
 from infoscreen.infoscreen_screen.parser import XML
 
 
-def main():
+class CheckXml():
     try:
         config = WebsiteConfig(settings.WEBSITE_CFG)
         response = urllib2.urlopen(config.xml_url)
@@ -28,9 +30,6 @@ def main():
     except(urllib2.HTTPError, urllib2.URLError):
         pass
         
-        
-if __name__ == '__main__':
-    main()
 
 
 
