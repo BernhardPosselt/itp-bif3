@@ -87,7 +87,7 @@ def einsatzfax_pdf(request, id):
         p.save()
         return response
     except Einsaetze.DoesNotExist:
-        return render(request, "infoscreen_screen/einsatzfax/einsatzfax_pdf.xml", ctx)
+        return render(request, "infoscreen_screen/einsatzfax/einsatzfax_pdf.xml")
     
     
 def einsatzfax_pdf_ausgedruckt(request, id):
