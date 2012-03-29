@@ -89,7 +89,7 @@ class Einsaetze(models.Model):
     meldertel = models.CharField("Meldertelefon", max_length=20, blank=True, help_text = "Telefonnummer der Person, welche den Einsatz gemeldet hat")
     abgeschlossen = models.BooleanField("Abgeschlossen", blank=True, help_text= "Ob der Einsatz bereits abgeschlossen wurde")
     ausgedruckt = models.BooleanField("Ausgedruckt", blank=True, help_text = "Ob der Einsatz bereits ausgedruckt wurde")
-    selbst_erstellt = models.BooleanField("Selbst erstellt", blank=True, help_text = "Der Einsatz wurde manuell erstellt und \
+    selbst_erstellt = models.BooleanField("Selbst erstellt", default=False, blank=True, help_text = "Der Einsatz wurde manuell erstellt und \
       und muss auch manuell (über das Admininterface) wieder geschlossen werden. Ist diese Checkbox nicht gesetzt \
       wird der Einsatz bei erneuter Abfrage der XML Schnittstelle automatisch geschlossen, weil er nicht von der \
       Leitstelle gesetzt worden ist")
