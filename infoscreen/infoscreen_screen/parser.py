@@ -245,7 +245,7 @@ class XML(object):
             
             #Suche nicht abgeschlossene Einsaetze und schliesse sie ggfls. ab
            
-            unabgeschl = EinsatzModel.objects.filter(abgeschlossen = False)
+            unabgeschl = EinsatzModel.objects.filter(abgeschlossen=False, selbst_erstellt=False)
             # Alle unabgeschlossenen Einsätze werden durchgelaufen
             for unab in unabgeschl:
                 close = 0 

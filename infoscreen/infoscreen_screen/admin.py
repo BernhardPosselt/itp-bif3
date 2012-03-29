@@ -51,8 +51,8 @@ class DispoAdmin(admin.TabularInline):
 
 class EinsatzAdmin(admin.ModelAdmin):
     list_display = ('einsatz', 'bemerkung','nummer1', 'strasse', 'plz', 'ort',
-                    'meldebild', 'einsatzerzeugt', 'abgeschlossen', 'ausgedruckt')
-    list_filter = ("meldebild__stufe", "abgeschlossen", "meldebild", 'modifiziert')
+                    'meldebild', 'einsatzerzeugt', 'abgeschlossen', 'ausgedruckt', 'selbst_erstellt')
+    list_filter = ("meldebild__stufe", "abgeschlossen", "meldebild", 'modifiziert', 'selbst_erstellt')
     ordering = ("modifiziert",)
     date_hierarchy = 'einsatzerzeugt'
     search_fields = ["nummer1", "strasse", "plz", "ort", "bemerkung", "objekt", "nummer2", "nummer3"]
